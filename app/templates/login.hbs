@@ -1,0 +1,24 @@
+<header class="login_header">
+	<img class="logo_header" src="{{rootURL}}/assets/img/logo_ssi_header.png" alt="logo ssi">
+</header>
+<div class="containerLogin">
+	<form class="login_form" {{action 'authenticate' on='submit'}}>
+		<img id="user_photo" class="login_user_photo" src="{{rootURL}}/assets/img/login_user_image.png" alt="user photo">						
+		<h2>Inicio de Sesión</h2>			
+		<label for="username">Login</label>
+		{{input value=username placeholder='Ingrese Login' class='form-control' focus-out="obtenerImage" autofocus="autofocus"}}
+		<label for="password">Contraseña</label>
+		{{input value=password placeholder='Ingrese password' class='form-control' type='password'}}
+		<button type="submit" class="button_login">Login</button>
+		<h5><a href="http//:www.grupossi.com">Olvidé mi contraseña</a></h5>
+	</form>
+	{{#if errorMessage}}
+		<p class="error">
+			<strong>Error</strong>
+			<code>{{errorMessage}}</code>
+		</p>
+	{{/if}}
+</div>
+<footer class="footerlogin">
+	<img src="{{rootURL}}/assets/img/logo_higia_negativo.png" width="200"alt="user photo">
+</footer>

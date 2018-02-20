@@ -1,0 +1,49 @@
+<header class="home_header">
+	<img src="{{rootURL}}/assets/img/logo_ssi_header.svg" style="margin:10px; margin-left:20px" height="40px" alt="logo empresa">
+	<nav>
+		<ul id="menu-favorito">
+			{{#each model.mfav as |fav|}}
+				<li>
+				{{#link-to fav.enlace}}
+					{{fav.label}} {{fav.enlace}}
+				{{/link-to}}
+				</li>
+			{{/each}}
+		</ul>
+	</nav>
+	<div class="icons_header">
+		<li>
+		<i class="fa fa-angle-double-down fa-2x" {{action "showMenu"}}></i>
+		</li>
+		<li>
+		<img id="user_home_photo" src="{{model.url_fto_usro}}" alt="clic para abrir opciones de perfil" style="height=20px; vertical-align:middle; margin=20px;" class="user_home_photo" onerror="userImgError(this)"><br>
+		</li>
+		<li class="lblUserName">
+			{{model.user.lgn}}
+		</li>
+		<li {{action "showConf"}}>{{fa-icon "cog" size=2}}<a href=""></a></li>
+	</div>
+	<div id="main-menu">
+		<div class="half">
+			{{#each model.menu as |menu|}}
+				{{item-menu item=menu}}
+			{{/each}}
+		</div>
+	</div>
+</header>
+<aside id="user_id">
+	<div id="user_info">
+		<i {{action "showConf"}} class="fa fa-arrow-left" title="Clic para regresar"></i>
+		<img id="user_home_photo" src="{{model.url_fto_usro}}" style="height=20px; vertical-align:middle; margin=20px;" class="user_home_photo" onerror="userImgError(this)" />
+		<div class="blockInfo">
+			<p style="text-align: left; font-weight: 400; font-size: 18px; color:white; line-height: 2px;"><strong>{{model.user.lgn}}</strong></p>
+			<p style="color:white; line-height:2px; text-align: left; font-weight: 400; font-size: 14px; ">{{model.user.crgo}}</p>
+			<p style="color:white; line-height:0px; text-align: left; font-weight: 400; font-size: 14px; ">{{model.user.crro_elctrnco}}</p>
+		</div>
+	</div>
+	<div id="user_setting">
+		<p><i class="fa fa-unlock fa-1x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="" style="color:gray; text-decoration:none;">Cambiar contraseña</a></p>
+		<p><i class="fa fa-sign-out fa-1x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a {{action "logout"}} href="" style="color:gray; text-decoration:none;">Cerrar sesión</a></p>
+		<div id="logo_user_info"><img src="{{rootURL}}/assets/img/logo_higia.png" width="100px"  alt=""></div>
+	</div>
+</aside>

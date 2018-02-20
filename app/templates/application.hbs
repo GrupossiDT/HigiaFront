@@ -1,0 +1,11 @@
+{{#if session.isAuthenticated}}
+	{{main-menu model=model}}
+{{/if}}
+<div class="blankSpaceTop"></div>
+  {{outlet}}
+<div class="blankSpaceBotton"></div>  
+<footer class="footer_home">
+	<img src="{{rootURL}}/assets/img/logo_higia.png" height=30px;  alt="logo higia">
+	&nbsp;&nbsp;&nbsp;<br>
+	<cite>HIGIA-SSI® Todos los derechos reservados </cite>
+</footer>

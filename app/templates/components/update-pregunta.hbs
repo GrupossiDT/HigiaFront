@@ -1,0 +1,31 @@
+<div class="starter-template">
+{{#if model}}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 padding-top">
+			<div class="form">
+				<form>
+					<div class="form-group">
+						<label>Codigo:</label>
+						{{input class="form-control" name="cdgo" value=model.cdgo}}
+						<div class="error_text">{{validationErrors.cdgo}}</div>
+					</div>
+					<div class="form-group">
+						<label>Descripcion:</label>
+						{{input class="form-control" name="dscrpcn" value=model.dscrpcn}}
+						<div class="error_text">{{validationErrors.dscrpcn}}</div>
+					</div>
+					<div class="btn-group">
+						{{input type="hidden" name="id" value=model.id}}
+            <div class="alert alert-success" role="alert"  id="success" hidden>This is a success alert—check it out!</div>
+            <div class="alert alert-danger" role="alert" id="danger" hidden> This is a danger alert—check it out!</div>
+						<button type="submit" class="btn" {{action 'update' on='click' }}>Actualizar</button>
+					</div>
+				</form>
+			</div>
+        </div>
+    </div>
+</div>
+{{/if}}
+{{yield}}
+</div>

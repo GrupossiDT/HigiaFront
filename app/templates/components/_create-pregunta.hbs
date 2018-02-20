@@ -1,0 +1,32 @@
+<h2>Crear Pregunta de Seguridad</h2>
+<div class="starter-template">
+
+{{#each model as |pregunta|}}
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 padding-top">
+			<div class="form">
+				<form>
+					<div class="form-group">
+						<label>Codigo:</label>
+						{{input class="form-control" name="cdgo" value=pregunta.cdgo}}
+						
+					</div>
+					<div class="form-group">
+						<label>Descripcion:</label>
+						{{input class="form-control" name="dscrpcn" value=pregunta.dscrpcn}}
+						
+					</div>
+					<div class="btn-group">
+						{{input type="hidden" name="id" value=pregunta.id}}
+						<button type="submit" class="btn" {{action 'save' on='click' }}>Crear</button>
+					</div>
+				</form>
+			</div>
+        </div>
+    </div>
+</div>
+{{/each}}
+{{yield}}
+</div>
