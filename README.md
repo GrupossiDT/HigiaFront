@@ -10,19 +10,20 @@ You will need the following things properly installed on your computer.
 * [Git](https://git-scm.com/)
 * [Node.js](https://nodejs.org/) (with npm)
 * [Ember CLI](https://ember-cli.com/)
+* [Yarn](https://yarnpkg.com/en/)
 * [Google Chrome](https://google.com/chrome/)
 
 ## Installation
 
 * `git clone <repository-url>` this repository
-* `cd front-ssi`
-* `npm install`
+* `cd HigiaFront`
+* `yarn install`
 
 ## Running / Development
 
 * `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
+* Visit your app at [http://localhost:4100](http://localhost:4100).
+* Visit your tests at [http://localhost:4100/tests](http://localhost:4100/tests).
 
 ### Code Generators
 
