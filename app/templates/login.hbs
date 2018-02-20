@@ -3,12 +3,13 @@
 </header>
 <div class="containerLogin">
 	<form class="login_form" {{action 'authenticate' on='submit'}}>
-		<img id="user_photo" class="login_user_photo" src="{{rootURL}}/assets/img/login_user_image.png" alt="user photo">						
-		<h2>Inicio de Sesión</h2>			
+		<img id="user_photo" class="login_user_photo" src="{{rootURL}}/assets/img/login_user_image.png" alt="user photo">
+		<h2>Inicio de Sesión</h2>
 		<label for="username">Login</label>
 		{{input value=username placeholder='Ingrese Login' class='form-control' focus-out="obtenerImage" autofocus="autofocus"}}
 		<label for="password">Contraseña</label>
 		{{input value=password placeholder='Ingrese password' class='form-control' type='password'}}
+		<div class="blankSpaceTop"></div>
 		<button type="submit" class="button_login">Login</button>
 		<h5><a href="http//:www.grupossi.com">Olvidé mi contraseña</a></h5>
 	</form>
