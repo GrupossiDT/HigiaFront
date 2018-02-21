@@ -2,7 +2,7 @@
 	<!--SI es un padre !-->
 	<div class="tab">
 		<input id="tab-{{item.id}}" type="checkbox" name="tabs">
-		<label for="tab-{{item.id}}">{{item.label}}</label>
+		<label class="label_menu" for="tab-{{item.id}}">{{item.label}}</label>
 		<div class="tab-content">
 			{{#each item.items as |child|}}
 				{{#unless child.enlace}}
@@ -11,16 +11,15 @@
 					</div>
 				{{else}}
 					<div>
-						{{#link-to child.enlace}} 
+						{{#link-to child.enlace}}
 							{{child.label}}
 						{{/link-to}}
 					</div>
-				{{/unless}}			
-			{{/each}}		
+				{{/unless}}
+			{{/each}}
 		</div>
 	</div>
 {{else}}
 	<!--SI No es un padre !-->
 	<div>{{item.label}}</div>
 {{/unless}}
-
