@@ -3,11 +3,13 @@
 # compiled output
 /dist
 /tmp
+/app_old
 
 #Adicionados por dev
 /public/assets/img/*
 
 # dependencies
+
 /node_modules
 /bower_components
 

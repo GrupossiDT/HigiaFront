@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  {{#if frmComponentCrear}}
+    <div class="row">
+      <div class="col-sm-8">
+        <!--- blank -->
+      </div>
+      <div class="col-sm-4" align="right">
+        <button class="btn btn-primary" onclick={{action "openmodal" "crear" }}>Nuevo</button>
+        {{#bs-modal open=mdlComponentCrear onHidden=(action "closeModal") as |modal|}}
+          {{#modal.header}}
+            <h2 class="modal-title">
+              {{frmTitleCrear}}
+            </h2>
+          {{/modal.header}}
+          {{#modal.body}}
+            {{component frmComponentCrear model=modelCreator parent=model.datos }}
+          {{/modal.body}}
+        {{/bs-modal}}
+      </div>
+    </div>
+  {{/if}}
+    <div class="row">
+      <div class="col-sm-12">
+        {{models-table
+        data=model.datos
+        columns=model.columns
+        filterQueryParameters=filterQueryParameters
+        showComponentFooter=true
+        showColumnsDropdown=false
+        useFilteringByColumns=true
+        showGlobalFilter=showGlobalFilter
+        useNumericPagination=true
+        ModelsTablePaginationSimple =true
+        showPageSize=true
+        columnComponents=(hash editRow=(component "boton-actualizar" frmComponentActualizar=frmComponentActualizar frmTitleActualizar=frmTitleActualizar))
+      }}
+      </div>
+    </div>
+</div>

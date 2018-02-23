@@ -1,0 +1,31 @@
+
+<div class="container">
+   <div class="row">
+     <div class="col-xs-12 col-sm-6 padding-top">
+       <div class="form">
+         <form>
+           <div class="form-group">
+             <label>Codigo:</label>
+             {{input class="form-control" name="cdgo" value = model.cdgo}}
+             <div class="error_text">{{validationErrors.cdgo}}</div>
+           </div>
+           <div class="form-group">
+             <label>Descripcion:</label>
+             {{input class="form-control" name="dscrpcn" value = model.dscrpcn}}
+             <div class="error_text">{{validationErrors.dscrpcn}}</div>
+           </div>
+           <div class="form-group">
+             <label>Estado:</label>
+             <select>
+                 <option selected={{ifcond model.estdo "ACTIVO"}} >ACTIVO</option>
+                 <option selected={{ifcond model.estdo "INACTIVO"}} >INACTIVO</option>
+             </select>
+           </div>
+           <div class="form-group">
+             {{#bs-button onClick=(action "update")}}Guardar{{/bs-button}}
+           </div>
+         </form>
+       </div>
+     </div>
+   </div>
+ </div>
