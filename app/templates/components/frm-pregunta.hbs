@@ -1,5 +1,4 @@
 <div class="starter-template">
-{{#if model}}
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-6 padding-top">
@@ -16,16 +15,19 @@
 						<div class="error_text">{{validationErrors.dscrpcn}}</div>
 					</div>
 					<div class="btn-group">
-						{{input type="hidden" name="id" value=model.id}}
             <div class="alert alert-success" role="alert"  id="success" hidden>This is a success alert—check it out!</div>
             <div class="alert alert-danger" role="alert" id="danger" hidden> This is a danger alert—check it out!</div>
-						<button type="submit" class="btn" {{action 'update' on='click' }}>Actualizar</button>
+            {{#if model.id}}
+                  {{input type="hidden" name="id" value=model.id}}
+						      <button type="submit" class="btn btn-info" {{action 'update' on='click' }}>Actualizar</button>
+            {{else}}
+                  <button type="submit" class="btn btn-info" {{action 'save' on='click' }}>Crear</button>
+            {{/if}}
 					</div>
 				</form>
 			</div>
         </div>
     </div>
 </div>
-{{/if}}
-{{yield}}
+
 </div>
