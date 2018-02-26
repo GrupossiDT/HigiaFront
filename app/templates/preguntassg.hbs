@@ -1,23 +1,9 @@
-<div class="container-fluid">
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a>Configuracion del Sistema</a></li>
-      <li class="breadcrumb-item"><a>Seguridad - Acceso</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Preguntas Seguridad</li>
-    </ol>
-  </nav>
-  {{models-table
-  data=model.datos
-  columns=model.columns
-  filterQueryParameters=filterQueryParameters
-  showComponentFooter=true
-  showColumnsDropdown=false
-  useFilteringByColumns=true
-  showGlobalFilter=showGlobalFilter
-  useNumericPagination=true
-  ModelsTablePaginationSimple =true
-  showPageSize=true
-  columnComponents=(hash editRow=(component "boton-actualizar" frmComponent="update-pregunta" frmTitle="Actualizar preguntas"))
-  }}
+<div class="fgContainer">
+  {{cntrl-grid
+    model=model.pregunta
+    frmComponentActualizar="frm-pregunta"
+    frmTitleActualizar="Actualizar preguntas"
+    frmComponentCrear="frm-pregunta"
+    frmTitleCrear="Nueva pregunta"
+    modelCreator=model.pregunta.modelCreator}}
 </div>
-{{outlet}}

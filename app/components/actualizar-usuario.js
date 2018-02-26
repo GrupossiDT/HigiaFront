@@ -6,20 +6,25 @@ export default Ember.Component.extend(formValidation,{
   session: inject('session'),
   validate:{
     form:{
-      cdgo:{
+      nombre_usuario:{
         required: true,
-        message: 'Debes escribir el codigo de la pregunta'
+        message: 'Debes escribir el nombre de usuario'
       },
-      dscrpcn:{
+      login:{
         required: true,
-        message: 'Debes escribir la descripcion de la Pregunta'
+        message: 'Debes escribir el login'
       },
+	  password:{
+		  required:true,
+		  message:'Debes escribir la contraseña. Debe tener al menos 8 caracteres e incluir 1 letra mayúscula, 1 letra minúscula y 1 número',
+		  format:'password'
+	  }
 	}
   },
   actions:{
 
     save(){
-      console.log("Hola mundo");
+	  var file = this.$('#imge_pth')[0].files[0];
       var frmData=this.model[0];
       var formData = new FormData();
 
@@ -30,10 +35,17 @@ export default Ember.Component.extend(formValidation,{
 
         return;
       }
-      formData.append('cdgo', frmData.cdgo);
-      formData.append('dscrpcn', frmData.dscrpcn);
-	  formData.append('id_mnu_ge',"330");
+
       let{access_token,cookie_higia} = this.get('session.data.authenticated');
+      if(file){
+        formData.append('imge_pth', file);
+      }
+      formData.append('password', frmData.password);
+      formData.append('nombre_usuario', frmData.nombre_usuario);
+      formData.append('login', frmData.login);
+	    formData.append('id_mnu_ge',"176");
+      formData.append('id_login_ge',frmData.id_login_ge);
+      formData.append('id_grpo_emprsrl',cookie_higia.id_grpo_emprsrl);
       Ember.$.ajax({
         data: formData,
 		headers:{"Authorization": access_token},
@@ -41,19 +53,22 @@ export default Ember.Component.extend(formValidation,{
         contentType: false,
         processData: false,
         type: 'POST',
-        url: ENV.SERVER_API+'/api/preguntasSg/insertar_preguntasg',
+        url: ENV.SERVER_API+'/api/users/actualizar_usuario',
         success: function (response) {
 
           if(typeof response == "object"){
             if(response.error == "null"){
-              alert("datos insertados correctamente");
+              alert("datos actualizados correctamente");
             }else {
 				alert(JSON.stringify(response.error));
 			}
           }
         },
         error:function(response){
-          alert("aaa"+response.readyState);
+		        var errr = JSON.stringify(response.responseJSON.error);
+            console.log(response);
+            alert(errr);
+
         }
       });
 

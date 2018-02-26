@@ -12,7 +12,7 @@ export default Route.extend({
 		var formdata = new FormData();
 		formdata.append('id_mnu_ge','330');
 		formdata.append('id_undd_ngco',cookie_higia.id_undd_ngco);
-		return Ember.$.ajax({
+		 return $.ajax({
 			headers:{"Authorization": access_token},
 			cache: false,
 			contentType: false,
@@ -21,14 +21,21 @@ export default Route.extend({
 			data:formdata,
 			url: ENV.SERVER_API+"/api/preguntasSg/listar_preguntasg",
 		}).then(function (result) {
-			var obj={};
-			obj["datos"]=result;
+			var obj={"pregunta":[]};
+			var myModel = {"cdgo":"","dscrpcn":"","id":"","estdo":""};
+			if(result.error){
+				 obj["pregunta"]["datos"]=myModel;
+			}else {
+					obj["pregunta"]["datos"]=result;
+			}
+
 			var columns = [{"propertyName":"cdgo","title" :"Código"},
 				{"propertyName":"dscrpcn","title" :"Descripción"},
 				{"propertyName":"estdo","title" :"Estado"},
 				{"title": "Modificar","component": "editRow","editable": false},
 			];
-			obj["columns"] = columns;
+			obj["pregunta"]["columns"] = columns;
+			obj["pregunta"]["modelCreator"]= myModel;
 			return obj;
 		})
 	}

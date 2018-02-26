@@ -36,17 +36,20 @@ export default Ember.Component.extend(formValidation,{
         return;
       }
 
+    let{access_token,cookie_higia} = this.get('session.data.authenticated');
+
 	  if(file){
-        formData.append('imge_pth', file);
-      }
-      formData.append('password', frmData.password);
-      formData.append('nombre_usuario', frmData.nombre_usuario);
-      formData.append('login', frmData.login);
-	  formData.append('id_mnu_ge',"176");
-      let{access_token,cookie_higia} = this.get('session.data.authenticated');
-      Ember.$.ajax({
+      formData.append('imge_pth', file);
+    }
+    formData.append('password', frmData.password);
+    formData.append('nombre_usuario', frmData.nombre_usuario);
+    formData.append('login', frmData.login);
+    formData.append('id_mnu_ge',"176");
+    formData.append('id_grpo_emprsrl',cookie_higia.id_grpo_emprsrl);
+
+    Ember.$.ajax({
         data: formData,
-		headers:{"Authorization": access_token},
+		    headers:{"Authorization": access_token},
         cache: false,
         contentType: false,
         processData: false,
@@ -64,6 +67,7 @@ export default Ember.Component.extend(formValidation,{
         },
         error:function(response){
 		  var errr = JSON.stringify(response.responseJSON.error);
+      console.log(response);
           alert(errr);
         }
       });

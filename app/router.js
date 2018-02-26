@@ -13,6 +13,7 @@ Router.map(function() {
   this.route('perfiles');
   this.route('preguntassg');
   this.route('crearusuario');
+  this.route('actualizarusuario');
 });
 
 export default Router;

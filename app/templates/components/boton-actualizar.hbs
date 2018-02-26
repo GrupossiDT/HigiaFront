@@ -1,11 +1,13 @@
-<button class="btn btn-primary" onclick={{action "mostrar_ventana" "actualizar" }}>Actualizar</button>
-{{#bs-modal open=mdlComponent onHidden=(action (mut mdlComponent) false) as |modal|}}
-  {{#modal.header}}
-    <h2 class="modal-title">
-      {{frmTitle}}
-    </h2>
-  {{/modal.header}}
-  {{#modal.body}}
-    {{component frmComponent model=record}}
-  {{/modal.body}}
-{{/bs-modal}}
+<div align="center">
+  <button class="btn btn-default" onclick={{action "mostrar_ventana" "actualizar" }}>Actualizar</button>
+  {{#bs-modal open=mdlComponent onHidden=(action (mut mdlComponent) false) as |modal|}}
+    {{#modal.header}}
+      <h2 class="modal-title">
+        {{frmTitleActualizar}}
+      </h2>
+    {{/modal.header}}
+    {{#modal.body}}
+      {{component frmComponentActualizar model=record}}
+    {{/modal.body}}
+  {{/bs-modal}}
+</div>
