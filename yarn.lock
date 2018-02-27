@@ -3018,7 +3018,7 @@ ember-simple-auth-token@^3.0.0:
   dependencies:
     ember-cli-babel "^6.6.0"
 
-ember-simple-auth@^1.4.2:
+ember-simple-auth@^1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/ember-simple-auth/-/ember-simple-auth-1.5.1.tgz#aa28fda5af5148b4a0ee823302e600598ccff4d8"
   dependencies:

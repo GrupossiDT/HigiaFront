@@ -48,17 +48,17 @@ export default Ember.Component.extend(formValidation,{
               });
             }else if (response.error) {
                 $("#danger").html(response.error).fadeTo(3000, 500).slideUp(500, function(){
-                    $("#success").slideUp(500);
+                    $("#danger").slideUp(500);
                 });
             }
           }else {
-            $("#danger").html("Error de conexión").fadeTo(3000, 500).slideUp(500, function(){
-                $("#success").slideUp(500);
+            $("#danger").html("Error Comuniquese con el Administrador del Sistema [no object]").fadeTo(3000, 500).slideUp(500, function(){
+                $("#danger").slideUp(500);
             });
           }
         }).catch((response)=>{
-          $("#danger").html("Error de conexión").fadeTo(3000, 500).slideUp(500, function(){
-              $("#success").slideUp(500);
+          $("#danger").html(response.error).fadeTo(3000, 500).slideUp(500, function(){
+              $("#danger").slideUp(500);
           });
       });
     },
@@ -90,14 +90,14 @@ export default Ember.Component.extend(formValidation,{
                   $("#success").slideUp(500);
               });
             }else {
-              $("#danger").html("Error de conexión").fadeTo(3000, 500).slideUp(500, function(){
-                  $("#success").slideUp(500);
+              $("#danger").html(response.error).fadeTo(3000, 500).slideUp(500, function(){
+                  $("#danger").slideUp(500);
               });
             }
           }
         }).catch((response)=>{
-          $("#danger").html("Error de conexión").fadeTo(3000, 500).slideUp(500, function(){
-              $("#success").slideUp(500);
+          $("#danger").html(response.error).fadeTo(3000, 500).slideUp(500, function(){
+              $("#danger").slideUp(500);
           });
         });
     }
