@@ -15,7 +15,11 @@
     "lint:js": "eslint ./*.js app config lib server tests",
     "start": "ember serve",
     "test": "ember test",
+<<<<<<< HEAD
     "postinstall": "bower install"
+=======
+	  "postinstall": "bower install"
+>>>>>>> 2d11ce3e18d01b1429a3f89fa76c90334a91de4c
   },
   "devDependencies": {
     "bootstrap": "^3.3.7",
