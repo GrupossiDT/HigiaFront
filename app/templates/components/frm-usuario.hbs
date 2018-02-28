@@ -1,0 +1,56 @@
+<div class="starter-template">
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 padding-top">
+			<div class="form">
+				<form>
+					<div class="form-group">
+            <div class="form-group">
+  					<label>Nombre Usuario:</label>
+  						{{input class="form-control" name="nombre_usuario" maxlength="60" value=model.nombre_usuario}}
+  						<div class="error_text">{{validationErrors.nombre_usuario}}</div>
+  					</div>
+  					<div class="form-group">
+  						<label>Usuario:</label>
+  						{{input class="form-control" name="login" maxlength="25" value=model.login}}
+  						<div class="error_text">{{validationErrors.login}}</div>
+  					</div>
+  					<div class="form-group">
+  						<label>Contraseña:</label>
+  						{{input type="password" class="form-control" name="password" maxlength="40" value=model.password}}
+  						<div class="error_text">{{validationErrors.password}}</div>
+  					</div>
+  					<div class="form-group">
+  						<label>Foto:</label>
+  						{{input type="file" class="form-control" name="imge_pth" id="imge_pth" value=model.imge_pth}}
+  						<div class="error_text">{{validationErrors.imge_pth}}</div>
+  					</div>
+
+
+						<label>Codigo:</label>
+						{{input class="form-control" name="cdgo" value=model.cdgo}}
+						<div class="error_text">{{validationErrors.cdgo}}</div>
+					</div>
+					<div class="form-group">
+						<label>Descripcion:</label>
+						{{input class="form-control" name="dscrpcn" value=model.dscrpcn}}
+						<div class="error_text">{{validationErrors.dscrpcn}}</div>
+					</div>
+					<div class="btn-group">
+            <div class="alert alert-success" role="alert"  id="success" hidden>This is a success alert—check it out!</div>
+            <div class="alert alert-danger" role="alert" id="danger" hidden> This is a danger alert—check it out!</div>
+            {{#if model.id}}
+                  {{input type="hidden" name="id_login_ge" value=model.id}}
+                  {{input type="text"  name="id_login_ge" value=model.id_login_ge}}
+						      <button type="submit" class="btn btn-info" {{action 'update' on='click' }}>Actualizar</button>
+            {{else}}
+                  <button type="submit" class="btn btn-info" {{action 'save' on='click' }}>Crear</button>
+            {{/if}}
+					</div>
+				</form>
+			</div>
+        </div>
+    </div>
+</div>
+
+</div>
