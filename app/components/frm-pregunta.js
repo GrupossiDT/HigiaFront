@@ -52,21 +52,12 @@ export default Ember.Component.extend(formValidation,{
                 });
             }
           }else {
-<<<<<<< HEAD
-            $("#danger").html("Error Comuniquese con el Administrador del Sistema [no object]").fadeTo(3000, 500).slideUp(500, function(){
-                $("#danger").slideUp(500);
-            });
-          }
-        }).catch((response)=>{
-          $("#danger").html(response.error).fadeTo(3000, 500).slideUp(500, function(){
-=======
             $("#success").html("Error de conexión").fadeTo(3000, 500).slideUp(500, function(){
                 $("#success").slideUp(500);
             });
           }
         }).catch((response)=>{
           $("#danger").html("Error de conexión").fadeTo(3000, 500).slideUp(500, function(){
->>>>>>> 2d11ce3e18d01b1429a3f89fa76c90334a91de4c
               $("#danger").slideUp(500);
           });
       });
