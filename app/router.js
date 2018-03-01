@@ -12,8 +12,6 @@ Router.map(function() {
   this.route('usuarios');
   this.route('perfiles');
   this.route('preguntassg');
-  this.route('crearusuario');
-  this.route('actualizarusuario');
 });
 
 export default Router;
