@@ -6,7 +6,7 @@ import { inject } from '@ember/service';
 import $ from 'jquery';
 
 export default Route.extend({
-	session: inject('session'),	
+	session: inject('session'),
 	model:function(){
 		let{access_token,cookie_higia} = this.get('session.data.authenticated');
 		var formdata = new FormData();
@@ -22,13 +22,23 @@ export default Route.extend({
 			data:formdata,
 			url: ENV.SERVER_API+"/api/users/ListarUsuarios",
 		}).then(function (result) {
-			var obj={};
-			obj["datos"]=result;
+			//var obj={};
+			//obj["datos"]=result;
+			var obj={"pregunta":[]};
+			var myModel = {"cdgo":"","dscrpcn":"","id":"","estdo":""};
+			if(result.error){
+				 obj["pregunta"]["datos"]=myModel;
+			}else {
+					obj["pregunta"]["datos"]=result;
+			}
+
 			var columns = [{"propertyName":"lgn","title" :"Usuario"},
 				{"propertyName":"nmbre_usro","title" :"Nombre Completo"},
 				{"propertyName":"estdo","title" :"Estado"},
+				{"title": "Modificar","component": "editRow","editable": false},
 			];
-			obj["columns"] = columns;
+			obj["pregunta"]["columns"] = columns;
+			obj["pregunta"]["modelCreator"]= myModel;
 			return obj;
 		})
 	}

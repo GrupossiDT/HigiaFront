@@ -1,3 +1,9 @@
-<div class="container-fluid">
-{{usuarios-list model = model}}
+<div class="fgContainer">
+  {{cntrl-grid
+    model=model.pregunta
+    frmComponentActualizar="frm-usuario"
+    frmTitleActualizar="Actualizar Usuario"
+    frmComponentCrear="frm-usuario"
+    frmTitleCrear="Nuevo Usuario"
+    modelCreator=model.pregunta.modelCreator}}
 </div>
