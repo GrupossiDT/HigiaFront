@@ -19,16 +19,22 @@ export default Route.extend({
 			processData: false,
 			type: 'POST',
 			data:formdata,
-			url: ENV.SERVER_API+"/api/perfiles/ListarPerfiles",
+			url: ENV.SERVER_API+"/api/perfiles/listar",
 		}).then(function (result) {
-			var obj={};
-			obj["datos"]=result;
+			var obj={"perfiles":[]};
+			var myModel = {"cdgo":"","dscrpcn":"","id":"","estdo":""};
+			if(result.error){
+				 obj["perfiles"]["datos"]=myModel;
+			}else {
+					obj["perfiles"]["datos"]=result;
+			}
 			var columns = [{"propertyName":"cdgo","title" :"Código"},
 				{"propertyName":"dscrpcn","title" :"Descripción"},
 				{"propertyName":"estdo","title" :"Estado"},
 				{"title": "Modificar","component": "editRow","editable": false},
 			];
-			obj["columns"] = columns;
+			obj["perfiles"]["columns"] = columns;
+			obj["perfiles"]["modelCreator"]= myModel;
 			return obj;
 		})
 	}

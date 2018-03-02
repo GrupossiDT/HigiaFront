@@ -17,8 +17,8 @@
            <div class="form-group">
              <label>Estado:</label>
              <select>
-                 <option selected={{ifcond model.estdo "ACTIVO"}} >ACTIVO</option>
-                 <option selected={{ifcond model.estdo "INACTIVO"}} >INACTIVO</option>
+                 <option value = {{model.estdo}} selected={{ifcond model.estdo "ACTIVO"}} >ACTIVO</option>
+                 <option value = {{model.estdo}} selected={{ifcond model.estdo "INACTIVO"}} >INACTIVO</option>
              </select>
            </div>
            <div class="form-group">
