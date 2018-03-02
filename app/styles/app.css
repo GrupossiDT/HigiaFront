@@ -30,6 +30,10 @@ padding-top: 20px;
 	height:78px;
 }
 
+.alert-login{
+  width: 310px;
+}
+
 /*contenedor de formularios y grids*/
 
 .fgContainer {
