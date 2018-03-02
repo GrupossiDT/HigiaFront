@@ -15,8 +15,8 @@
 						<div class="error_text">{{validationErrors.dscrpcn}}</div>
 					</div>
 					<div class="btn-group">
-            <div class="alert alert-success" role="alert"  id="success" hidden>This is a success alert—check it out!</div>
-            <div class="alert alert-danger" role="alert" id="danger" hidden> This is a danger alert—check it out!</div>
+            <div class="alert alert-success" role="alert"  id="success" hidden></div>
+            <div class="alert alert-danger" role="alert" id="danger" hidden></div>
             {{#if model.id}}
                   {{input type="text" name="id" value=model.id}}
 						      <button type="submit" class="btn btn-info" {{action 'update' on='click' }}>Actualizar</button>
