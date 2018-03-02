@@ -6,8 +6,22 @@ export default Component.extend({
 	session: inject('session'),
 	actions:{
 		logout(){
-			this.get('session').invalidate();
-			window.location.href='/login';
+			var _this = this;
+			let{access_token,cookie_higia} = this.get('session.data.authenticated');
+			$.ajax({
+				headers:{"Authorization": access_token},
+				cache: false,
+				contentType: false,
+				processData: false,
+				type: 'POST',
+				url: ENV.SERVER_API+"/api/auth/logout",
+			}).then(function (result) {
+				console.log(result);
+				if(result.success=="BYE"){
+					_this.get('session').invalidate();
+					window.location.href='/login';
+				}
+			})
 		},
 		showMenu(){
 			$('#main-menu').toggleClass("showMenu");

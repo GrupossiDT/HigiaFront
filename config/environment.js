@@ -33,9 +33,9 @@ module.exports = function(environment) {
 			crossDomain:	true,
 			apiURL: "http://127.0.0.1:5000"
 		}
-		
+
 	};
-	
+
 	ENV['ember-simple-auth-token'] = {
 	  serverTokenEndpoint: ENV.SERVER_API + "/api/auth",
 	  identificationField: 'username',
