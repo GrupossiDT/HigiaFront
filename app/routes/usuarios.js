@@ -20,16 +20,19 @@ export default Route.extend({
 			processData: false,
 			type: 'POST',
 			data:formdata,
-			url: ENV.SERVER_API+"/api/users/ListarUsuarios",
+			url: ENV.SERVER_API+"/api/users/listar",
 		}).then(function (result) {
 			//var obj={};
 			//obj["datos"]=result;
-			var obj={"pregunta":[]};
-			var myModel = {"cdgo":"","dscrpcn":"","id":"","estdo":""};
+			var obj={"usuario":[]};
+
+			
+
+			var myModel = {"nmbre_usro":"","lgn":"","id":"","estdo":""};
 			if(result.error){
-				 obj["pregunta"]["datos"]=myModel;
+				 obj["usuario"]["datos"]=myModel;
 			}else {
-					obj["pregunta"]["datos"]=result;
+					obj["usuario"]["datos"]=result;
 			}
 
 			var columns = [{"propertyName":"lgn","title" :"Usuario"},
@@ -37,8 +40,8 @@ export default Route.extend({
 				{"propertyName":"estdo","title" :"Estado"},
 				{"title": "Modificar","component": "editRow","editable": false},
 			];
-			obj["pregunta"]["columns"] = columns;
-			obj["pregunta"]["modelCreator"]= myModel;
+			obj["usuario"]["columns"] = columns;
+			obj["usuario"]["modelCreator"]= myModel;
 			return obj;
 		})
 	}
