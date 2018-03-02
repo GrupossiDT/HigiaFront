@@ -19,7 +19,7 @@ export default Route.extend({
 			processData: false,
 			type: 'POST',
 			data:formdata,
-			url: ENV.SERVER_API+"/api/preguntasSg/listar_preguntasg",
+			url: ENV.SERVER_API+"/api/preguntasSg/listar",
 		}).then(function (result) {
 			var obj={"pregunta":[]};
 			var myModel = {"cdgo":"","dscrpcn":"","id":"","estdo":""};

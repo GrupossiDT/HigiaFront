@@ -3,7 +3,7 @@ import { inject } from '@ember/service';
 import ENV from '../config/environment';
 import $ from 'jquery';
 export default EmberController.extend({
-	session: inject('session'),	
+	session: inject('session'),
 	init:function() {
 		$('body').toggleClass("bg_login");
 		this._super(...arguments);
@@ -12,23 +12,27 @@ export default EmberController.extend({
 		authenticate(){
 			let {username,password} = this.getProperties('username','password');
 			let identification =username;
-			let  u = this.get('session').authenticate('authenticator:oauth2',identification,password).then(() =>{				
+			let  u = this.get('session').authenticate('authenticator:oauth2',identification,password).then(() =>{
 				window.location.href='/protected';
 			}).catch((reason)=>{
-				var error="";
 				if(typeof reason.error == "object"){
 					if(reason.error.password){
-						error += "Debes digitar la contraseña";
+						$("#danger").html("Debes digitar la contraseÃ±a").fadeTo(5000, 500).slideUp(500, function(){
+								$("#danger").slideUp(500);
+						});
 					}
 					if(reason.error.username){
-						error += "Debes digitar el usuario ";
+						$("#danger").html("Debes digitar el usuario ").fadeTo(5000, 500).slideUp(500, function(){
+								$("#danger").slideUp(500);
+						});
 					}
-				} else if(typeof reason.error == "string"){
-					error = reason.error;
+				} else if(reason.error){
+					$("#danger").html(reason.error).fadeTo(5000, 500).slideUp(500, function(){
+							$("#danger").slideUp(500);
+					});
 				}
-				this.set('errorMessage',error);
-			}); 
-			
+			});
+
 		},
 		obtenerImage(){
 			let {username} = this.getProperties('username');
@@ -42,8 +46,8 @@ export default EmberController.extend({
 						$('#user_photo').attr('src', '/assets/img/login_user_image.png');
 						o.set('errorMessage',data.error);
 					}
-				}).fail(function(data){	
-					$('#user_photo').attr('src', '/assets/img/login_user_image.png');	
+				}).fail(function(data){
+					$('#user_photo').attr('src', '/assets/img/login_user_image.png');
 					o.set('errorMessage',data.responseJSON.error);
 				});
 			}else{
