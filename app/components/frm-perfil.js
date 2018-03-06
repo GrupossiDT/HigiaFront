@@ -22,7 +22,6 @@ export default Ember.Component.extend(formValidation,{
       let{access_token,cookie_higia} = this.get('session.data.authenticated');
       var frmData  = this.model;
       var formData = new FormData();
-      console.log(frmData);
       this.send('validate_form_action', frmData);
       if(Object.keys(this.validationErrors).length > 0){
         return;
@@ -32,8 +31,8 @@ export default Ember.Component.extend(formValidation,{
       formData.append('cdgo', frmData.cdgo);
       formData.append('dscrpcn', frmData.dscrpcn);
       formData.append('estdo', frmData.estdo=='ACTIVO');
+      formData.append('id_undd_ngco',cookie_higia.id_undd_ngco);
       formData.append('id_mnu_ge','175');
-      console.log(formData);
       Ember.$.ajax({
         data: formData,
         headers:{"Authorization": access_token},
@@ -43,6 +42,7 @@ export default Ember.Component.extend(formValidation,{
         type: 'POST',
         url: ENV.SERVER_API+"/api/perfiles/actualizar",
       }).then((response)=>{
+        console.log(typeof response)
           if(typeof response == "object"){
             if(response.success){
               $("#success").html(response.success).fadeTo(3000, 500).slideUp(500, function(){
@@ -59,10 +59,54 @@ export default Ember.Component.extend(formValidation,{
             });
           }
         }).catch((response)=>{
-          $("#danger").html("Error de conexión").fadeTo(3000, 500).slideUp(500, function(){
+          $("#danger").html(response.responseJSON.error).fadeTo(3000, 500).slideUp(500, function(){
               $("#danger").slideUp(500);
           });
       });
     },
+    save(){
+      let{access_token,cookie_higia} = this.get('session.data.authenticated');
+      var frmData  = this.model;
+      var formData = new FormData();
+      this.send('validate_form_action', frmData);
+      if(Object.keys(this.validationErrors).length > 0){
+        return;
+      }
+      formData.append('id_undd_ngco',cookie_higia.id_undd_ngco);
+      formData.append('cdgo', frmData.cdgo);
+      formData.append('dscrpcn', frmData.dscrpcn);
+      formData.append('id_mnu_ge',"175");
+      Ember.$.ajax({
+        data: formData,
+        headers:{"Authorization": access_token},
+        cache: false,
+        contentType: false,
+        processData: false,
+        type: 'POST',
+        url: ENV.SERVER_API+'/api/perfiles/crear'
+      }).then((response)=> {
+          if(typeof response == "object"){
+            if(!response.error){
+              var datos={"cdgo":frmData.cdgo,"dscrpcn":frmData.dscrpcn,"id":response.id};
+              this.parent.unshiftObject(datos);
+              $("#success").html(response.success).fadeTo(3000, 500).slideUp(500, function(){
+                  $("#success").slideUp(500);
+              });
+            }else {
+              $("#danger").html(response.error).fadeTo(3000, 500).slideUp(500, function(){
+                  $("#danger").slideUp(500);
+              });
+            }
+          }
+        }).catch((response)=>{
+          $("#danger").html(response.responseJSON.error).fadeTo(3000, 500).slideUp(500, function(){
+              $("#danger").slideUp(500);
+          });
+        });
+    },
+    cambioEstado(){
+    	var lb_estdo = $( "#chg_estdo option:selected" ).val();
+    	this.set('model.estdo',lb_estdo);
+    }
   }
 })
