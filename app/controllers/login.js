@@ -5,6 +5,9 @@ import $ from 'jquery';
 export default EmberController.extend({
 	session: inject('session'),
 	init:function() {
+		if(this.get('session.isAuthenticated')){
+			window.location.href='/protected';
+		}
 		$('body').toggleClass("bg_login");
 		this._super(...arguments);
 	},
