@@ -1,15 +1,7 @@
-<div class="container-fluid">
-  {{models-table
-  data=model.datos
-  columns=model.columns
-  filterQueryParameters=filterQueryParameters
-  showComponentFooter=true
-  showColumnsDropdown=false
-  useFilteringByColumns=true
-  showGlobalFilter=showGlobalFilter
-  useNumericPagination=true
-  ModelsTablePaginationSimple =true
-  showPageSize=true
-  columnComponents=(hash editRow=(component "boton-actualizar" frmComponent="frm-perfil" frmTitle="Actualizar Perfil"))
-  }}
+<div class="fgContainer">
+  {{cntrl-grid
+    model=model.perfiles
+    frmComponentActualizar="frm-perfil"   frmTitleActualizar="Actualizar perfiles"
+    frmComponentCrear="frm-perfil"    frmTitleCrear="Nuevo Perfil"
+    modelCreator=model.perfiles.modelCreator}}
 </div>

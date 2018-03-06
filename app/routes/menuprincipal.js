@@ -10,8 +10,9 @@ export default Route.extend({
 	model:function(){
 		let{access_token,cookie_higia} = this.get('session.data.authenticated');
 		var formdata = new FormData();
-		formdata.append('id_mnu_ge','175');
+		formdata.append('id_mnu_ge_opt','409');
 		formdata.append('id_undd_ngco',cookie_higia.id_undd_ngco);
+		formdata.append('id_grpo_emprsrl',cookie_higia.id_grpo_emprsrl);
 		return Ember.$.ajax({
 			headers:{"Authorization": access_token},
 			cache: false,
@@ -19,22 +20,26 @@ export default Route.extend({
 			processData: false,
 			type: 'POST',
 			data:formdata,
-			url: ENV.SERVER_API+"/api/perfiles/listar",
+			url: ENV.SERVER_API+"/api/menu/listar",
 		}).then(function (result) {
-			var obj={"perfiles":[]};
-			var myModel = {"cdgo":"","dscrpcn":"","id":"","estdo":""};
+			//var obj={};
+			//obj["datos"]=result;
+			var obj={"menu":[]};
+			var myModel = {"ordn":"","dscrpcn":"","id":"","lnk":"","estdo":""};
 			if(result.error){
-				 obj["perfiles"]["datos"]=myModel;
+				 obj["menu"]["datos"]=myModel;
 			}else {
-					obj["perfiles"]["datos"]=result;
+					obj["menu"]["datos"]=result;
 			}
-			var columns = [{"propertyName":"cdgo","title" :"Código"},
+
+			var columns = [{"propertyName":"ordn","title" :"Orden"},
 				{"propertyName":"dscrpcn","title" :"Descripción"},
+        {"propertyName":"lnk","title" :"Link"},
 				{"propertyName":"estdo","title" :"Estado"},
 				{"title": "Modificar","component": "editRow","editable": false},
 			];
-			obj["perfiles"]["columns"] = columns;
-			obj["perfiles"]["modelCreator"]= myModel;
+			obj["menu"]["columns"] = columns;
+			obj["menu"]["modelCreator"]= myModel;
 			return obj;
 		})
 	}

@@ -17,7 +17,7 @@ export default Ember.Component.extend(formValidation,{
     }
   },
   actions:{
-    update(){
+    actualizar(){
       var _mymodel = this.model;
       var frmData=this.model;
       var formData = new FormData();
@@ -26,12 +26,12 @@ export default Ember.Component.extend(formValidation,{
       if(Object.keys(this.validationErrors).length > 0){
         return;
       }
-      formData.append('id_prgnta_ge', frmData.id);
-      formData.append('cdgo', frmData.cdgo);
-      formData.append('dscrpcn', frmData.dscrpcn);
-	    formData.append('id_mnu_ge',"330");
       let{access_token,cookie_higia} = this.get('session.data.authenticated');
-
+      formData.append('ln_id_prgnta_ge', frmData.id);
+      formData.append('lc_cdgo', frmData.cdgo);
+      formData.append('lc_dscrpcn', frmData.dscrpcn);
+      formData.append('lb_estdo', frmData.estdo);
+	    formData.append('id_mnu_ge',"330");
       Ember.$.ajax({
         data: formData,
         headers:{"Authorization": access_token},
@@ -39,7 +39,7 @@ export default Ember.Component.extend(formValidation,{
         contentType: false,
         processData: false,
         type: 'POST',
-        url: ENV.SERVER_API+'/api/preguntasSg/actualizar_preguntasg'
+        url: ENV.SERVER_API+'/api/preguntasSg/actualizar'
       }).then((response)=>{
           if(typeof response == "object"){
             if(response.success){
@@ -47,32 +47,34 @@ export default Ember.Component.extend(formValidation,{
                   $("#success").slideUp(500);
               });
             }else if (response.error) {
-                $("#danger").html(response.error).fadeTo(3000, 500).slideUp(500, function(){
+                $("#danger").html(response.responseJSON.error).fadeTo(3000, 500).slideUp(500, function(){
                     $("#danger").slideUp(500);
                 });
             }
           }else {
-            $("#success").html("Error de conexión").fadeTo(3000, 500).slideUp(500, function(){
-                $("#success").slideUp(500);
+            $("#danger").html(response.responseJSON.error).fadeTo(3000, 500).slideUp(500, function(){
+                $("#danger").slideUp(500);
             });
           }
         }).catch((response)=>{
-          $("#danger").html("Error de conexión").fadeTo(3000, 500).slideUp(500, function(){
+          console.log(response);
+          $("#danger").html(response.responseJSON.error).fadeTo(3000, 500).slideUp(500, function(){
               $("#danger").slideUp(500);
           });
       });
     },
-    save(){
+    crear(){
       var frmData=this.model;
       var formData = new FormData();
       this.send('validate_form_action', frmData);
       if(Object.keys(this.validationErrors).length > 0){
         return;
       }
-      formData.append('cdgo', frmData.cdgo);
-      formData.append('dscrpcn', frmData.dscrpcn);
-      formData.append('id_mnu_ge',"330");
       let{access_token,cookie_higia} = this.get('session.data.authenticated');
+      formData.append('lc_cdgo', frmData.cdgo);
+      formData.append('lc_dscrpcn', frmData.dscrpcn);
+      formData.append('id_mnu_ge',"330");
+      formData.append('id_undd_ngco',cookie_higia.id_undd_ngco);
       Ember.$.ajax({
         data: formData,
         headers:{"Authorization": access_token},
@@ -80,26 +82,31 @@ export default Ember.Component.extend(formValidation,{
         contentType: false,
         processData: false,
         type: 'POST',
-        url: ENV.SERVER_API+'/api/preguntasSg/insertar_preguntasg'
+        url: ENV.SERVER_API+'/api/preguntasSg/crear'
       }).then((response)=> {
           if(typeof response == "object"){
             if(!response.error){
-              var pregunta={"cdgo":frmData.cdgo,"dscrpcn":frmData.dscrpcn,"id":response.id};
+              var pregunta={"cdgo":frmData.cdgo,"dscrpcn":frmData.dscrpcn,"id":response.id,"estdo":'ACTIVO'};
               this.parent.unshiftObject(pregunta);
               $("#success").html(response.success).fadeTo(3000, 500).slideUp(500, function(){
                   $("#success").slideUp(500);
               });
+
             }else {
-              $("#danger").html(response.error).fadeTo(3000, 500).slideUp(500, function(){
+              $("#danger").html(response.responseJSON.error).fadeTo(3000, 500).slideUp(500, function(){
                   $("#danger").slideUp(500);
               });
             }
           }
         }).catch((response)=>{
-          $("#danger").html(response.error).fadeTo(3000, 500).slideUp(500, function(){
+          $("#danger").html(response.responseJSON.error).fadeTo(3000, 500).slideUp(500, function(){
               $("#danger").slideUp(500);
           });
         });
+    },
+    cambioEstado(){
+      var lb_estdo = $( "#chg_estdo option:selected" ).val();
+      this.set('model.estdo',lb_estdo);
     }
   }
 });

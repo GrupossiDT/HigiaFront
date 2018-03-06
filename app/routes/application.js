@@ -4,7 +4,7 @@ import ENV from '../config/environment';
 import { inject } from '@ember/service';
 import $ from 'jquery';
 export default Ember.Route.extend(AuthenticatedRouteMixin,{
-	session: inject('session'),	
+	session: inject('session'),
 	model:function(){
 		var isAuthenticated = this.get('session.isAuthenticated');
 		if( isAuthenticated ){
@@ -43,7 +43,7 @@ function CrearMenu(data){
 		var favorito = item.favorito == false ? null: item.favorito;
 		var parentid = item.parentid == 0 ? null : item.parentid;
 		var enlace = item.enlace == "" ? null : item.enlace;
-		
+
 		var id = item.id;
 		console.log(enlace,id);
 		if(favorito){
@@ -62,9 +62,10 @@ function CrearMenu(data){
 			items[id] = { parentid: parentid, id:id, label: label, item: item,enlace:enlace };
 			source[id] = items[id];
 		}
-	});	
+	});
 	result["fav"] =  favoritos;
 	result["source"] = source;
+	console.log(source);
   return result;
 }
 
