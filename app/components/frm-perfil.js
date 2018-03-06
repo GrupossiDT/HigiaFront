@@ -103,6 +103,10 @@ export default Ember.Component.extend(formValidation,{
               $("#danger").slideUp(500);
           });
         });
+    },
+    cambioEstado(){
+      var lb_estdo = $( "#chg_estdo option:selected" ).val();
+      this.set('model.estdo',lb_estdo);
     }
   }
 })

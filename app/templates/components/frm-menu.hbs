@@ -5,14 +5,23 @@
        <div class="form">
          <form>
            <div class="form-group">
-             <label>Codigo:</label>
-             {{input class="form-control" name="cdgo" value = model.cdgo}}
-             <div class="error_text">{{validationErrors.cdgo}}</div>
+             <label>Nodo Superior:</label>
+             {{input class="form-control" name="txt_ndo_sprr" value = model.parent}}
+           </div>
+           <div class="form-group">
+             <label>Orden:</label>
+             {{input class="form-control" name="txt_ordn" value = model.ordn}}
+             <div class="error_text">{{validationErrors.ordn}}</div>
            </div>
            <div class="form-group">
              <label>Descripcion:</label>
-             {{input class="form-control" name="dscrpcn" value = model.dscrpcn}}
+             {{input class="form-control" name="txt_dscrpcn" value = model.dscrpcn}}
              <div class="error_text">{{validationErrors.dscrpcn}}</div>
+           </div>
+           <div class="form-group">
+             <label>Ruta:</label>
+             {{input class="form-control" name="txt_rta" value = model.lnk}}
+             <div class="error_text">{{validationErrors.lnk}}</div>
            </div>
            {{#if model.id}}
            <div class="form-group">

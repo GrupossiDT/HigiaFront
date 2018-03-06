@@ -60,8 +60,8 @@ export default Ember.Component.extend(formValidation,{
                 });
             }
           }else {
-            $("#success").html("Error de conexión").fadeTo(3000, 500).slideUp(500, function(){
-                $("#success").slideUp(500);
+            $("#danger").html("Error de conexión").fadeTo(3000, 500).slideUp(500, function(){
+                $("#danger").slideUp(500);
             });
           }
         }).catch((response)=>{
@@ -108,18 +108,20 @@ export default Ember.Component.extend(formValidation,{
                   $("#success").slideUp(500);
               });
             }else {
-              $("#danger").html(response.error).fadeTo(3000, 500).slideUp(500, function(){
+              $("#danger").html(response.responseJSON.error).fadeTo(3000, 500).slideUp(500, function(){
                   $("#danger").slideUp(500);
               });
             }
           }
         }).catch((response)=>{
-          console.log(response.responseJSON.error);
           $("#danger").html(response.responseJSON.error).fadeTo(3000, 500).slideUp(500, function(){
               $("#danger").slideUp(500);
-              console.log('hello word');
           });
         });
+    },
+    cambioEstado(){
+      var lb_estdo = $( "#chg_estdo option:selected" ).val();
+      this.set('model.estdo',lb_estdo);
     }
   }
 });
