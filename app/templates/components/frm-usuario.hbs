@@ -27,12 +27,12 @@
           {{#if model.id}}
           <div class="form-group">
             <label>Estado:</label>
-            <select id="chg_estdo" {{action 'cambioEstado' on='change'}}>
-                <option  value='ACTIVO'  selected={{ifcond model.estdo "ACTIVO"}} >ACTIVO</option>
-                <option  value='INACTIVO' selected={{ifcond model.estdo "INACTIVO"}} >INACTIVO</option>
+            <select id="estdo" class="form-control" name="slct_estdo" {{action 'cambioEstado' on='change'}}>
+                <option value='ACTIVO'  selected={{ifcond model.estdo "ACTIVO"}} >ACTIVO</option>
+                <option value='INACTIVO' selected={{ifcond model.estdo "INACTIVO"}} >INACTIVO</option>
             </select>
           </div>
-          {{/if}}          
+          {{/if}}
 					<div class="btn-group">
             <div class="alert alert-success" role="alert"  id="success" hidden>This is a success alert—check it out!</div>
             <div class="alert alert-danger" role="alert" id="danger" hidden> This is a danger alert—check it out!</div>
@@ -41,7 +41,6 @@
 						      <button type="submit" class="btn btn-info" {{action 'update' on='click' }}>Actualizar</button>
             {{else}}
                   <button type="submit" class="btn btn-info" {{action 'save' on='click' }}>Crear</button>
-
             {{/if}}
 					</div>
 				</form>

@@ -27,11 +27,11 @@ export default Ember.Component.extend(formValidation,{
         return;
       }
       let{access_token,cookie_higia} = this.get('session.data.authenticated');
+      formData.append('ln_id_mnu_ge',frmData.id);
       formData.append('ln_parent', frmData.parent);
       formData.append('lc_ordn', frmData.ordn);
       formData.append('lc_dscrpcn', frmData.dscrpcn);
       formData.append('lc_lnk', frmData.lnk);
-      formData.append('ln_id_mnu_ge',frmData.id);
       formData.append('lb_estdo', frmData.estdo == 'ACTIVO');
 	    formData.append('id_mnu_ge_opt',"409");
       Ember.$.ajax({
