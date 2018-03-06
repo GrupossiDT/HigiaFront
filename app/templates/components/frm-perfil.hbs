@@ -11,15 +11,15 @@
            </div>
            <div class="form-group">
              <label>Descripcion:</label>
-             {{input class="form-control" name="dscrpcn" value = model.dscrpcn}}
+             {{input class="form-control"  name="dscrpcn" value = model.dscrpcn}}
              <div class="error_text">{{validationErrors.dscrpcn}}</div>
            </div>
            {{#if model.id}}
            <div class="form-group">
              <label>Estado:</label>
-             <select>
-                 <option value = {{model.estdo}} selected={{ifcond model.estdo "ACTIVO"}} >ACTIVO</option>
-                 <option value = {{model.estdo}} selected={{ifcond model.estdo "INACTIVO"}} >INACTIVO</option>
+             <select id="chg_estdo" class="form-control" {{action 'cambioEstado' on='change'}}>
+             	   <option  value='ACTIVO'  selected={{ifcond model.estdo "ACTIVO"}} >ACTIVO</option>
+              	 <option  value='INACTIVO' selected={{ifcond model.estdo "INACTIVO"}} >INACTIVO</option>
              </select>
            </div>
            {{/if}}
@@ -28,12 +28,21 @@
              <div class="alert alert-danger" role="alert" id="danger" hidden></div>
              {{#if model.id}}
                    {{input type="hidden" name="id" value=model.id}}
+<<<<<<< HEAD
+                   <button type="submit" class="btn btn-info" {{action 'update' on='click' }}>Actualizar</button>
+             {{else}}
+                   <button type="submit" class="btn btn-info" {{action 'save' on='click' }}>Crear</button>
+             {{/if}}
+           </div>
+          </form>
+=======
  						      <button type="submit" class="btn btn-info" {{action 'update' on='click' }}>Actualizar</button>
              {{else}}
                    <button type="submit" class="btn btn-info" {{action 'save' on='click' }}>Crear</button>
              {{/if}}
  					</div>
          </form>
+>>>>>>> 49af9b7c584cc98fabfa8d03f8c407819a74e5ac
        </div>
      </div>
    </div>
