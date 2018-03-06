@@ -1,33 +1,41 @@
 <div class="starter-template">
 <div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-6 padding-top">
-			<div class="form">
-				<form>
-					<div class="form-group">
-						<label>Codigo:</label>
-						{{input class="form-control" name="cdgo" value=model.cdgo}}
-						<div class="error_text">{{validationErrors.cdgo}}</div>
-					</div>
-					<div class="form-group">
-						<label>Descripcion:</label>
-						{{input class="form-control" name="dscrpcn" value=model.dscrpcn}}
-						<div class="error_text">{{validationErrors.dscrpcn}}</div>
-					</div>
-					<div class="btn-group">
-            <div class="alert alert-success" role="alert"  id="success" hidden></div>
-            <div class="alert alert-danger" role="alert" id="danger" hidden></div>
-            {{#if model.id}}
-                  {{input type="hidden" name="id" value=model.id}}
-						      <button type="submit" class="btn btn-info" {{action 'update' on='click' }}>Actualizar</button>
-            {{else}}
-                  <button type="submit" class="btn btn-info" {{action 'save' on='click' }}>Crear</button>
-            {{/if}}
-					</div>
-				</form>
-			</div>
+  <div class="row">
+      <div class="col-xs-12 col-sm-6 padding-top">
+    <div class="form">
+      <form>
+        <div class="form-group">
+          <label>Codigo:</label>
+          {{input class="form-control" name="cdgo" value=model.cdgo}}
+          <div class="error_text">{{validationErrors.cdgo}}</div>
         </div>
+        <div class="form-group">
+          <label>Descripcion:</label>
+          {{input class="form-control" name="dscrpcn" value=model.dscrpcn}}
+          <div class="error_text">{{validationErrors.dscrpcn}}</div>
+        </div>
+        {{#if model.id}}
+        <div class="form-group">
+          <label>Estado:</label>
+          <select id="chg_estdo" {{action 'cambioEstado' on='change'}}>
+              <option  value='ACTIVO'  selected={{ifcond model.estdo "ACTIVO"}} >ACTIVO</option>
+              <option  value='INACTIVO' selected={{ifcond model.estdo "INACTIVO"}} >INACTIVO</option>
+          </select>
+        </div>
+        {{/if}}
+        <div class="btn-group">
+          <div class="alert alert-success" role="alert"  id="success" hidden></div>
+          <div class="alert alert-danger" role="alert" id="danger" hidden></div>
+          {{#if model.id}}
+                {{input type="hidden" name="id" value=model.id}}
+                <button type="submit" class="btn btn-info" {{action 'actualizar' on='click' }}>Actualizar</button>
+          {{else}}
+                <button type="submit" class="btn btn-info" {{action 'crear' on='click' }}>Crear</button>
+          {{/if}}
+        </div>
+      </form>
     </div>
+      </div>
+  </div>
 </div>
-
 </div>
