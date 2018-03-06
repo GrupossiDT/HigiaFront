@@ -14,11 +14,7 @@ export default Ember.Component.extend(formValidation,{
         required: true,
         message: 'Debes escribir el login'
       },
-      password:{
-        required:true,
-        message:'Debes escribir la contraseña. Debe tener al menos 8 caracteres e incluir 1 letra mayúscula, 1 letra minúscula y 1 número',
-        format:'password'
-      }
+
     }
   },
   actions:{
