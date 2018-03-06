@@ -22,7 +22,6 @@ export default Ember.Component.extend(formValidation,{
       let{access_token,cookie_higia} = this.get('session.data.authenticated');
       var frmData  = this.model;
       var formData = new FormData();
-      console.log(frmData);
       this.send('validate_form_action', frmData);
       if(Object.keys(this.validationErrors).length > 0){
         return;
@@ -54,8 +53,8 @@ export default Ember.Component.extend(formValidation,{
                 });
             }
           }else {
-            $("#success").html("Error de conexión").fadeTo(3000, 500).slideUp(500, function(){
-                $("#success").slideUp(500);
+            $("#danger").html("Error de conexión").fadeTo(3000, 500).slideUp(500, function(){
+                $("#danger").slideUp(500);
             });
           }
         }).catch((response)=>{
@@ -64,5 +63,46 @@ export default Ember.Component.extend(formValidation,{
           });
       });
     },
+    save(){
+      var frmData=this.model;
+      var formData = new FormData();
+      this.send('validate_form_action', frmData);
+      if(Object.keys(this.validationErrors).length > 0){
+        return;
+      }
+      formData.append('cdgo', frmData.cdgo);
+      formData.append('dscrpcn', frmData.dscrpcn);
+      formData.append('id_mnu_ge',"175");
+      let{access_token,cookie_higia} = this.get('session.data.authenticated');
+      formData.append('id_undd_ngco',cookie_higia.id_undd_ngco);
+      Ember.$.ajax({
+        data: formData,
+        headers:{"Authorization": access_token},
+        cache: false,
+        contentType: false,
+        processData: false,
+        type: 'POST',
+        url: ENV.SERVER_API+'/api/perfiles/crear'
+      }).then((response)=> {
+        console.log(response);
+          if(typeof response == "object"){
+            if(!response.error){
+              var perfil={"cdgo":frmData.cdgo,"dscrpcn":frmData.dscrpcn,"id":response.id};
+              this.parent.unshiftObject(perfil);
+              $("#success").html(response.success).fadeTo(3000, 500).slideUp(500, function(){
+                  $("#success").slideUp(500);
+              });
+            }else {
+              $("#danger").html(response.error).fadeTo(3000, 500).slideUp(500, function(){
+                  $("#danger").slideUp(500);
+              });
+            }
+          }
+        }).catch((response)=>{
+          $("#danger").html(response.error).fadeTo(3000, 500).slideUp(500, function(){
+              $("#danger").slideUp(500);
+          });
+        });
+    }
   }
 })
