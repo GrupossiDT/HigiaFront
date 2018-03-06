@@ -23,7 +23,6 @@ export default Ember.Component.extend(formValidation,{
       var frmData=this.model;
       var formData = new FormData();
       var file = this.$('#fl_imagen')[0].files[0];
-      console.log(frmData);
       this.send('validate_form_action', frmData);
       if(Object.keys(this.validationErrors).length > 0){
         return;
@@ -36,6 +35,7 @@ export default Ember.Component.extend(formValidation,{
     //model frmData.id equivale a id_login_ge de la tabla login_ge
     formData.append('id_login_ge',frmData.id);
     formData.append('id_grpo_emprsrl',cookie_higia.id_grpo_emprsrl);
+    formData.append('estdo',frmData.estdo=='ACTIVO');
     if(file){
         formData.append('imge_pth', file);
     }
@@ -84,7 +84,7 @@ export default Ember.Component.extend(formValidation,{
       formData.append('login', frmData.lgn);
       formData.append('id_mnu_ge',"176");
       formData.append('id_grpo_emprsrl',cookie_higia.id_grpo_emprsrl);
-      formData.append('estado',frmData.estado);
+      formData.append('estdo',frmData.estdo);
       if(file){
           formData.append('imge_pth', file);
       }
@@ -100,8 +100,6 @@ export default Ember.Component.extend(formValidation,{
       }).then((response)=> {
           if(typeof response == "object"){
             if(!response.error){
-              console.log('AQUI ENTRO!');
-              console.log(frmData);
               var usuario={"nmbre_usro":frmData.nmbre_usro,"lgn":frmData.lgn,"id":response.id, "estdo":frmData.estado};
               this.parent.unshiftObject(usuario);
               $("#success").html(response.success).fadeTo(3000, 500).slideUp(500, function(){
@@ -114,12 +112,27 @@ export default Ember.Component.extend(formValidation,{
             }
           }
         }).catch((response)=>{
-          console.log(response.responseJSON.error);
-          $("#danger").html(response.responseJSON.error).fadeTo(3000, 500).slideUp(500, function(){
+
+          var resultado = '';
+          var objeto = response.responseJSON.error;
+
+          if(objeto.length>0){
+            resultado = objeto;
+          }else{
+            for (var i in objeto){
+              resultado += i+":"+objeto[i][0]+"\n";
+            }
+          }
+
+          $("#danger").html(resultado).fadeTo(3000, 500).slideUp(500, function(){
               $("#danger").slideUp(500);
-              console.log('hello word');
+
           });
         });
+    },
+    cambioEstado(){
+      var lb_estdo = $( "#estdo option:selected" ).val();
+      this.set('model.estdo',lb_estdo);
     }
   }
 });
