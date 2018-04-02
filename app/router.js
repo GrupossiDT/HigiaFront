@@ -13,6 +13,9 @@ Router.map(function() {
   this.route('perfiles');
   this.route('preguntassg');
   this.route('menuprincipal');
+  this.route('recuperarcontrasena');
+  this.route('clavetemporal');
+  this.route('cambiarcontrasena');
 });
 
 export default Router;
