@@ -45,7 +45,6 @@ function CrearMenu(data){
 		var enlace = item.enlace == "" ? null : item.enlace;
 
 		var id = item.id;
-		console.log(enlace,id);
 		if(favorito){
 			var item_favorito = { parentid: parentid, id:id, label: label, item: item, enlace:enlace };
 			favoritos[favoritos.length] = item_favorito;
@@ -65,7 +64,6 @@ function CrearMenu(data){
 	});
 	result["fav"] =  favoritos;
 	result["source"] = source;
-	console.log(source);
   return result;
 }
 

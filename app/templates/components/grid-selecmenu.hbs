@@ -1,0 +1,44 @@
+<style>
+.modal-body{
+position: relative;
+padding: 15px;
+height: 300px !important;
+overflow: scroll;
+overflow-x: hidden;
+}
+</style>
+<div align="center">
+  <button class="button-default" onclick={{action "mostrar_ventana" record}}>Seleccione</button>
+  {{#bs-modal open=mdlComponent onHidden=(action (mut mdlComponent) false) as |modal|}}
+    {{#modal.header}}
+      <h2 class="modal-title">
+        {{frmTitleActualizar}}
+      </h2>
+      <div style="text-align:right">
+        <button class="button-default" onclick={{action "toggle_seleccion"}}><span id="text_toggle">{{model.text_select}}</span></button>
+      </div>
+    {{/modal.header}}
+    {{#modal.body}}
+      {{models-table
+        data=model.opcion.datos
+        columns=model.opcion.columns
+        filterQueryParameters=filterQueryParameters
+        showComponentFooter=true
+        showColumnsDropdown=false
+        useFilteringByColumns=true
+        showGlobalFilter=showGlobalFilter
+        useNumericPagination=true
+        ModelsTablePaginationSimple = false
+        showPageSize=false
+        filteringIgnoreCase=true
+        pageSize=model.opcion.datos.length
+        columnComponents= (hash editOpt=(component "check-opcionmenu"))
+      }}
+    {{/modal.body}}
+    {{#modal.footer}}
+      <div style="text-align:center">
+        <button class="button-default" onclick={{action "guardar"}} >Guardar</button>
+      </div>
+    {{/modal.footer}}
+  {{/bs-modal}}
+</div>
