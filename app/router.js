@@ -13,6 +13,7 @@ Router.map(function() {
   this.route('perfiles');
   this.route('preguntassg');
   this.route('menuprincipal');
+  this.route('contratos');
 });
 
 export default Router;

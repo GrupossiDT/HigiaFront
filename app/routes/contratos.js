@@ -19,23 +19,22 @@ export default Route.extend({
 			processData: false,
 			type: 'POST',
 			data:formdata,
-			url: ENV.SERVER_API+"/api/perfiles/listar",
+			url: ENV.SERVER_API+"/api/Contratos/listar",
 		}).then(function (result) {
-			var obj={"perfiles":[]};
-			var myModel = {"cdgo":"","dscrpcn":"","id":"","estdo":""};
+			var obj={"contratos":[]};
+			var myModel = {"cnsctvo_cntrto":"","nmbre_rzn_scl":"","id_cntrts":""};
 			if(result.error){
-				 obj["perfiles"]["datos"]=myModel;
+				 obj["contratos"]["datos"]=myModel;
 			}else {
-					obj["perfiles"]["datos"]=result;
+					obj["contratos"]["datos"]=result;
 			}
-			var columns = [{"propertyName":"cdgo","title" :"Código"},
-				{"propertyName":"dscrpcn","title" :"Descripción"},
-				{"propertyName":"estdo","title" :"Estado"},
+			var columns = [{"propertyName":"cnsctvo_cntrto","title" :"Consecutivo Contrato"},
+				{"propertyName":"nmbre_rzn_scl","title" :"Nombre / Razon Social"},
 				{"title": "Modificar","component": "editRow","editable": false},
 				{"title": "Opciones Menu","component": "editRow","editable": false},
 			];
-			obj["perfiles"]["columns"] = columns;
-			obj["perfiles"]["modelCreator"]= myModel;
+			obj["contratos"]["columns"] = columns;
+			obj["contratos"]["modelCreator"]= myModel;
 			return obj;
 		})
 	}
