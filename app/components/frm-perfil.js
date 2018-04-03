@@ -31,8 +31,8 @@ export default Ember.Component.extend(formValidation,{
       formData.append('cdgo', frmData.cdgo);
       formData.append('dscrpcn', frmData.dscrpcn);
       formData.append('estdo', frmData.estdo=='ACTIVO');
+      formData.append('id_undd_ngco',cookie_higia.id_undd_ngco);
       formData.append('id_mnu_ge','175');
-      console.log(formData);
       Ember.$.ajax({
         data: formData,
         headers:{"Authorization": access_token},
@@ -42,6 +42,7 @@ export default Ember.Component.extend(formValidation,{
         type: 'POST',
         url: ENV.SERVER_API+"/api/perfiles/actualizar",
       }).then((response)=>{
+        console.log(typeof response)
           if(typeof response == "object"){
             if(response.success){
               $("#success").html(response.success).fadeTo(3000, 500).slideUp(500, function(){
@@ -58,7 +59,7 @@ export default Ember.Component.extend(formValidation,{
             });
           }
         }).catch((response)=>{
-          $("#danger").html("Error de conexión").fadeTo(3000, 500).slideUp(500, function(){
+          $("#danger").html(response.responseJSON.error).fadeTo(3000, 500).slideUp(500, function(){
               $("#danger").slideUp(500);
           });
       });
@@ -103,6 +104,10 @@ export default Ember.Component.extend(formValidation,{
               $("#danger").slideUp(500);
           });
         });
+    },
+    cambioEstado(){
+      var lb_estdo = $( "#chg_estdo option:selected" ).val();
+      this.set('model.estdo',lb_estdo);
     }
   }
 })

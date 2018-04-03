@@ -1,0 +1,24 @@
+<header class="login_header">
+  <img class="logo_header" src="{{rootURL}}/assets/img/logo_ssi_header.png" alt="logo ssi">
+</header>
+<div class="containerLogin">
+<form class="login_form" {{action 'enviarClave' on='submit'}}>
+	<h2>Solicitud de Clave Temporal</h2>
+	<p>Para restablecer tu contraseña primero solicita una clave temporal que llegará a tu celular  y/o correo electrónico, una vez la tengas ingrésala en "Ya tengo mi clave temporal"</p>
+  <h5>¿Aún no recibes tu clave temporal?</h5>
+	<h5>{{#link-to 'recuperarcontrasena' }}<button class="button_login">Solicitar clave</button>{{/link-to}}</h5>
+	<h2>Ya tengo mi clave temporal</h2>
+    {{input type='password' name='claveTemporal' maxlength="8" value=claveTemporal placeholder="escribe tu clave temporal" class='form-control' autofocus="autofocus" focus-out="enable_btn"}}
+    <div class="btn-group" style="width:100%;">
+      <div class="alert alert-success" role="alert"  id="success" hidden></div>
+      <div class="alert alert-danger" role="alert" id="danger" hidden></div>
+      <button id="btn_snd_tpm" class="button_login" type="submit" disabled>Ya tengo mi clave</button>
+    </div>
+		<h5>{{#link-to 'login' }}Ir a inicio de Sesión{{/link-to}}</h5>
+</form>
+</div>
+<footer class="footer_home">
+<img src="{{rootURL}}/assets/img/logo_higia.png" height=30px;  alt="logo higia">
+&nbsp;&nbsp;&nbsp;<br>
+<cite>HIGIA-SSI® Todos los derechos reservados </cite>
+</footer>

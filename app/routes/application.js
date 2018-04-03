@@ -3,7 +3,7 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 import ENV from '../config/environment';
 import { inject } from '@ember/service';
 import $ from 'jquery';
-export default Ember.Route.extend(AuthenticatedRouteMixin,{
+export default Ember.Route.extend({
 	session: inject('session'),
 	model:function(){
 		var isAuthenticated = this.get('session.isAuthenticated');

@@ -1,0 +1,49 @@
+
+<div class="container">
+   <div class="row">
+     <div class="col-xs-12 col-sm-6 padding-top">
+       <div class="form">
+         <form>
+           <div class="form-group">
+             <label>Nodo Superior:</label>
+             {{input class="form-control" name="txt_ndo_sprr" value = model.parent}}
+           </div>
+           <div class="form-group">
+             <label>Orden:</label>
+             {{input class="form-control" name="txt_ordn" value = model.ordn}}
+             <div class="error_text">{{validationErrors.ordn}}</div>
+           </div>
+           <div class="form-group">
+             <label>Descripcion:</label>
+             {{input class="form-control" name="txt_dscrpcn" value = model.dscrpcn}}
+             <div class="error_text">{{validationErrors.dscrpcn}}</div>
+           </div>
+           <div class="form-group">
+             <label>Ruta:</label>
+             {{input class="form-control" name="txt_rta" value = model.lnk}}
+             <div class="error_text">{{validationErrors.lnk}}</div>
+           </div>
+           {{#if model.id}}
+           <div class="form-group">
+             <label>Estado:</label>
+             <select class="form-control" id="chg_estdo" {{action 'cambioEstado' on='change'}}>
+                 <option  value='ACTIVO'  selected={{ifcond model.estdo "ACTIVO"}} >ACTIVO</option>
+                 <option  value='INACTIVO' selected={{ifcond model.estdo "INACTIVO"}} >INACTIVO</option>
+             </select>
+           </div>
+           {{/if}}
+           <div class="btn-group">
+             <div class="alert alert-success" role="alert"  id="success" hidden></div>
+             <div class="alert alert-danger" role="alert" id="danger" hidden></div>
+             {{#if model.id}}
+                   {{input type="hidden" name="id" value=model.id}}
+ 						      <button type="submit" class="btn btn-info" {{action 'actualizar' on='click' }}>Actualizar</button>
+             {{else}}
+                   <button type="submit" class="btn btn-info" {{action 'crear' on='click' }}>Crear</button>
+             {{/if}}
+ 					</div>
+         </form>
+       </div>
+     </div>
+   </div>
+ </div>
