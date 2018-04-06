@@ -3,7 +3,7 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 import ENV from '../config/environment';
 import { inject } from '@ember/service';
 import $ from 'jquery';
-export default Ember.Route.extend(AuthenticatedRouteMixin,{
+export default Ember.Route.extend({
 	session: inject('session'),
 	model:function(){
 		var isAuthenticated = this.get('session.isAuthenticated');
@@ -34,8 +34,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin,{
 });
 
 function CrearMenu(data){
-    var source = [];
-    var items = [];
+  var source = [];
+  var items = [];
 	var result ={};
 	var favoritos=[];
 	data.forEach(function(item){
@@ -43,9 +43,11 @@ function CrearMenu(data){
 		var favorito = item.favorito == false ? null: item.favorito;
 		var parentid = item.parentid == 0 ? null : item.parentid;
 		var enlace = item.enlace == "" ? null : item.enlace;
-
 		var id = item.id;
-		console.log(enlace,id);
+
+		//variable que ubica id_mnu_ge
+		arrayMenu[enlace]={"id":id};
+
 		if(favorito){
 			var item_favorito = { parentid: parentid, id:id, label: label, item: item, enlace:enlace };
 			favoritos[favoritos.length] = item_favorito;
@@ -65,7 +67,7 @@ function CrearMenu(data){
 	});
 	result["fav"] =  favoritos;
 	result["source"] = source;
-	console.log(source);
+	console.log(result);
   return result;
 }
 
