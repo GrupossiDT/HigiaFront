@@ -19,8 +19,7 @@ export default Component.extend({
 				type: 'POST',
 				url: ENV.SERVER_API+"/api/auth/logout",
 			}).then(function (result) {
-				console.log(result);
-				if(result.success=="BYE"){
+				if(result.success == "BYE" ){
 					_this.get('session').invalidate();
 					window.location.href='/login';
 				}

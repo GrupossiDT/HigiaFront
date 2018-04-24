@@ -1,0 +1,42 @@
+{{#if record.lnk}}
+<table>
+    <tr>
+      <td width=60>
+        <label class="label-text" data-title="Crear" for="{{record.id_mnu}}_crear" onclick={{action "guardarEnRegistro" }} data-obj="crear">
+            {{input type="checkbox" class="check_permiso" name=record.id_mnu checked=record.crar}}
+            <i style="cursor:pointer" class="fa fa-plus-square fa-lg" data-obj="crear"></i>
+        </label>
+      </td>
+      <td width=60>
+          <label class="label-text" data-title="Anular" for="{{record.id_mnu}}_anular" onclick={{action "guardarEnRegistro" }} data-obj="anular">
+            {{input type="checkbox" class="check_permiso" name=record.id_mnu checked=record.anlr}}
+            <i style="cursor:pointer" class="fa fa-ban fa-lg" data-obj="anular"></i>
+        </label>
+      </td>
+      <td width=60>
+
+        <label class="label-text" data-title="Actualizar" for="{{record.id_mnu}}_actualizar" onclick={{action "guardarEnRegistro" }} data-obj="actualizar">
+          {{input type="checkbox" class="check_permiso" name=record.id_mnu checked=record.actlzr}}
+          <i style="cursor:pointer" class="fa fa-pencil-square fa-lg" data-obj="actualizar"></i>
+        </label>
+      </td>
+      <td width=60>
+        <label class="label-text" data-title="Imprimir" for="{{record.id_mnu}}_imprimir" onclick={{action "guardarEnRegistro" }} data-obj="imprimir">
+          {{input type="checkbox" class="check_permiso" name=record.id_mnu checked=record.imprmr}}
+          <i style="cursor:pointer" class="fa fa-print fa-lg" data-obj="imprimir"></i>
+        </label>
+      </td>
+      <td width=60>
+        <label class="label-text" data-title="Exportar" for="{{record.id_mnu}}_exportar" onclick={{action "guardarEnRegistro" }} data-obj="exportar">
+          {{input type="checkbox" class="check_permiso" name=record.id_mnu checked=record.exprtr}}
+          <i style="cursor:pointer" class="fa fa-external-link fa-lg" data-obj="exportar"></i>
+        </label>
+      </td>
+  </tr>
+  <tr>
+    <td colspan="5" style="text-align:center">
+      <span id="all_{{record.id_mnu}}" name="all_{{record.id_mnu}}" style="cursor:pointer;" onclick={{action "toggle_seleccion_permisos" }}>{{record.text_all}}</span>
+    </td>
+  </tr>
+</table>
+{{/if}}

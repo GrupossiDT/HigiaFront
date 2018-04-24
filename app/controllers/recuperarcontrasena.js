@@ -12,20 +12,20 @@ export default EmberController.extend({
 			if(crro_crprtvo.txt_crro_crprtvo != ''){
 				$.post( ENV.SERVER_API+"/api/users/claveTemporal", { "crro_crprtvo": crro_crprtvo.txt_crro_crprtvo}).done(function( data ) {
 					console.log(data);
-					$("#success").html(data.success).fadeTo(3000, 500).slideUp(500, function(){
-							$("#success").slideUp(500);
+					$("#success").html(data.success).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+							$("#success").slideUp(ENV.TIME_IN_ALERT);
 							setTimeout(function () {
 										window.location.href='/clavetemporal';
 							}, 2000);
 					});
 				}).fail(function(data){
-					$("#danger").html(data.responseJSON.error).fadeTo(5000, 500).slideUp(500, function(){
-							$("#danger").slideUp(500);
+					$("#danger").html(data.responseJSON.error).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+							$("#danger").slideUp(ENV.TIME_IN_ALERT);
 					});
 				});
 			}else{
-				$("#danger").html("Debes digitar el Correo").fadeTo(5000, 500).slideUp(500, function(){
-						$("#danger").slideUp(500);
+				$("#danger").html("Debes digitar el Correo").fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+						$("#danger").slideUp(ENV.TIME_IN_ALERT);
 				});
 			}
 		}

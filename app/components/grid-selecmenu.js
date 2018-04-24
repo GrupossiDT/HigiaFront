@@ -25,9 +25,10 @@ export default Component.extend({
   			obj["opcion"]["datos"]=result;
 
   			var columns = [
+          {"title": "Activo","component": "editOpt","editable": false},
           {"propertyName":"ordn","title" :"Orden"},
   				{"propertyName":"text","title" :"Descripción"},
-          {"title": "Opciones","component": "editOpt","editable": false}
+          {"title": "Permisos","component": "editPrmss","editable": false},
   			];
   			obj["opcion"]["columns"] = columns;
         var seleccionado = obj["opcion"]["datos"];
@@ -39,7 +40,7 @@ export default Component.extend({
           ln_total_seleccionado++;
         });
 
-        if(seleccionado.length-1 == ln_total_seleccionado){
+        if(seleccionado.length == ln_total_seleccionado){
           obj["text_select"] = "Ninguno"
         }else{
           obj["text_select"] = "Todos"
@@ -69,14 +70,51 @@ export default Component.extend({
       $('#text_toggle').html(text_button);
     },
     guardar(){
-      console.log(this.record);
       if(this.record.estdo == "ACTIVO"){
-        var ls_data = JSON.stringify(this.model.opcion.datos);
+        var arraySeleccion=[];
+        var arrayPermisos=[];
+        this.model.opcion.datos.forEach(function(entry){
+
+          var tmpval={"id_mnu":entry['id_mnu'],
+                      "id_prfl_une_mnu":entry['id_prfl_une_mnu'],
+                      "seleccionado":entry['seleccionado']
+          };
+
+          var tmpval2={"id_prfl_une_mnu":entry['id_prfl_une_mnu'],
+                        "id_mnu":entry['id_mnu'],
+                        "id_crar":entry['id_crar'],
+                  			"crar":entry['crar'],
+                  			"id_act":entry['id_act'],
+                  			"actlzr":entry['actlzr'],
+                  			"id_anlr":entry['id_anlr'],
+                  			"anlr":entry['anlr'],
+                  			"id_imprmr":entry['id_imprmr'],
+                  			"imprmr":entry['imprmr'],
+                  			"id_exprtr":entry['id_exprtr'],
+                  			"exprtr":entry['exprtr']
+          };
+
+          if( entry['crar'] !=null ||
+              entry['actlzr'] !=null ||
+              entry['anlr'] !=null ||
+              entry['imprmr'] !=null ||
+              entry['exprtr'] !=null
+          ){
+            arrayPermisos.push(tmpval2);
+          }
+
+          arraySeleccion.push(tmpval);
+        });
+
+        var ls_data = JSON.stringify(arraySeleccion);
+        var ls_data_permisos = JSON.stringify(arrayPermisos);
+
         let{access_token,cookie_higia} = this.get('session.data.authenticated');
     		var formdata = new FormData();
     		formdata.append('id_mnu_ge','175');
         formdata.append('id_undd_ngco',cookie_higia.id_undd_ngco);
         formdata.append('ls_data',ls_data);
+        formdata.append('ls_data_permisos',ls_data_permisos);
         formdata.append('id_perfil_une',this.record.id);
         Ember.$.ajax({
     			headers:{"Authorization": access_token},
@@ -87,7 +125,13 @@ export default Component.extend({
     			data:formdata,
     			url: ENV.SERVER_API+"/api/perfiles/gestionPermisos",
     		}).then((result)=>{
-
+          if(result.success=="OK"){
+            alert("Se guardaron los cambios");
+          }else{
+            alert("No se pudo guardar");
+            //TODO:verificar como hacer roolback
+            this.record.rollbackAttributes();
+          }
         });
       }else{
         alert("Solo se pueden modificar perfiles activos");
