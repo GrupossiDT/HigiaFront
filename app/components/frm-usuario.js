@@ -31,7 +31,8 @@ export default Ember.Component.extend(formValidation,{
     formData.append('password', frmData.password);
     formData.append('nombre_usuario', frmData.nmbre_usro);
     formData.append('login', frmData.lgn);
-    formData.append('id_mnu_ge',"176");
+    var ln_id_mnu_ge = getIdMenu();
+    formData.append('id_mnu_ge',ln_id_mnu_ge);
     //model frmData.id equivale a id_login_ge de la tabla login_ge
     formData.append('id_login_ge',frmData.id);
     formData.append('id_grpo_emprsrl',cookie_higia.id_grpo_emprsrl);
@@ -84,7 +85,8 @@ export default Ember.Component.extend(formValidation,{
       formData.append('password', frmData.password);
       formData.append('nombre_usuario', frmData.nmbre_usro);
       formData.append('login', frmData.lgn);
-      formData.append('id_mnu_ge',"176");
+      var ln_id_mnu_ge = getIdMenu();
+      formData.append('id_mnu_ge',ln_id_mnu_ge);
       formData.append('id_grpo_emprsrl',cookie_higia.id_grpo_emprsrl);
       formData.append('estdo',frmData.estdo);
       if(file){

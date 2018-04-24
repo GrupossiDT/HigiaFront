@@ -1,3 +1,4 @@
+var arrayMenu={};
 window.onload=function(){
 	$( "body" ).click(function( e ) {
 			mainMenu = document.getElementById("main-menu");
@@ -36,4 +37,17 @@ window.onload=function(){
 function userImgError(Obj){
 	$(Obj).attr('src', '/assets/img/login_user_image.png');
 }
-var _k="hola mundo"
+/*Funcion que permite traer el id_mnu_ge del
+enlace del menu principal de form directa
+se define en application.js
+@params: route es opcional para elementos que no son cargados desde archivos routes ejemplo function en actions
+*/
+
+function getIdMenu(route){
+	var page = route;
+	if(!route){
+		var path = window.location.pathname;
+		var page = path.split("/").pop();
+	}
+	return arrayMenu[page].id;
+}
