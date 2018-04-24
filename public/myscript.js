@@ -1,9 +1,3 @@
-/*Variables Globales */
-var arrayMenu={}; // llamada en application.js
-
-/*Funcion que se ejecuta al cargar el docuemento cualquier
-parte del body .
-caso de uso ocultar menu y panel automaticamente*/
 window.onload=function(){
 	$( "body" ).click(function( e ) {
 			mainMenu = document.getElementById("main-menu");
@@ -41,13 +35,4 @@ window.onload=function(){
 
 function userImgError(Obj){
 	$(Obj).attr('src', '/assets/img/login_user_image.png');
-}
-
-/*Funcion que permite traer el id_mnu_ge del
-enlace del menu principal de form directa
-se define en application.js*/
-function getIdMenu(){
-	var path = window.location.pathname;
-	var page = path.split("/").pop();
-	return arrayMenu[page].id;
 }

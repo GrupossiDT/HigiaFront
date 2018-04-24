@@ -45,40 +45,39 @@ export default Ember.Component.extend(formValidation,{
         console.log(typeof response)
           if(typeof response == "object"){
             if(response.success){
-              $("#success").html(response.success).fadeTo(3000, 500).slideUp(500, function(){
-                  $("#success").slideUp(500);
+              $("#success").html(response.success).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+                  $("#success").slideUp(ENV.TIME_IN_ALERT);
               });
             }else if (response.error) {
-                $("#danger").html(response.error).fadeTo(3000, 500).slideUp(500, function(){
-                    $("#danger").slideUp(500);
+                $("#danger").html(response.error).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+                    $("#danger").slideUp(ENV.TIME_IN_ALERT);
                 });
             }
           }else {
-            $("#danger").html("Error de conexión").fadeTo(3000, 500).slideUp(500, function(){
-                $("#danger").slideUp(500);
+            $("#danger").html("Error de conexión").fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+                $("#danger").slideUp(ENV.TIME_IN_ALERT);
             });
           }
         }).catch((response)=>{
-          $("#danger").html(response.responseJSON.error).fadeTo(3000, 500).slideUp(500, function(){
-              $("#danger").slideUp(500);
+          $("#danger").html(response.responseJSON.error).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+              $("#danger").slideUp(ENV.TIME_IN_ALERT);
           });
       });
     },
     save(){
-
       var frmData=this.model;
+      var _this = this;
+
       var formData = new FormData();
       this.send('validate_form_action', frmData);
       if(Object.keys(this.validationErrors).length > 0){
         return;
       }
-
       formData.append('cdgo', frmData.cdgo);
       formData.append('dscrpcn', frmData.dscrpcn);
       formData.append('id_mnu_ge',"175");
       let{access_token,cookie_higia} = this.get('session.data.authenticated');
       formData.append('id_undd_ngco',cookie_higia.id_undd_ngco);
-
       Ember.$.ajax({
         data: formData,
         headers:{"Authorization": access_token},
@@ -90,29 +89,27 @@ export default Ember.Component.extend(formValidation,{
       }).then((response)=> {
           if(typeof response == "object"){
             if(!response.error){
-              var perfil={"cdgo":frmData.cdgo,"dscrpcn":frmData.dscrpcn,"id":response.id};
+              var perfil={"cdgo":frmData.cdgo,"dscrpcn":frmData.dscrpcn,"id":response.id,"estdo":"ACTIVO"};
               this.parent.unshiftObject(perfil);
-
-              $("#success").html(response.success).fadeTo(3000, 500).slideUp(500, function(){
-                  $("#success").slideUp(500);
+              $("#success").html(response.success).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+                  _this.set('model',{});
+                  $("#success").slideUp(ENV.TIME_IN_ALERT);
               });
             }else {
-              $("#danger").html(response.error).fadeTo(3000, 500).slideUp(500, function(){
-                  $("#danger").slideUp(500);
+              $("#danger").html(response.error).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+                  $("#danger").slideUp(ENV.TIME_IN_ALERT);
               });
             }
           }
         }).catch((response)=>{
-
-          $("#danger").html(response.error).fadeTo(3000, 500).slideUp(500, function(){
-              $("#danger").slideUp(500);
+          $("#danger").html(response.error).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+              $("#danger").slideUp(ENV.TIME_IN_ALERT);
           });
         });
     },
     cambioEstado(){
-    	var lb_estdo = $( "#chg_estdo option:selected" ).val();
+      var lb_estdo = $( "#chg_estdo option:selected" ).val();
       this.set('model.estdo',lb_estdo);
-
     }
   }
 })

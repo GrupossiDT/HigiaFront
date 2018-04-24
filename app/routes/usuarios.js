@@ -40,7 +40,7 @@ export default Route.extend({
 				{"propertyName":"lgn","title" :"Usuario"},
 				{"propertyName":"nmbre_usro","title" :"Nombre Completo"},
 				{"propertyName":"estdo","title" :"Estado"},
-				{"title": "Asignar Perfil","component": "addprfl","editable": false},	
+				{"title": "Asignar Perfil","component": "addprfl","editable": false},
 			];
 			obj["usuario"]["columns"] = columns;
 			obj["usuario"]["modelCreator"]= myModel;

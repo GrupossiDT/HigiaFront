@@ -5,11 +5,12 @@ import $ from 'jquery';
 export default EmberController.extend({
 	session: inject('session'),
 	init:function() {
-		alert('apenas cargo papu...');
+		this._super(...arguments);
 		if(this.get('session.isAuthenticated')){
 			window.location.href='/protected';
 		}
 	},
+	labels:LANG[ENV.APP_LANG],
 	actions: {
 		authenticate(){
 			let {username,password} = this.getProperties('username','password');
@@ -20,19 +21,19 @@ export default EmberController.extend({
 				console.log(reason);
 				if(typeof reason.error == "object"){
 					if(reason.error.password){
-						$("#danger").html("Debes digitar la contraseña").fadeTo(5000, 500).slideUp(500, function(){
-								$("#danger").slideUp(500);
+						$("#danger").html("Debes digitar la contraseña").fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+								$("#danger").slideUp(ENV.TIME_IN_ALERT);
 						});
 					}
 					if(reason.error.username){
-						$("#danger").html("Debes digitar el usuario ").fadeTo(5000, 500).slideUp(500, function(){
-								$("#danger").slideUp(500);
+						$("#danger").html("Debes digitar el usuario ").fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+								$("#danger").slideUp(ENV.TIME_IN_ALERT);
 						});
 					}
 					console.log(typeof reason.rerror);
 				} else if(reason.error){
-					$("#danger").html(reason.error).fadeTo(5000, 500).slideUp(500, function(){
-							$("#danger").slideUp(500);
+					$("#danger").html(reason.error).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+							$("#danger").slideUp(ENV.TIME_IN_ALERT);
 					});
 				}
 			});

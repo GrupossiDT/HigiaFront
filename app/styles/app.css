@@ -888,9 +888,53 @@ input[type=radio] + label::after {
 .home_header>nav {
 	display: none;
 }
-	#bg_recovery{
+#bg_recovery{
 		background-image: none;
-	}
+}
+}
+
+.label-text:hover:before{
+	border: 1px solid #62a29e;
+	border-radius:5px;
+	color:#FFF;
+	padding: 3px 3px;
+	background: #337ab7;
+	content: attr(data-title);
+	width:60px !important;
+	height:30px;
+	line-height: 25px;
+	font-size: 0.92em;
+	position: absolute;
+	right: -20px !important;
+	top: -32px !important;
+	z-index:1000;
+	margin-left:5px !important;
+	text-shadow:none !important;
+	font-family: "Lato", Arial, sans-serif;
+	text-align: center;
+	transparent:0.8;
+}
+
+.label-text input[type="checkbox"]{
+	display: none;
+}
+
+.label-text{
+	color: #999;
+	height: 16px;
+	width: 16px;
+	display:inline-block;
+	padding: 0 0 0 0px;
+	position: relative;
+}
+
+.label-text input.check_permiso:checked + .fa
+{
+	color:#2e6da4 !important;
+	height: 16px;
+	width: 16px;
+	display:inline-block;
+	padding: 0 0 0 0px;
 }
 
 
