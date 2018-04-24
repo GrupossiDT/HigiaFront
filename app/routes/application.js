@@ -43,10 +43,16 @@ function CrearMenu(data){
 		var favorito = item.favorito == false ? null: item.favorito;
 		var parentid = item.parentid == 0 ? null : item.parentid;
 		var enlace = item.enlace == "" ? null : item.enlace;
-
 		var id = item.id;
+<<<<<<< HEAD
 		var id_mnu_ge = item.id_mnu_ge;
 		arrayMenu[enlace]={"id":id_mnu_ge};
+=======
+
+		//variable que ubica id_mnu_ge
+		arrayMenu[enlace]={"id":id};
+
+>>>>>>> 718749e32266c85916fa3138b8e59c743d0d0ef6
 		if(favorito){
 			var item_favorito = { parentid: parentid, id:id, label: label, item: item, enlace:enlace };
 			favoritos[favoritos.length] = item_favorito;

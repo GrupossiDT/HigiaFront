@@ -11,6 +11,7 @@ Router.map(function() {
   this.route('protected');
   this.route('usuarios');
   this.route('perfiles');
+  this.route('contratos');
   this.route('preguntassg');
   this.route('menuprincipal');
   this.route('recuperarcontrasena');

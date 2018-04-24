@@ -3,8 +3,8 @@
 	<nav>
 		<ul id="menu-favorito">
 			{{#each model.mfav as |fav|}}
-				<li>
-				{{#link-to fav.enlace}}
+				<li id="{{fav.id}}">
+				{{#link-to  fav.enlace}}
 					{{fav.label}}
 				{{/link-to}}
 				</li>
