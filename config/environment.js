@@ -6,7 +6,10 @@ module.exports = function(environment) {
 		environment,
 		rootURL: '/',
 		locationType: 'auto',
-		SERVER_API:"http://192.168.10.134:5000",
+		SERVER_API:"http://127.0.0.1:5000",
+		TIME_IN_ALERT:500,
+		TIME_OUT_ALERT:5000,
+		APP_LANG:'ESP',
 		EmberENV: {
 			FEATURES: {
 				// Here you can enable experimental features on an ember canary build
@@ -15,7 +18,7 @@ module.exports = function(environment) {
 			'simple-auth':{
 				store: 'simple-auth-session-store:local-storage',
 				authorizer: 'authorizer:token',
-				crossOriginWhitelist: "http://192.168.10.134:5000",
+				crossOriginWhitelist: "http://127.0.0.1:5000",
 				routeAfterAuthentication: '/protected',
 				authenticationRoute:'/protected'
 			},
@@ -31,7 +34,7 @@ module.exports = function(environment) {
 			usingCors: true,
 			corsWithCreds: true,
 			crossDomain:	true,
-			apiURL: "http://192.168.10.134:5000"
+			apiURL: "http://127.0.0.1:5000"
 		}
 
 	};

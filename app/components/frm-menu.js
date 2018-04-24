@@ -45,23 +45,24 @@ export default Ember.Component.extend(formValidation,{
       }).then((response)=>{
           if(typeof response == "object"){
             if(response.success){
-              $("#success").html(response.success).fadeTo(3000, 500).slideUp(500, function(){
-                  $("#success").slideUp(500);
+                //ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT
+              $("#success").html(response.success).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+                  $("#success").slideUp(ENV.TIME_IN_ALERT);
               });
             }else if (response.error) {
-                $("#danger").html(response.responseJSON.error).fadeTo(3000, 500).slideUp(500, function(){
-                    $("#danger").slideUp(500);
+                $("#danger").html(response.responseJSON.error).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+                    $("#danger").slideUp(ENV.TIME_IN_ALERT);
                 });
             }
           }else {
-            $("#danger").html(response.responseJSON.error).fadeTo(3000, 500).slideUp(500, function(){
-                $("#danger").slideUp(500);
+            $("#danger").html(response.responseJSON.error).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+                $("#danger").slideUp(ENV.TIME_IN_ALERT);
             });
           }
         }).catch((response)=>{
           console.log(response);
-          $("#danger").html(response.responseJSON.error).fadeTo(3000, 500).slideUp(500, function(){
-              $("#danger").slideUp(500);
+          $("#danger").html(response.responseJSON.error).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+              $("#danger").slideUp(ENV.TIME_IN_ALERT);
           });
       });
     },
@@ -92,19 +93,19 @@ export default Ember.Component.extend(formValidation,{
             if(!response.error){
               var menu={"parent":frmData.parent,"ordn":frmData.ordn,"dscrpcn":frmData.dscrpcn,"lnk":frmData.lnk,"id":response.id,"estdo":'ACTIVO'};
               this.parent.unshiftObject(menu);
-              $("#success").html(response.success).fadeTo(3000, 500).slideUp(500, function(){
-                  $("#success").slideUp(500);
+              $("#success").html(response.success).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+                  $("#success").slideUp(ENV.TIME_IN_ALERT);
               });
 
             }else {
-              $("#danger").html(response.responseJSON.error).fadeTo(3000, 500).slideUp(500, function(){
-                  $("#danger").slideUp(500);
+              $("#danger").html(response.responseJSON.error).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+                  $("#danger").slideUp(ENV.TIME_IN_ALERT);
               });
             }
           }
         }).catch((response)=>{
-          $("#danger").html(response.responseJSON.error).fadeTo(3000, 500).slideUp(500, function(){
-              $("#danger").slideUp(500);
+          $("#danger").html(response.responseJSON.error).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+              $("#danger").slideUp(ENV.TIME_IN_ALERT);
           });
         });
     },

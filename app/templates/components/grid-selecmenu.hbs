@@ -2,20 +2,20 @@
 .modal-body{
 position: relative;
 padding: 15px;
-height: 300px !important;
+height: 400px !important;
 overflow: scroll;
 overflow-x: hidden;
 }
 </style>
 <div align="center">
-  <button class="button-default" onclick={{action "mostrar_ventana" record}}>Seleccione</button>
+  <button class="btn btn-primary" onclick={{action "mostrar_ventana" record}}>Seleccione</button>
   {{#bs-modal open=mdlComponent onHidden=(action (mut mdlComponent) false) as |modal|}}
     {{#modal.header}}
       <h2 class="modal-title">
         {{frmTitleActualizar}}
       </h2>
-      <div style="text-align:right">
-        <button class="button-default" onclick={{action "toggle_seleccion"}}><span id="text_toggle">{{model.text_select}}</span></button>
+      <div style="text-align:left">
+        <button class="btn btn-primary" onclick={{action "toggle_seleccion"}}><span id="text_toggle">{{model.text_select}}</span></button>
       </div>
     {{/modal.header}}
     {{#modal.body}}
@@ -31,13 +31,15 @@ overflow-x: hidden;
         ModelsTablePaginationSimple = false
         showPageSize=false
         filteringIgnoreCase=true
-        pageSize=model.opcion.datos.length
-        columnComponents= (hash editOpt=(component "check-opcionmenu"))
+        pageSize=10
+        columnComponents= (hash editOpt=(component "check-opcionmenu")
+        editPrmss=(component "opt-permisos")
+        )
       }}
     {{/modal.body}}
     {{#modal.footer}}
       <div style="text-align:center">
-        <button class="button-default" onclick={{action "guardar"}} >Guardar</button>
+        <button class="btn btn-primary" onclick={{action "guardar"}} >Guardar</button>
       </div>
     {{/modal.footer}}
   {{/bs-modal}}

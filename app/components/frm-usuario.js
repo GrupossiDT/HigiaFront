@@ -51,22 +51,23 @@ export default Ember.Component.extend(formValidation,{
       }).then((response)=>{
           if(typeof response == "object"){
             if(response.success){
-              $("#success").html(response.success).fadeTo(3000, 500).slideUp(500, function(){
-                  $("#success").slideUp(500);
+
+              $("#success").html(response.success).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+                  $("#success").slideUp(ENV.TIME_IN_ALERT);
               });
             }else if (response.error) {
-                $("#danger").html(response.error).fadeTo(3000, 500).slideUp(500, function(){
-                    $("#danger").slideUp(500);
+                $("#danger").html(response.error).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+                    $("#danger").slideUp(ENV.TIME_IN_ALERT);
                 });
             }
           }else {
-            $("#danger").html("Error de conexión").fadeTo(3000, 500).slideUp(500, function(){
-                $("#danger").slideUp(500);
+            $("#danger").html("Error de conexión").fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+                $("#danger").slideUp(ENV.TIME_IN_ALERT);
             });
           }
         }).catch((response)=>{
-          $("#danger").html("Error de conexión").fadeTo(3000, 500).slideUp(500, function(){
-              $("#danger").slideUp(500);
+          $("#danger").html("Error de conexión").fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+              $("#danger").slideUp(ENV.TIME_IN_ALERT);
           });
       });
     },
@@ -75,6 +76,7 @@ export default Ember.Component.extend(formValidation,{
       var formData = new FormData();
       var file = this.$('#fl_imagen')[0].files[0];
       this.send('validate_form_action', frmData);
+      var _this = this;
       if(Object.keys(this.validationErrors).length > 0){
         return;
       }
@@ -98,16 +100,18 @@ export default Ember.Component.extend(formValidation,{
         type: 'POST',
         url: ENV.SERVER_API+'/api/users/crear',
       }).then((response)=> {
+
           if(typeof response == "object"){
             if(!response.error){
               var usuario={"nmbre_usro":frmData.nmbre_usro,"lgn":frmData.lgn,"id":response.id, "estdo":'ACTIVO'};
               this.parent.unshiftObject(usuario);
-              $("#success").html(response.success).fadeTo(3000, 500).slideUp(500, function(){
-                  $("#success").slideUp(500);
+              $("#success").html(response.success).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+                  $("#success").slideUp(ENV.TIME_IN_ALERT);
+                  _this.set('model',{});
               });
             }else {
-              $("#danger").html(response.responseJSON.error).fadeTo(3000, 500).slideUp(500, function(){
-                  $("#danger").slideUp(500);
+              $("#danger").html(response.responseJSON.error).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+                  $("#danger").slideUp(ENV.TIME_IN_ALERT);
               });
             }
           }
@@ -124,8 +128,8 @@ export default Ember.Component.extend(formValidation,{
             }
           }
 
-          $("#danger").html(resultado).fadeTo(3000, 500).slideUp(500, function(){
-              $("#danger").slideUp(500);
+          $("#danger").html(resultado).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+              $("#danger").slideUp(ENV.TIME_IN_ALERT);
 
           });
         });
