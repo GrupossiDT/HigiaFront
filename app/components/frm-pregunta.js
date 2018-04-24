@@ -30,8 +30,14 @@ export default Ember.Component.extend(formValidation,{
       formData.append('ln_id_prgnta_ge', frmData.id);
       formData.append('lc_cdgo', frmData.cdgo);
       formData.append('lc_dscrpcn', frmData.dscrpcn);
+<<<<<<< HEAD
       formData.append('lb_estdo',frmData.estdo == 'ACTIVO');
 	    formData.append('id_mnu_ge',"330");
+=======
+      formData.append('lb_estdo', frmData.estdo=='ACTIVO');
+      var ln_id_mnu_ge = getIdMenu();
+	    formData.append('id_mnu_ge',ln_id_mnu_ge);
+>>>>>>> 900fdcd999e04c91627ce0ecdd91c7c77bb847b6
       Ember.$.ajax({
         data: formData,
         headers:{"Authorization": access_token},
@@ -73,7 +79,8 @@ export default Ember.Component.extend(formValidation,{
       let{access_token,cookie_higia} = this.get('session.data.authenticated');
       formData.append('lc_cdgo', frmData.cdgo);
       formData.append('lc_dscrpcn', frmData.dscrpcn);
-      formData.append('id_mnu_ge',"330");
+      var ln_id_mnu_ge = getIdMenu();
+      formData.append('id_mnu_ge',ln_id_mnu_ge);
       formData.append('id_undd_ngco',cookie_higia.id_undd_ngco);
       Ember.$.ajax({
         data: formData,
