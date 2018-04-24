@@ -10,7 +10,7 @@ export default Route.extend({
 	model:function(){
 		let{access_token,cookie_higia} = this.get('session.data.authenticated');
 		var formdata = new FormData();
-		formdata.append('id_mnu_ge','176');
+		formdata.append('id_mnu_ge',getIdMenu());
 		formdata.append('id_undd_ngco',cookie_higia.id_undd_ngco);
 		formdata.append('id_grpo_emprsrl',cookie_higia.id_grpo_emprsrl);
 		return Ember.$.ajax({

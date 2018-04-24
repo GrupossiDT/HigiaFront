@@ -30,7 +30,7 @@ export default Ember.Component.extend(formValidation,{
       formData.append('ln_id_prgnta_ge', frmData.id);
       formData.append('lc_cdgo', frmData.cdgo);
       formData.append('lc_dscrpcn', frmData.dscrpcn);
-      formData.append('lb_estdo', frmData.estdo);
+      formData.append('lb_estdo',frmData.estdo == 'ACTIVO');
 	    formData.append('id_mnu_ge',"330");
       Ember.$.ajax({
         data: formData,
