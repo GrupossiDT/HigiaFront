@@ -11,7 +11,7 @@
 		{{input value=password placeholder='Ingrese password' class='form-control' type='password'}}
 		<div class="blankSpaceTop"></div>
 		<button type="submit" class="button_login">Login</button>
-		<h5><a href="#">Olvidé mi contraseña</a></h5>
+		<h5>{{#link-to 'recuperarcontrasena' }}Olvidé mi contraseña{{/link-to}}</h5>
 		<div class="alert alert-danger alert-login" role="alert" id="danger" hidden></div>
 	</form>
 </div>

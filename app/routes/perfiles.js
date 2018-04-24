@@ -28,11 +28,11 @@ export default Route.extend({
 			}else {
 					obj["perfiles"]["datos"]=result;
 			}
-			var columns = [{"propertyName":"cdgo","title" :"Código"},
+			var columns = [{"title": "Modificar","component": "editRow","editable": false},
+				{"propertyName":"cdgo","title" :"Código"},
 				{"propertyName":"dscrpcn","title" :"Descripción"},
 				{"propertyName":"estdo","title" :"Estado"},
-				{"title": "Modificar","component": "editRow","editable": false},
-				{"title": "Opciones Menu","component": "editRow","editable": false},
+				{"title": "Opciones","component": "addOpt","editable": false},
 			];
 			obj["perfiles"]["columns"] = columns;
 			obj["perfiles"]["modelCreator"]= myModel;

@@ -1,9 +1,11 @@
 <div class="fgContainer">
   {{cntrl-grid
     model=model.pregunta
-    frmComponentActualizar="frm-pregunta"
-    frmTitleActualizar="Actualizar preguntas"
     frmComponentCrear="frm-pregunta"
     frmTitleCrear="Nueva pregunta"
-    modelCreator=model.pregunta.modelCreator}}
+    modelCreator=model.pregunta.modelCreator
+    hashColumns=(hash
+      editRow=(component "boton-actualizar" frmComponentActualizar="frm-pregunta" frmTitleActualizar="Actualizar preguntas")
+    )
+  }}
 </div>

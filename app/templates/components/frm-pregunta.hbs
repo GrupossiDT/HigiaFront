@@ -17,7 +17,7 @@
         {{#if model.id}}
         <div class="form-group">
           <label>Estado:</label>
-          <select id="chg_estdo" {{action 'cambioEstado' on='change'}}>
+          <select class="form-control" id="chg_estdo" {{action 'cambioEstado' on='change'}}>
               <option  value='ACTIVO'  selected={{ifcond model.estdo "ACTIVO"}} >ACTIVO</option>
               <option  value='INACTIVO' selected={{ifcond model.estdo "INACTIVO"}} >INACTIVO</option>
           </select>

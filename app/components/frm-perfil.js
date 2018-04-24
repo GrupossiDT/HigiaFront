@@ -65,17 +65,20 @@ export default Ember.Component.extend(formValidation,{
       });
     },
     save(){
-      let{access_token,cookie_higia} = this.get('session.data.authenticated');
-      var frmData  = this.model;
+
+      var frmData=this.model;
       var formData = new FormData();
       this.send('validate_form_action', frmData);
       if(Object.keys(this.validationErrors).length > 0){
         return;
       }
-      formData.append('id_undd_ngco',cookie_higia.id_undd_ngco);
+
       formData.append('cdgo', frmData.cdgo);
       formData.append('dscrpcn', frmData.dscrpcn);
       formData.append('id_mnu_ge',"175");
+      let{access_token,cookie_higia} = this.get('session.data.authenticated');
+      formData.append('id_undd_ngco',cookie_higia.id_undd_ngco);
+
       Ember.$.ajax({
         data: formData,
         headers:{"Authorization": access_token},
@@ -87,8 +90,9 @@ export default Ember.Component.extend(formValidation,{
       }).then((response)=> {
           if(typeof response == "object"){
             if(!response.error){
-              var datos={"cdgo":frmData.cdgo,"dscrpcn":frmData.dscrpcn,"id":response.id};
-              this.parent.unshiftObject(datos);
+              var perfil={"cdgo":frmData.cdgo,"dscrpcn":frmData.dscrpcn,"id":response.id};
+              this.parent.unshiftObject(perfil);
+
               $("#success").html(response.success).fadeTo(3000, 500).slideUp(500, function(){
                   $("#success").slideUp(500);
               });
@@ -99,14 +103,16 @@ export default Ember.Component.extend(formValidation,{
             }
           }
         }).catch((response)=>{
-          $("#danger").html(response.responseJSON.error).fadeTo(3000, 500).slideUp(500, function(){
+
+          $("#danger").html(response.error).fadeTo(3000, 500).slideUp(500, function(){
               $("#danger").slideUp(500);
           });
         });
     },
     cambioEstado(){
     	var lb_estdo = $( "#chg_estdo option:selected" ).val();
-    	this.set('model.estdo',lb_estdo);
+      this.set('model.estdo',lb_estdo);
+
     }
   }
 })

@@ -28,12 +28,13 @@
              <div class="alert alert-danger" role="alert" id="danger" hidden></div>
              {{#if model.id}}
                    {{input type="hidden" name="id" value=model.id}}
-                   <button type="submit" class="btn btn-info" {{action 'update' on='click' }}>Actualizar</button>
+ 						      <button type="submit" class="btn btn-info" {{action 'update' on='click' }}>Actualizar</button>
              {{else}}
                    <button type="submit" class="btn btn-info" {{action 'save' on='click' }}>Crear</button>
              {{/if}}
-           </div>
-          </form>
+ 					</div>
+         </form>
+
        </div>
      </div>
    </div>

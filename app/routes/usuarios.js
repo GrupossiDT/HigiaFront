@@ -26,19 +26,21 @@ export default Route.extend({
 			//obj["datos"]=result;
 			var obj={"usuario":[]};
 
-			
-
 			var myModel = {"nmbre_usro":"","lgn":"","id":"","estdo":""};
+
+
 			if(result.error){
 				 obj["usuario"]["datos"]=myModel;
 			}else {
 					obj["usuario"]["datos"]=result;
 			}
 
-			var columns = [{"propertyName":"lgn","title" :"Usuario"},
+			var columns = [
+				{"title": "Modificar","component": "editRow","editable": false},
+				{"propertyName":"lgn","title" :"Usuario"},
 				{"propertyName":"nmbre_usro","title" :"Nombre Completo"},
 				{"propertyName":"estdo","title" :"Estado"},
-				{"title": "Modificar","component": "editRow","editable": false},
+				{"title": "Asignar Perfil","component": "addprfl","editable": false},	
 			];
 			obj["usuario"]["columns"] = columns;
 			obj["usuario"]["modelCreator"]= myModel;

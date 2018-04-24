@@ -5,8 +5,10 @@ import $ from 'jquery';
 export default EmberController.extend({
 	session: inject('session'),
 	init:function() {
-		$('body').toggleClass("bg_login");
-		this._super(...arguments);
+		alert('apenas cargo papu...');
+		if(this.get('session.isAuthenticated')){
+			window.location.href='/protected';
+		}
 	},
 	actions: {
 		authenticate(){
@@ -15,6 +17,7 @@ export default EmberController.extend({
 			let  u = this.get('session').authenticate('authenticator:oauth2',identification,password).then(() =>{
 				window.location.href='/protected';
 			}).catch((reason)=>{
+				console.log(reason);
 				if(typeof reason.error == "object"){
 					if(reason.error.password){
 						$("#danger").html("Debes digitar la contraseña").fadeTo(5000, 500).slideUp(500, function(){
@@ -26,6 +29,7 @@ export default EmberController.extend({
 								$("#danger").slideUp(500);
 						});
 					}
+					console.log(typeof reason.rerror);
 				} else if(reason.error){
 					$("#danger").html(reason.error).fadeTo(5000, 500).slideUp(500, function(){
 							$("#danger").slideUp(500);
