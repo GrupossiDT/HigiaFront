@@ -49,13 +49,15 @@ export default Ember.Component.extend(formValidation,{
         type: 'POST',
         url: ENV.SERVER_API+'/api/users/actualizar',
       }).then((response)=>{
+console.log('aqui '+response);
           if(typeof response == "object"){
+
             if(response.success){
               $("#success").html(response.success).fadeTo(3000, 500).slideUp(500, function(){
                   $("#success").slideUp(500);
               });
             }else if (response.error) {
-                $("#danger").html(response.error).fadeTo(3000, 500).slideUp(500, function(){
+                $("#danger").html(response.responseJSON.error).fadeTo(3000, 500).slideUp(500, function(){
                     $("#danger").slideUp(500);
                 });
             }

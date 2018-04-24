@@ -5,6 +5,9 @@ import $ from 'jquery';
 export default Component.extend({
 	session: inject('session'),
 	actions:{
+		cambiarcontrasena(){
+				window.location.href='/cambiarcontrasena';
+		},
 		logout(){
 			var _this = this;
 			let{access_token,cookie_higia} = this.get('session.data.authenticated');

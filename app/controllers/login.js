@@ -5,7 +5,6 @@ import $ from 'jquery';
 export default EmberController.extend({
 	session: inject('session'),
 	init:function() {
-		alert('apenas cargo papu...');
 		if(this.get('session.isAuthenticated')){
 			window.location.href='/protected';
 		}

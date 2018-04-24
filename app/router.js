@@ -16,6 +16,7 @@ Router.map(function() {
   this.route('recuperarcontrasena');
   this.route('clavetemporal');
   this.route('cambiarcontrasena');
+  this.route('cambiarcontrasenainterno');
 });
 
 export default Router;
