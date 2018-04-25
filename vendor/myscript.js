@@ -1,13 +1,9 @@
-<<<<<<< HEAD
-var arrayMenu={};
-=======
 /*Variables Globales */
 var arrayMenu={}; // llamada en application.js
 
 /*Funcion que se ejecuta al cargar el docuemento cualquier
 parte del body .
 caso de uso ocultar menu y panel automaticamente*/
->>>>>>> 718749e32266c85916fa3138b8e59c743d0d0ef6
 window.onload=function(){
 	$( "body" ).click(function( e ) {
 			mainMenu = document.getElementById("main-menu");
@@ -46,7 +42,6 @@ window.onload=function(){
 function userImgError(Obj){
 	$(Obj).attr('src', '/assets/img/login_user_image.png');
 }
-<<<<<<< HEAD
 /*Funcion que permite traer el id_mnu_ge del
 enlace del menu principal de form directa
 se define en application.js
@@ -59,14 +54,5 @@ function getIdMenu(route){
 		var path = window.location.pathname;
 		var page = path.split("/").pop();
 	}
-=======
-
-/*Funcion que permite traer el id_mnu_ge del
-enlace del menu principal de form directa
-se define en application.js*/
-function getIdMenu(){
-	var path = window.location.pathname;
-	var page = path.split("/").pop();
->>>>>>> 718749e32266c85916fa3138b8e59c743d0d0ef6
 	return arrayMenu[page].id;
 }
