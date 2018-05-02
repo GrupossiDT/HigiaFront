@@ -29,7 +29,6 @@ export default Route.extend({
 
 			var myModel = {"nmbre_usro":"","lgn":"","id":"","estdo":""};
 
-
 			if(result.error){
 				 obj["usuario"]["datos"]=myModel;
 			}else {
@@ -45,6 +44,7 @@ export default Route.extend({
 			];
 			obj["usuario"]["columns"] = columns;
 			obj["usuario"]["modelCreator"]= myModel;
+			
 			return obj;
 		})
 	}
