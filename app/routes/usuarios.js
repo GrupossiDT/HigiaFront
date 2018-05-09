@@ -44,7 +44,10 @@ export default Route.extend({
 			];
 			obj["usuario"]["columns"] = columns;
 			obj["usuario"]["modelCreator"]= myModel;
-			
+			obj["exportar"]={
+				"url": ENV.SERVER_API+"/api/users/descarga",
+				params:[{"id_mnu_ge":ln_id_mnu_ge}]
+			};
 			return obj;
 		})
 	}

@@ -51,22 +51,15 @@
           </h2>
         {{/modal.header}}
         {{#modal.body}}
-         {{#if modelExportar}}
-            <span>POR ACA PASO</span>
-            {{component componentExportar
-              model=modelExportar
-              parent=parentExportar}}
-          {{else}}
-            <div>
-              <select>
-                <option value="XLSX">XLSX</option>
-                <option value="CSV">TEXTO SEPARADO POR COMAS</option>
-                <option value="TXT">TEXTO PLANO</option>
-                <option value="PDF">PDF</option>
-              </select>
-            </div>
-            <button class="btn btn-primary" onclick={{action "exportData"}}>Exportar</button>
-          {{/if}}
+          <div>
+            <select id="type_download">
+              <option value="xlsx">XLSX</option>
+              <option value="csv">TEXTO SEPARADO POR COMAS</option>
+              <option value="txt">TEXTO PLANO</option>
+              <option value="pdf">PDF</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" onclick={{action "exportData" }}>Exportar</button>
         {{/modal.body}}
       {{/bs-modal}}
     {{/if}}
