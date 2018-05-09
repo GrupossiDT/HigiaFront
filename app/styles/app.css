@@ -185,6 +185,7 @@ vertical-align: middle;
 @media print
 {
 	.noprint,.home_header,.footer_home {display:none;}
+	.fgContainer{padding:0px;}
 
 }
 

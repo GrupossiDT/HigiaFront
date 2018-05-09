@@ -11,16 +11,16 @@ export default Route.extend({
       	Object.keys(e).forEach(function(m){
       		if(m=='component'){
       			isComponent=true;
-              }
+          }
       	});
+
       	if(!isComponent){
       		tmpColumns.push(e);
-          }
+        }
       });
       var newModel=[];
       newModel.columns = tmpColumns;
       newModel.datos = mdl.datos;
-      console.log(mdl.columns,mdl.datos);
       return newModel;
   }
 });
