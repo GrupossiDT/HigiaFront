@@ -23,8 +23,6 @@ export default Route.extend({
 			data:formdata,
 			url: ENV.SERVER_API+"/api/users/listar",
 		}).then(function (result) {
-			//var obj={};
-			//obj["datos"]=result;
 			var obj={"usuario":[]};
 
 			var myModel = {"nmbre_usro":"","lgn":"","id":"","estdo":""};

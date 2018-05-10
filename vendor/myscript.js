@@ -39,6 +39,51 @@ window.onload=function(){
 	});
 }
 
+//precargador general.
+//se modifica ajaxSetup para que todos los llamados AJAX tengan un
+//indicador de precarga
+var iAjx =0;
+var loading=null;
+jQuery.ajaxSetup({
+	beforeSend: function() {
+		 console.log("entro");
+			iAjx++;
+			var preloading = document.getElementById("preloading");
+			if(!preloading){
+				var body = document.body;
+				loading = document.createElement('div');
+				loading.id="preloading";
+				loading.style.width="100px";
+				loading.style.height="40px";
+				loading.style.position="fixed";
+				loading.style.top="50%";
+				loading.style.left="50%";
+				loading.innerHTML="Espere...";
+				loading.style.zIndex="5000000000";
+				loading.style.backgroundColor="#DDD";
+				loading.style.boder="1px solid #000";
+				loading.style.boderRadius="20px";
+				loading.style.textAlign="center";
+				loading.style.lineHeight="40px";
+				loading.style.boxShadow="2px 4px 2px #777";
+				body.appendChild(loading);
+			}
+
+	},
+	complete: function(){
+		console.log("termino");
+		iAjx--;
+		if(iAjx==0){
+			var body = document.body;
+			var preloading = document.getElementById("preloading");
+			if(preloading){
+					body.removeChild(preloading);
+			}
+		}
+	}
+});
+
+
 function userImgError(Obj){
 	$(Obj).attr('src', '/assets/img/login_user_image.png');
 }

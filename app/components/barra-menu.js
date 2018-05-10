@@ -25,7 +25,6 @@ export default Component.extend(AuthenticatedRouteMixin,{
       //carga de parametros
       lo_data.params.forEach(function(entry,key){
         for(var k in entry){
-          console.log(k,entry[k]);
           formData.append(k,entry[k]);
         }
       });
