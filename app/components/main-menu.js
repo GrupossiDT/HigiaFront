@@ -4,6 +4,27 @@ import ENV from '../config/environment';
 import $ from 'jquery';
 export default Component.extend({
 	session: inject('session'),
+	classNames        : [ 'draggableDropzone' ],
+  classNameBindings : [ 'dragClass' ],
+  dragClass         : 'deactivated',
+	dragLeave(event) {
+    event.preventDefault();
+  },
+
+  dragOver(event) {
+    event.preventDefault();
+  },
+
+  drop(event) {
+		//TODO:guardar el cambio en base de datos
+    var data = event.dataTransfer.getData('text');
+		var element = document.getElementById(data)
+		var item = element.cloneNode(true);
+		var li = document.createElement('li')
+		var lo_menu_favoritos = document.getElementById('menu-favorito');
+		li.appendChild(item);
+		lo_menu_favoritos.appendChild(li);
+  },
 	actions:{
 		logout(){
 			var _this = this;
@@ -27,6 +48,6 @@ export default Component.extend({
 		},
 		showConf(){
 			$('#user_id').toggleClass("showConf");
-		}
+		},
 	}
 });

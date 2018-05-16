@@ -59,7 +59,7 @@ jQuery.ajaxSetup({
 				loading.style.top="50%";
 				loading.style.left="50%";
 				loading.innerHTML="Espere...";
-				loading.style.zIndex="5000000000";
+				loading.style.zIndex="99";
 				loading.style.backgroundColor="#DDD";
 				loading.style.boder="1px solid #000";
 				loading.style.boderRadius="20px";
@@ -256,3 +256,23 @@ function getIdMenu(route){
 		return true;
 	}; /* end download() */
 }));
+/*
+function allowDrop(ev) {
+	ev.preventDefault();
+}
+
+function drag(ev) {
+		ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+		console.log(Ember);
+		ev.preventDefault();
+		var data = ev.dataTransfer.getData("text");
+		var element = document.getElementById(data)
+		var item = element.cloneNode(true);
+		var li = document.createElement('li')
+		var lo_menu_favoritos = document.getElementById('menu-favorito');
+		li.appendChild(item);
+		lo_menu_favoritos.appendChild(li);
+}*/

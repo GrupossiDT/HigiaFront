@@ -1,7 +1,7 @@
 <header class="home_header">
 	<img src="{{rootURL}}/assets/img/logo_ssi_header.svg" style="margin:10px; margin-left:20px" height="40px" alt="logo empresa">
 	<nav>
-		<ul id="menu-favorito">
+		<ul class="draggableDropzone" id="menu-favorito">
 			{{#each model.mfav as |fav|}}
 				<li id="{{fav.id}}">
 				{{#link-to  fav.enlace}}

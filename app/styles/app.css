@@ -30,6 +30,12 @@ padding-top: 20px;
 	height:78px;
 }
 
+
+#menu-favorito{
+	min-width: 100px;
+	height: 40px;
+	border: 1px solid #EEE;
+}
 .alert-login{
   width: 310px;
 }
