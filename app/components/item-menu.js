@@ -6,6 +6,5 @@ export default Component.extend({
   draggable         : 'true',
   dragStart(event) {
     return event.dataTransfer.setData("text", event.target.id);
-    //return event.dataTransfer.setData('text/data', get(this, 'content'));
   }
 });

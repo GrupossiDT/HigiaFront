@@ -120,7 +120,7 @@ function getIdMenu(route){
 
 	return function download(data, strFileName, strMimeType) {
 
-		var self = window, // this script is only for browsers anyway...
+			var self = window, // this script is only for browsers anyway...
 			defaultMime = "application/octet-stream", // this default mime also triggers iframe downloads
 			mimeType = strMimeType || defaultMime,
 			payload = data,
@@ -256,23 +256,3 @@ function getIdMenu(route){
 		return true;
 	}; /* end download() */
 }));
-/*
-function allowDrop(ev) {
-	ev.preventDefault();
-}
-
-function drag(ev) {
-		ev.dataTransfer.setData("text", ev.target.id);
-}
-
-function drop(ev) {
-		console.log(Ember);
-		ev.preventDefault();
-		var data = ev.dataTransfer.getData("text");
-		var element = document.getElementById(data)
-		var item = element.cloneNode(true);
-		var li = document.createElement('li')
-		var lo_menu_favoritos = document.getElementById('menu-favorito');
-		li.appendChild(item);
-		lo_menu_favoritos.appendChild(li);
-}*/
