@@ -21,6 +21,7 @@ export default EmberController.extend({
 			let  u = this.get('session').authenticate('authenticator:oauth2',identification,password).then(() =>{
 				window.location.href='/protected';
 			}).catch((reason)=>{
+				console.log(reason);
 				if(typeof reason.error == "object"){
 					if(reason.error.password){
 						$("#danger").html("Debes digitar la contraseña").fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){

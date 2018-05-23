@@ -8,9 +8,10 @@ import $ from 'jquery';
 export default Route.extend({
 	session: inject('session'),
 	model:function(){
+	  var	ln_id_mnu_ge = getIdMenu(this.routeName);
 		let{access_token,cookie_higia} = this.get('session.data.authenticated');
 		var formdata = new FormData();
-		formdata.append('id_mnu_ge','176');
+		formdata.append('id_mnu_ge',ln_id_mnu_ge);
 		formdata.append('id_undd_ngco',cookie_higia.id_undd_ngco);
 		formdata.append('id_grpo_emprsrl',cookie_higia.id_grpo_emprsrl);
 		return Ember.$.ajax({
@@ -22,12 +23,9 @@ export default Route.extend({
 			data:formdata,
 			url: ENV.SERVER_API+"/api/users/listar",
 		}).then(function (result) {
-			//var obj={};
-			//obj["datos"]=result;
 			var obj={"usuario":[]};
 
 			var myModel = {"nmbre_usro":"","lgn":"","id":"","estdo":""};
-
 
 			if(result.error){
 				 obj["usuario"]["datos"]=myModel;
@@ -36,13 +34,18 @@ export default Route.extend({
 			}
 
 			var columns = [
+				{"title": "Modificar","component": "editRow","editable": false},
 				{"propertyName":"lgn","title" :"Usuario"},
 				{"propertyName":"nmbre_usro","title" :"Nombre Completo"},
 				{"propertyName":"estdo","title" :"Estado"},
-				{"title": "Modificar","component": "editRow","editable": false},
+				{"title": "Asignar Perfil","component": "addprfl","editable": false},
 			];
 			obj["usuario"]["columns"] = columns;
 			obj["usuario"]["modelCreator"]= myModel;
+			obj["exportar"]={
+				"url": ENV.SERVER_API+"/api/users/descarga",
+				params:[{"id_mnu_ge":ln_id_mnu_ge}]
+			};
 			return obj;
 		})
 	}

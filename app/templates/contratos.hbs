@@ -1,0 +1,11 @@
+<div class="fgContainer">
+  {{cntrl-grid
+    model=model.contratos
+    frmComponentActualizar="frm-contratos"   frmTitleActualizar="Actualizar Contratos"
+    frmComponentCrear="frm-contratos"    frmTitleCrear="Nuevo Contrato"
+    modelCreator=model.contratos.modelCreator
+    hashColumns=(hash
+      editRow=(component "boton-actualizar" frmComponentActualizar="frm-contratos" frmTitleActualizar="Actualizar Contratos")
+    )
+    }}
+</div>

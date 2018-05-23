@@ -10,33 +10,34 @@ export default Route.extend({
 	model:function(){
 		let{access_token,cookie_higia} = this.get('session.data.authenticated');
 		var formdata = new FormData();
-		var	ln_id_mnu_ge = getIdMenu(this.routeName);
-		formdata.append('id_mnu_ge',ln_id_mnu_ge);
+		console.log(cookie_higia);
+		formdata.append('id_mnu_ge',getIdMenu());
+		formdata.append('id_scrsl',cookie_higia.id_scrsl);
 		formdata.append('id_undd_ngco',cookie_higia.id_undd_ngco);
-		 return $.ajax({
+
+		return Ember.$.ajax({
 			headers:{"Authorization": access_token},
 			cache: false,
 			contentType: false,
 			processData: false,
 			type: 'POST',
 			data:formdata,
-			url: ENV.SERVER_API+"/api/preguntasSg/listar",
+			url: ENV.SERVER_API+"/api/Contratos/listar",
 		}).then(function (result) {
-			var obj={"pregunta":[]};
-			var myModel = {"cdgo":"","dscrpcn":"","id":"","estdo":""};
+			var obj={"contratos":[]};
+			var myModel = {"cnsctvo_cntrto":"","nmbre_rzn_scl":"","id_cntrts":""};
 			if(result.error){
-				 obj["pregunta"]["datos"]=myModel;
+				 obj["contratos"]["datos"]=myModel;
 			}else {
-					obj["pregunta"]["datos"]=result;
+					obj["contratos"]["datos"]=result;
 			}
-
-			var columns = [{"propertyName":"cdgo","title" :"Código"},
-				{"propertyName":"dscrpcn","title" :"Descripción"},
-				{"propertyName":"estdo","title" :"Estado"},
+			var columns = [
 				{"title": "Modificar","component": "editRow","editable": false},
+				{"propertyName":"cnsctvo_cntrto","title" :"Consecutivo Contrato"},
+				{"propertyName":"nmbre_rzn_scl","title" :"Nombre  Razon Social"},
 			];
-			obj["pregunta"]["columns"] = columns;
-			obj["pregunta"]["modelCreator"]= myModel;
+			obj["contratos"]["columns"] = columns;
+			obj["contratos"]["modelCreator"]= myModel;
 			return obj;
 		})
 	}

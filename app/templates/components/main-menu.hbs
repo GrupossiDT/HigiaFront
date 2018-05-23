@@ -1,12 +1,13 @@
 <header class="home_header">
 	<img src="{{rootURL}}/assets/img/logo_ssi_header.svg" style="margin:10px; margin-left:20px" height="40px" alt="logo empresa">
 	<nav>
-		<ul id="menu-favorito">
+		<ul class="draggableDropzone" id="menu-favorito">
 			{{#each model.mfav as |fav|}}
-				<li>
-				{{#link-to fav.enlace}}
-					{{fav.label}}
-				{{/link-to}}
+				<li id="F_{{fav.id}}">
+					<span {{action 'borrarFavorito' fav.id_mnu_ge fav.id fav.enlace}} class="delete_icon"></span>
+					{{#link-to  fav.enlace}}
+						{{fav.label}}
+					{{/link-to}}
 				</li>
 			{{/each}}
 		</ul>

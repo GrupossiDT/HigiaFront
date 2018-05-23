@@ -43,14 +43,26 @@ function CrearMenu(data){
 		var favorito = item.favorito == false ? null: item.favorito;
 		var parentid = item.parentid == 0 ? null : item.parentid;
 		var enlace = item.enlace == "" ? null : item.enlace;
-
 		var id = item.id;
+		var id_mnu_ge = item.id_mnu_ge;
+		arrayMenu[enlace]={
+			"descripcion":enlace,
+			"parent_id":id,
+			"parent":parentid,
+			"label":label,
+			"id":id_mnu_ge,
+			"crear":item.crear,
+			"actualizar":item.actualizar,
+			"anular":item.anular,
+			"imprimir":item.imprimir,
+			"exportar":item.exportar
+		};
 		if(favorito){
-			var item_favorito = { parentid: parentid, id:id, label: label, item: item, enlace:enlace };
+			var item_favorito = { parentid: parentid, id:id,id_mnu_ge:id_mnu_ge, label: label, item: item, enlace:enlace };
 			favoritos[favoritos.length] = item_favorito;
 		}
 		if (items[parentid]) {
-			var item = { parentid: parentid, id:id, label: label, item: item,enlace:enlace };
+			var item = { parentid: parentid, id:id, id_mnu_ge:id_mnu_ge, label: label, item: item,enlace:enlace };
 			if (!items[parentid].items) {
 				items[parentid].items = [];
 			}
@@ -58,7 +70,7 @@ function CrearMenu(data){
 			items[id] = item;
 		}
 		else {
-			items[id] = { parentid: parentid, id:id, label: label, item: item,enlace:enlace };
+			items[id] = { parentid: parentid, id:id, id_mnu_ge:id_mnu_ge,label: label, item: item,enlace:enlace };
 			source[id] = items[id];
 		}
 	});
