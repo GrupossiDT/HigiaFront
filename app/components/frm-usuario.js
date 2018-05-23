@@ -49,22 +49,14 @@ export default Ember.Component.extend(formValidation,{
         type: 'POST',
         url: ENV.SERVER_API+'/api/users/actualizar',
       }).then((response)=>{
-console.log('aqui '+response);
           if(typeof response == "object"){
-
             if(response.success){
-
               $("#success").html(response.success).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
                   $("#success").slideUp(ENV.TIME_IN_ALERT);
               });
             }else if (response.error) {
-<<<<<<< HEAD
-                $("#danger").html(response.responseJSON.error).fadeTo(3000, 500).slideUp(500, function(){
-                    $("#danger").slideUp(500);
-=======
                 $("#danger").html(response.error).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
                     $("#danger").slideUp(ENV.TIME_IN_ALERT);
->>>>>>> 0ce4865f6eec3ab5db116a567d871153266383b8
                 });
             }
           }else {
@@ -73,7 +65,13 @@ console.log('aqui '+response);
             });
           }
         }).catch((response)=>{
-          $("#danger").html("Error de conexión").fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+          var error;
+          if(response.responseJSON.error){
+            error = response.responseJSON.error;
+          }else{
+            error="Error de conexión";
+          }
+          $("#danger").html(error).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
               $("#danger").slideUp(ENV.TIME_IN_ALERT);
           });
       });
@@ -123,10 +121,8 @@ console.log('aqui '+response);
             }
           }
         }).catch((response)=>{
-
           var resultado = '';
           var objeto = response.responseJSON.error;
-
           if(objeto.length>0){
             resultado = objeto;
           }else{
@@ -134,7 +130,6 @@ console.log('aqui '+response);
               resultado += i+":"+objeto[i][0]+"\n";
             }
           }
-
           $("#danger").html(resultado).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
               $("#danger").slideUp(ENV.TIME_IN_ALERT);
 

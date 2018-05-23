@@ -6,7 +6,7 @@ export default Component.extend({
 	session: inject('session'),
 	actions:{
 		cambiarcontrasena(){
-				window.location.href='/cambiarcontrasena';
+				window.location.href='/cambiarcontrasenainterno';
 		},
 		logout(){
 			var _this = this;
