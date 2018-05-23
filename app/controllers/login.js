@@ -5,7 +5,10 @@ import $ from 'jquery';
 export default EmberController.extend({
 	session: inject('session'),
 	init:function() {
+<<<<<<< HEAD
+=======
 		this._super(...arguments);
+>>>>>>> 0ce4865f6eec3ab5db116a567d871153266383b8
 		if(this.get('session.isAuthenticated')){
 			window.location.href='/protected';
 		}

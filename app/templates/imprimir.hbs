@@ -1,0 +1,20 @@
+<div class="fgContainer">
+  <div class="noprint">
+    <button class="btn btn-primary" onclick={{action "goBack"}}> <span>Regresar</span></button>
+    <button class="btn btn-primary" onclick={{action "printData"}}>Imprimir</button>
+  </div>
+  {{models-table
+    data=model.datos
+    columns=model.columns
+    filterQueryParameters=filterQueryParameters
+    showComponentFooter=false
+    showColumnsDropdown=false
+    useFilteringByColumns=false
+    showGlobalFilter=false
+    useNumericPagination=false
+    ModelsTablePaginationSimple=false
+    showPageSize=false
+    filteringIgnoreCase=true
+    pageSize=model.datos.length
+  }}
+</div>

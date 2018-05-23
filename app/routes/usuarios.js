@@ -23,12 +23,9 @@ export default Route.extend({
 			data:formdata,
 			url: ENV.SERVER_API+"/api/users/listar",
 		}).then(function (result) {
-			//var obj={};
-			//obj["datos"]=result;
 			var obj={"usuario":[]};
 
 			var myModel = {"nmbre_usro":"","lgn":"","id":"","estdo":""};
-
 
 			if(result.error){
 				 obj["usuario"]["datos"]=myModel;
@@ -45,6 +42,10 @@ export default Route.extend({
 			];
 			obj["usuario"]["columns"] = columns;
 			obj["usuario"]["modelCreator"]= myModel;
+			obj["exportar"]={
+				"url": ENV.SERVER_API+"/api/users/descarga",
+				params:[{"id_mnu_ge":ln_id_mnu_ge}]
+			};
 			return obj;
 		})
 	}

@@ -52,7 +52,6 @@ export default Ember.Component.extend(formValidation,{
       }).then((response)=>{
           if(typeof response == "object"){
             if(response.success){
-
               $("#success").html(response.success).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
                   $("#success").slideUp(ENV.TIME_IN_ALERT);
               });
@@ -67,7 +66,13 @@ export default Ember.Component.extend(formValidation,{
             });
           }
         }).catch((response)=>{
-          $("#danger").html("Error de conexión").fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+          var error;
+          if(response.responseJSON.error){
+            error = response.responseJSON.error;
+          }else{
+            error="Error de conexión";
+          }
+          $("#danger").html(error).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
               $("#danger").slideUp(ENV.TIME_IN_ALERT);
           });
       });
@@ -118,10 +123,8 @@ export default Ember.Component.extend(formValidation,{
             }
           }
         }).catch((response)=>{
-
           var resultado = '';
           var objeto = response.responseJSON.error;
-
           if(objeto.length>0){
             resultado = objeto;
           }else{
@@ -129,7 +132,6 @@ export default Ember.Component.extend(formValidation,{
               resultado += i+":"+objeto[i][0]+"\n";
             }
           }
-
           $("#danger").html(resultado).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
               $("#danger").slideUp(ENV.TIME_IN_ALERT);
 
