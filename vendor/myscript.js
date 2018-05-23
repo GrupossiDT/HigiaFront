@@ -1,6 +1,5 @@
 /*Variables Globales */
 var arrayMenu={}; // llamada en application.js
-
 /*Funcion que se ejecuta al cargar el docuemento cualquier
 parte del body .
 caso de uso ocultar menu y panel automaticamente*/
@@ -46,7 +45,6 @@ var iAjx =0;
 var loading=null;
 jQuery.ajaxSetup({
 	beforeSend: function() {
-		 console.log("entro");
 			iAjx++;
 			var preloading = document.getElementById("preloading");
 			if(!preloading){
@@ -71,7 +69,6 @@ jQuery.ajaxSetup({
 
 	},
 	complete: function(){
-		console.log("termino");
 		iAjx--;
 		if(iAjx==0){
 			var body = document.body;

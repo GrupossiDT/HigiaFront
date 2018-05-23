@@ -3,10 +3,11 @@
 	<nav>
 		<ul class="draggableDropzone" id="menu-favorito">
 			{{#each model.mfav as |fav|}}
-				<li id="{{fav.id}}">
-				{{#link-to  fav.enlace}}
-					{{fav.label}}
-				{{/link-to}}
+				<li id="F_{{fav.id}}">
+					<span {{action 'borrarFavorito' fav.id_mnu_ge fav.id fav.enlace}} class="delete_icon"></span>
+					{{#link-to  fav.enlace}}
+						{{fav.label}}
+					{{/link-to}}
 				</li>
 			{{/each}}
 		</ul>

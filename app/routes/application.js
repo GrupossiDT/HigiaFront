@@ -47,6 +47,9 @@ function CrearMenu(data){
 		var id_mnu_ge = item.id_mnu_ge;
 		arrayMenu[enlace]={
 			"descripcion":enlace,
+			"parent_id":id,
+			"parent":parentid,
+			"label":label,
 			"id":id_mnu_ge,
 			"crear":item.crear,
 			"actualizar":item.actualizar,

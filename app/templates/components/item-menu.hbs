@@ -10,7 +10,7 @@
 						{{item-menu item=child}}
 					</div>
 				{{else}}
-					<div class="draggableItem" id="{{child.id_mnu_ge}}">
+					<div class="draggableItem" id="{{child.id_mnu_ge}}" data-key="{{child.enlace}}">
 						{{#link-to child.enlace}}
 							{{child.label}}
 						{{/link-to}}
