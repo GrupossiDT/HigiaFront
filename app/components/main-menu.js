@@ -87,9 +87,6 @@ export default Component.extend({
 				sobre_control= false;
 		});
   },
-	borrar(){
-		console.log('borrar sin refrescar');
-	},
 	actions:{
 		cambiarcontrasena(){
 				window.location.href='/cambiarcontrasenainterno';
