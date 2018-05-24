@@ -11,7 +11,8 @@ export default Route.extend({
 		let{access_token,cookie_higia} = this.get('session.data.authenticated');
 		var formdata = new FormData();
 		console.log(cookie_higia);
-		formdata.append('id_mnu_ge',getIdMenu());
+		var	ln_id_mnu_ge = getIdMenu(this.routeName);
+		formdata.append('id_mnu_ge',ln_id_mnu_ge);
 		formdata.append('id_scrsl',cookie_higia.id_scrsl);
 		formdata.append('id_undd_ngco',cookie_higia.id_undd_ngco);
 

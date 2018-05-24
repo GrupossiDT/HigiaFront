@@ -1,0 +1,15 @@
+
+<select  class="select_higia form-control" id="{{tagid}}" data-parent="{{tagparent}}" {{action 'change' on='change'}} >
+  <option value = "0">
+    {{#if text}}
+      {{text}}
+    {{else}}
+      Seleccione
+    {{/if}}
+  </option>
+  {{#each model as |item|}}
+    <option value="{{item.id}}" selected={{ifcond item.id valor_selecionado}} >
+      {{item.dscrpcn}}
+   </option>
+  {{/each}}
+</select>

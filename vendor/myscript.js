@@ -1,5 +1,7 @@
-/*Variables Globales */
+ 	/*Variables Globales */
 var arrayMenu={}; // llamada en application.js
+
+var arrayComponents={};//variable usada para traer elementos del select
 
 /*Funcion que se ejecuta al cargar el docuemento cualquier
 parte del body .
@@ -45,9 +47,15 @@ function userImgError(Obj){
 
 /*Funcion que permite traer el id_mnu_ge del
 enlace del menu principal de form directa
-se define en application.js*/
-function getIdMenu(){
-	var path = window.location.pathname;
-	var page = path.split("/").pop();
-	return arrayMenu[page].id;
+se define en application.js
+@params: route es opcional para elementos que no son cargados desde archivos routes ejemplo function en actions
+*/
+
+function getIdMenu(route){
+ var page = route;
+ if(!route){
+	 var path = window.location.pathname;
+	 var page = path.split("/").pop();
+ }
+ return arrayMenu[page].id;
 }

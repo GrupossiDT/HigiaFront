@@ -1,0 +1,13 @@
+
+<div align="center">
+ <div class="form-group">
+   <label>Estado:</label>
+   <select id="chg_estdo" class="form-control" {{action 'cambioEstado' on='change'}}>
+       <option  value='ACTIVO'  selected={{ifcond model.estdo "ACTIVO"}} >ACTIVO</option>
+       <option  value='INACTIVO' selected={{ifcond model.estdo "INACTIVO"}} >INACTIVO</option>
+   </select>
+ </div>
+   <div style="text-align:center">
+     <button class="button-default" onclick={{action "guardar"}} >Guardar</button>
+   </div>
+</div>

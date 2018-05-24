@@ -44,10 +44,16 @@ function CrearMenu(data){
 		var parentid = item.parentid == 0 ? null : item.parentid;
 		var enlace = item.enlace == "" ? null : item.enlace;
 		var id = item.id;
-
-		//variable que ubica id_mnu_ge
-		arrayMenu[enlace]={"id":id};
-
+		var id_mnu_ge = item.id_mnu_ge;
+		arrayMenu[enlace]={
+			"descripcion":enlace,
+			"id":id_mnu_ge,
+			"crear":item.crear,
+			"actualizar":item.actualizar,
+			"anular":item.anular,
+			"imprimir":item.imprimir,
+			"exportar":item.exportar
+		};
 		if(favorito){
 			var item_favorito = { parentid: parentid, id:id, label: label, item: item, enlace:enlace };
 			favoritos[favoritos.length] = item_favorito;
@@ -69,6 +75,7 @@ function CrearMenu(data){
 	result["source"] = source;
   return result;
 }
+
 
 function buildUL(items) {
 var stringmenu = "";

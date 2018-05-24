@@ -1,0 +1,11 @@
+<div class="fgContainer">
+  {{cntrl-grid
+    model=model.perfiles_sucursales
+    frmComponentCrear="frm-perfilessucursales"
+    frmTitleCrear="Nueva Sucursal"
+    modelCreator=model.perfiles_sucursales.modelCreator
+    hashColumns=(hash
+      editRow=(component "boton-actualizar" frmComponentActualizar="frm-perfilessucursales" frmTitleActualizar="Actualizar Perfil Sucursal")
+    )
+  }}
+</div>
