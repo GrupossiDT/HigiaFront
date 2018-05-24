@@ -1,9 +1,17 @@
 <div class="fgContainer">
   {{cntrl-grid
     model=model.usuario
+    permisos=model.permisos
     frmComponentCrear="frm-usuario"
     frmTitleCrear="Nuevo Usuario"
     modelCreator=model.usuario.modelCreator
+    frmComponentExportar=true
+    modelExportar=model.exportar
+    frmComponentImprimir=true
+    modelImprimir=model.usuario
+    hashCustom=(hash
+      editRow=(component "boton-actualizar" frmComponentActualizar="frm-usuario" frmTitleActualizar="Actualizar Usuario")
+    )
     hashColumns=(hash
       editRow=(component "boton-actualizar" frmComponentActualizar="frm-usuario" frmTitleActualizar="Actualizar Usuario")
       addprfl=(component "frm-usuariosperfil" frmTitleActualizar="Asignar Perfil")

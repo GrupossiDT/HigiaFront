@@ -1,40 +1,45 @@
 <div class="container-fluid">
-  {{#if frmComponentCrear}}
-    <div class="row">
-      <div class="col-sm-8">
-        <!--- blank -->
-      </div>
-      <div class="col-sm-4" align="right">
-        <button class="btn btn-primary" onclick={{action "openmodal" "crear" }}>Nuevo</button>
-        {{#bs-modal open=mdlComponentCrear onHidden=(action "closeModal") as |modal|}}
-          {{#modal.header}}
-            <h2 class="modal-title">
-              {{frmTitleCrear}}
-            </h2>
-          {{/modal.header}}
-          {{#modal.body}}
-            {{component frmComponentCrear model=modelCreator parent=model.datos }}
-          {{/modal.body}}
-        {{/bs-modal}}
-      </div>
+  {{barra-menu
+    permisos=permisos
+    componentCrear=frmComponentCrear
+    modelCreator=modelCreator
+    parentCreator=model.datos
+    crearTitle=frmTitleCrear
+    componentActualizar=frmComponentActualizar
+    modelActualizar=modelActualizar
+    parentActualizar=parentActualizar
+    actualizarTitle=frmTitleActualizar
+    componentAnular=frmComponentAnular
+    modelAnular=modelAnular
+    parentAnular=parentAnular
+    anularTitle=anularTitle
+    componentExportar=frmComponentExportar
+    modelExportar=modelExportar
+    parentExportar=parentExportar
+    actualizarTitle=actualizarTitle
+    componentImprimir=frmComponentImprimir
+    modelImprimir=modelImprimir
+    parentImprimir=parentImprimir
+    imprimirTitle=imprimirTitle
+    hashCustom=hashCustom
+  }}
+  <br>
+  <div class="row">
+    <div class="col-sm-12">
+      {{models-table
+      data=model.datos
+      columns=model.columns
+      filterQueryParameters=filterQueryParameters
+      showComponentFooter=true
+      showColumnsDropdown=false
+      useFilteringByColumns=true
+      showGlobalFilter=showGlobalFilter
+      useNumericPagination=true
+      ModelsTablePaginationSimple =true
+      showPageSize=true
+      filteringIgnoreCase=true
+      columnComponents=hashColumns
+    }}
     </div>
-  {{/if}}
-    <div class="row">
-      <div class="col-sm-12">
-        {{models-table
-        data=model.datos
-        columns=model.columns
-        filterQueryParameters=filterQueryParameters
-        showComponentFooter=true
-        showColumnsDropdown=false
-        useFilteringByColumns=true
-        showGlobalFilter=showGlobalFilter
-        useNumericPagination=true
-        ModelsTablePaginationSimple =true
-        showPageSize=true
-        filteringIgnoreCase=true
-        columnComponents=hashColumns
-      }}
-      </div>
-    </div>
+  </div>
 </div>

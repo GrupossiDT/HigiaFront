@@ -31,7 +31,8 @@ export default Ember.Component.extend(formValidation,{
     formData.append('password', frmData.password);
     formData.append('nombre_usuario', frmData.nmbre_usro);
     formData.append('login', frmData.lgn);
-    formData.append('id_mnu_ge',"176");
+    var ln_id_mnu_ge = getIdMenu();
+    formData.append('id_mnu_ge',ln_id_mnu_ge);
     //model frmData.id equivale a id_login_ge de la tabla login_ge
     formData.append('id_login_ge',frmData.id);
     formData.append('id_grpo_emprsrl',cookie_higia.id_grpo_emprsrl);
@@ -51,7 +52,6 @@ export default Ember.Component.extend(formValidation,{
       }).then((response)=>{
           if(typeof response == "object"){
             if(response.success){
-
               $("#success").html(response.success).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
                   $("#success").slideUp(ENV.TIME_IN_ALERT);
               });
@@ -66,7 +66,13 @@ export default Ember.Component.extend(formValidation,{
             });
           }
         }).catch((response)=>{
-          $("#danger").html("Error de conexión").fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
+          var error;
+          if(response.responseJSON.error){
+            error = response.responseJSON.error;
+          }else{
+            error="Error de conexión";
+          }
+          $("#danger").html(error).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
               $("#danger").slideUp(ENV.TIME_IN_ALERT);
           });
       });
@@ -84,7 +90,8 @@ export default Ember.Component.extend(formValidation,{
       formData.append('password', frmData.password);
       formData.append('nombre_usuario', frmData.nmbre_usro);
       formData.append('login', frmData.lgn);
-      formData.append('id_mnu_ge',"176");
+      var ln_id_mnu_ge = getIdMenu();
+      formData.append('id_mnu_ge',ln_id_mnu_ge);
       formData.append('id_grpo_emprsrl',cookie_higia.id_grpo_emprsrl);
       formData.append('estdo',frmData.estdo);
       if(file){
@@ -116,10 +123,8 @@ export default Ember.Component.extend(formValidation,{
             }
           }
         }).catch((response)=>{
-
           var resultado = '';
           var objeto = response.responseJSON.error;
-
           if(objeto.length>0){
             resultado = objeto;
           }else{
@@ -127,7 +132,6 @@ export default Ember.Component.extend(formValidation,{
               resultado += i+":"+objeto[i][0]+"\n";
             }
           }
-
           $("#danger").html(resultado).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
               $("#danger").slideUp(ENV.TIME_IN_ALERT);
 

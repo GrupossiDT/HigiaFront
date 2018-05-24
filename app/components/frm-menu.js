@@ -21,7 +21,6 @@ export default Ember.Component.extend(formValidation,{
       var _mymodel = this.model;
       var frmData=this.model;
       var formData = new FormData();
-      console.log(frmData);
       this.send('validate_form_action', frmData);
       if(Object.keys(this.validationErrors).length > 0){
         return;
@@ -33,7 +32,8 @@ export default Ember.Component.extend(formValidation,{
       formData.append('lc_dscrpcn', frmData.dscrpcn);
       formData.append('lc_lnk', frmData.lnk);
       formData.append('lb_estdo', frmData.estdo == 'ACTIVO');
-	    formData.append('id_mnu_ge_opt',"409");
+      var ln_id_mnu_ge = getIdMenu();
+      formData.append('opt_id_mnu_ge',ln_id_mnu_ge);
       Ember.$.ajax({
         data: formData,
         headers:{"Authorization": access_token},
@@ -78,7 +78,8 @@ export default Ember.Component.extend(formValidation,{
       formData.append('lc_ordn', frmData.ordn);
       formData.append('lc_dscrpcn', frmData.dscrpcn);
       formData.append('lc_lnk', frmData.lnk);
-      formData.append('id_mnu_ge_opt',"409");
+      var ln_id_mnu_ge = getIdMenu();
+      formData.append('opt_id_mnu_ge',ln_id_mnu_ge);
       formData.append('id_grpo_emprsrl',cookie_higia.id_grpo_emprsrl);
       Ember.$.ajax({
         data: formData,

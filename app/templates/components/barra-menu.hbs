@@ -1,0 +1,68 @@
+<div class="row">
+  {{#if permisos.crear}}
+    {{#if componentCrear}}
+      <div class="col-sm-1" align="right">
+        <button class="btn btn-primary" onclick={{action "openmodal" "mdlComponentCrear" }}>Nuevo</button>
+        {{#bs-modal open=mdlComponentCrear onHidden=(action "closeModal") as |modal|}}
+          {{#modal.header}}
+            <h2 class="modal-title">
+              {{#if crearTitle}}
+                {{crearTitle}}
+              {{else}}
+                  Nuevo
+              {{/if}}
+            </h2>
+          {{/modal.header}}
+          {{#modal.body}}
+            {{component componentCrear
+              model=modelCreator
+              parent=parentCreator}}
+          {{/modal.body}}
+        {{/bs-modal}}
+      </div>
+      {{/if}}
+  {{/if}}
+  {{#if permisos.actualizar}}
+    {{#if componentActualizar}}
+      <button class="btn btn-primary">Actualizar</button>
+    {{/if}}
+  {{/if}}
+  {{#if permisos.anular}}
+    {{#if componentAnular}}
+      <button class="btn btn-primary">Anular</button>
+    {{/if}}
+  {{/if}}
+  {{#if permisos.imprimir}}
+    {{#if componentImprimir}}
+      <button class="btn btn-primary" onclick={{action "printData"}}>Imprimir</button>
+    {{/if}}
+  {{/if}}
+  {{#if permisos.exportar}}
+    {{#if componentExportar}}
+      <button class="btn btn-primary" onclick={{action "openmodal" "mdlExportar" }}>Exportar</button>
+      {{#bs-modal open=mdlExportar onHidden=(action "closeModal") as |modal|}}
+        {{#modal.header}}
+          <h2 class="modal-title">
+            {{#if exportarTitle}}
+              {{exportarTitle}}
+            {{else}}
+                Exportar a archivos
+            {{/if}}
+          </h2>
+        {{/modal.header}}
+        {{#modal.body}}
+          <div>
+            <select id="type_download">
+              <option value="xlsx">XLSX</option>
+              <option value="csv">TEXTO SEPARADO POR COMAS</option>
+              <option value="txt">TEXTO PLANO</option>
+              <option value="pdf">PDF</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" onclick={{action "exportData" }}>Exportar</button>
+        {{/modal.body}}
+      {{/bs-modal}}
+    {{/if}}
+  {{/if}}
+  {{yield (hash hashCustom)}}
+</div>
