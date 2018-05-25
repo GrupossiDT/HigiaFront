@@ -1,8 +1,10 @@
 <div class="fgContainer">
   {{cntrl-grid
     model=model.perfiles_sucursales
+    permisos=model.permisos
     frmComponentCrear="frm-perfilessucursales"
     frmTitleCrear="Nueva Sucursal"
+    frmComponentExportar=true
     modelCreator=model.perfiles_sucursales.modelCreator
     hashColumns=(hash
       editRow=(component "boton-actualizar" frmComponentActualizar="frm-perfilessucursales" frmTitleActualizar="Actualizar Perfil Sucursal")
