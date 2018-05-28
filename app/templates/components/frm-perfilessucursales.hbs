@@ -1,13 +1,127 @@
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 padding-top">
+			  <div class="form">
+				  <form class="form-inline" role="form" id = "form_perfiles_sucursales">
+              <div class="form-group">
+                  <label for="UnddsNgcio">Unidad De Negocio:</label>
+                  {{cntrl-select
+                    name=id_undds_ngcio
+                    id=UnddsNgcio.id
+                    tagid="UnddsNgcio"
+                    model=UnddsNgcio
+                    text="Seleccione Unidad De Negocio ..."   valor_selecionado=model.id_undds_ngcio
+                  }}
+                  <div class="error_text">{{validationErrors.id}}</div>
+              </div>
+              <div class="form-group">
+                  <label>Sucursal:</label>
+                  {{cntrl-select
+                    name=id_scrsl
+                    model=scrsl
+                    tagid="Scrsl"
+                    tagparent="UnddsNgcio"
+                    text="Seleccione Sucursal ..." valor_selecionado=model.id_scrsl
+                    parent=model.id_undds_ngcio
+                    url="/api/AdministracionTablasMaestras/Sucursales"
+                    cmporlcn="id_undd_ngco"
+                    data=(concat '{"id_undd_ngco":"' model.id_undds_ngcio '"}')
+                  }}
+                  <div class="error_text">{{validationErrors.id}}</div>
+              </div>
 
-<div align="center">
- <div class="form-group">
-   <label>Estado:</label>
-   <select id="chg_estdo" class="form-control" {{action 'cambioEstado' on='change'}}>
-       <option  value='ACTIVO'  selected={{ifcond model.estdo "ACTIVO"}} >ACTIVO</option>
-       <option  value='INACTIVO' selected={{ifcond model.estdo "INACTIVO"}} >INACTIVO</option>
-   </select>
- </div>
-   <div style="text-align:center">
-     <button class="button-default" onclick={{action "guardar"}} >Guardar</button>
-   </div>
+              <div class="form-group">
+                  <label>Perfil:</label>
+                  {{cntrl-select
+                    name=id_prfl_une
+                    model=Prfl
+                    tagid="Prfl"
+                    tagparent="Scrsl"
+                    text="Seleccione Perfil ..." valor_selecionado=model.id_prfl_une
+                    parent=model.id_undds_ngcio
+                    cmporlcn="id_undd_ngco"
+                    url="/api/AdministracionTablasMaestras/Perfiles"
+                    data=(concat '{"id_undd_ngco":"' model.id_undds_ngcio '"}')
+                  }}
+                  <div class="error_text">{{validationErrors.id}}</div>
+              </div>
+
+              <div class="form-group">
+                  <label>Formas De Pago:</label>
+                  {{cntrl-select
+                    model=frmsPgo
+                    main=true
+                    tagid="frmsPgo"
+                    text="Seleccione Formas De Pago ..." valor_selecionado=model.id_frma_pgo_dfcto_une
+                    url="/api/AdministracionTablasMaestras/FormasPago"
+                    parent=model.id_undds_ngcio
+                    data=(concat '{"id_undd_ngco":"' model.id_undds_ngcio '"}')
+                  }}
+              </div>
+
+              <div class="form-group">
+                  <label>Canal De Recaudo:</label>
+                  {{cntrl-select
+                    model=Cnlrcdo
+                    main=true
+                    tagid="Cnlrcdo"
+                    text="Seleccione Canal De Recaudo ..." valor_selecionado=model.id_cnl_rcdo_dfcto_une
+                    url="/api/AdministracionTablasMaestras/CanalRecaudo"
+                    parent=model.id_undds_ngcio
+                    data=(concat '{"id_undd_ngco":"' model.id_undds_ngcio '"}')
+                  }}
+              </div>
+
+              <div class="form-group">
+                <label>Sucursal Defecto:</label>
+                <select id="chg_estdo" class="form-control" {{action 'cambioEstado' on='change'}}>
+                    <option  value='ACTIVO'  selected={{ifcond model.mrca_scrsl_dfcto "ACTIVO"}} >ACTIVO</option>
+                    <option  value='INACTIVO' selected={{ifcond model.mrca_scrsl_dfcto "INACTIVO"}} >INACTIVO</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+               <label>Control De Comprobantes:</label>
+               <select id="chg_estdo" class="form-control" {{action 'cambioEstado' on='change'}}>
+                   <option  value='ACTIVO'  selected={{ifcond model.cntrl_cmprbnte "ACTIVO"}} >ACTIVO</option>
+                   <option  value='INACTIVO' selected={{ifcond model.cntrl_cmprbnte "INACTIVO"}} >INACTIVO</option>
+               </select>
+              </div>
+
+             <div class="form-group">
+              <label>Control De Autorizaciones:</label>
+              <select id="chg_estdo" class="form-control" {{action 'cambioEstado' on='change'}}>
+                  <option  value='ACTIVO'  selected={{ifcond model.cntrl_atrzcn "ACTIVO"}} >ACTIVO</option>
+                  <option  value='INACTIVO' selected={{ifcond model.cntrl_atrzcn "INACTIVO"}} >INACTIVO</option>
+              </select>
+             </div>
+
+             <div class="form-group">
+               <label>Monto Autorizado Reembolso:</label>
+               {{input class="form-control"  name="mnto_rmblso_pac" value = model.mnto_rmblso_pac}}
+            </div>
+
+             <div class="form-group">
+              <label>Control De Comprobantes Caja Menor:</label>
+              <select id="chg_estdo" class="form-control" {{action 'cambioEstado' on='change'}}>
+                  <option  value='ACTIVO'  selected={{ifcond model.cntrl_cja_mnr "ACTIVO"}} >ACTIVO</option>
+                  <option  value='INACTIVO' selected={{ifcond model.cntrl_cja_mnr "INACTIVO"}} >INACTIVO</option>
+              </select>
+             </div>
+
+             <div class="form-group">
+              <label>Estado:</label>
+              <select id="chg_estdo" class="form-control" {{action 'cambioEstado' on='change'}}>
+                  <option  value='ACTIVO'  selected={{ifcond model.estdo "ACTIVO"}} >ACTIVO</option>
+                  <option  value='INACTIVO' selected={{ifcond model.estdo "INACTIVO"}} >INACTIVO</option>
+              </select>
+            </div>
+
+             <div style="text-align:center">
+                   <button class="button-default" onclick={{action "update"}} >Guardar</button>
+             </div>
+           </form>
+        </div>
+      </div>
+    </div>
 </div>

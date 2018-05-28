@@ -7,7 +7,7 @@ export default Component.extend({
     init() {
       this._super(...arguments);
       arrayComponents[this.tagid]=this;
-      if (this.parent ){
+      if (this.parent || this.main){
         var _this = this;
         var lo_data =JSON.parse(_this.get('data'));
         let result =  $.ajax({

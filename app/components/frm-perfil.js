@@ -43,7 +43,6 @@ export default Ember.Component.extend(formValidation,{
         type: 'POST',
         url: ENV.SERVER_API+"/api/perfiles/actualizar",
       }).then((response)=>{
-        console.log(typeof response)
           if(typeof response == "object"){
             if(response.success){
               $("#success").html(response.success).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){

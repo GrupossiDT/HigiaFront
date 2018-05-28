@@ -4,7 +4,7 @@ export default Component.extend({
     this._super(...arguments);
     var ls_route = this.router.currentRouteName;
     if(arrayMenu[ls_route]){
-      this.set("permisos",arrayMenu[ls_route])
+      var ln_array=this.set("permisos",arrayMenu[ls_route])
     }
   },
   actions:{

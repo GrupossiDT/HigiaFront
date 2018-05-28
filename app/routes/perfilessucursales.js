@@ -14,7 +14,6 @@ export default Route.extend({
 	model:function(params){
 		let{access_token,cookie_higia} = this.get('session.data.authenticated');
     let ln_id_lgn_ge = params.id_lgn_ge;
-    console.log(params.id_lgn_ge);
     var formdata = new FormData();
   	formdata.append('id_lgn_ge',ln_id_lgn_ge);
 		return Ember.$.ajax({
@@ -32,14 +31,24 @@ export default Route.extend({
                      "estdo":"",
                      "lgn_prfl_scrsl":"",
                      "undds_ngcio":"",
-                     "mrca_scrsl_dfcto":""};
+                     "mrca_scrsl_dfcto":"",
+                     "id_scrsl":"",
+                     "id_prfl_une":"",
+                     "id_frma_pgo_dfcto_une":"",
+                     "id_cnl_rcdo_dfcto_une":"",
+                     "mnto_rmblso_pac":"",
+                     "gdgt_sgmnto_trsldo":"",
+                     "cntrl_atrzcn":"",
+                     "cntrl_cja_mnr":"",
+                     "cntrl_cmprbnte":"",
+                     "id_lgn_ge":""};
 			if(result.error){
         console.log('error');
 				 obj["perfiles_sucursales"]["datos"]=myModel;
 			}else {
 					obj["perfiles_sucursales"]["datos"]=result;
 			}
-			var columns = [{"title": "Modificar","component": "editRow","editable": false},
+			var columns = [{"title": "","component": "editRow","editable": false},
 				{"propertyName":"nmbre_scrsl","title" :"Sucursal"},
 				{"propertyName":"dscrpcn_prfl","title" :"Perfil"},
 				{"propertyName":"undds_ngcio","title" :"Unidade Negocio"},

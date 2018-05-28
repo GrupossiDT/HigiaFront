@@ -1,13 +1,25 @@
 <div class="fgContainer">
+  <div class="col-sm-1 pad-adjust" align="right">
+    <button class="btn btn-primary" onclick={{action "openmodal" "frm-perfilessucursales" }}>Nuevo</button>
+  </div>
+  <div class="col-md-1 pad-adjust" align="left">
+    <button class="btn btn-primary" onclick={{action "openmodal" "frm-perfilessucursales" }}>Salir</button>
+  </div>
+
   {{cntrl-grid
     model=model.perfiles_sucursales
     permisos=model.permisos
     frmComponentCrear="frm-perfilessucursales"
-    frmTitleCrear="Nueva Sucursal"
+    frmTitleCrear="Nuevo Sucursal"
+    modelCreator=model.perfilessucursales.modelCreator
     frmComponentExportar=true
-    modelCreator=model.perfiles_sucursales.modelCreator
+    modelExportar=model.exportar
+    frmComponentImprimir=true
+    modelImprimir=model.perfilessucursales
     hashColumns=(hash
-      editRow=(component "boton-actualizar" frmComponentActualizar="frm-perfilessucursales" frmTitleActualizar="Actualizar Perfil Sucursal")
+      editRow=(component "boton-actualizar" frmComponentActualizar="frm-perfilessucursales" frmTitleActualizar="Actualizar  Sucursal")
     )
   }}
+
+
 </div>
