@@ -2,21 +2,40 @@
     <div class="row">
       <div class="col-xs-12 col-sm-6 padding-top">
 			  <div class="form">
-				  <form class="form-inline" role="form" id = "form_perfiles_sucursales">
+				  <form class="form" role="form" id = "form_perfiles_sucursales">
               <div class="form-group">
                   <label for="UnddsNgcio">Unidad De Negocio:</label>
-                  {{cntrl-select
-                    name=id_undds_ngcio
-                    id=UnddsNgcio.id
-                    tagid="UnddsNgcio"
-                    model=UnddsNgcio
-                    text="Seleccione Unidad De Negocio ..."   valor_selecionado=model.id_undds_ngcio
-                  }}
-                  <div class="error_text">{{validationErrors.id}}</div>
+                  {{#if model.id_lgn_prfl_scrsl}}
+                      {{cntrl-select
+                        externalModel=model
+                        externalSelect="id_undds_ngcio"
+                        name=id_undds_ngcio
+                        id=UnddsNgcio.id
+                        tagid="UnddsNgcio"
+                        model=UnddsNgcio
+                        text="Seleccione Unidad De Negocio ..."   valor_selecionado=model.id_undds_ngcio
+                      }}
+                  {{else}}
+
+                      {{cntrl-select
+                        externalModel=model.perfiles_sucursales.modelCreator
+                        externalSelect="id_undds_ngcio"
+                        name=id_undds_ngcio
+                        id=UnddsNgcio.id
+                        tagid="UnddsNgcio"
+                        model=UnddsNgcio
+                        text="Seleccione Unidad De Negocio ..."
+                      }}
+                  {{/if}}
+                  <div class="error_text"><strong>{{validationErrors.id_undds_ngcio}}</strong></div>
               </div>
+
               <div class="form-group">
                   <label>Sucursal:</label>
                   {{cntrl-select
+                    externalModel=model
+                    externalSelect="id_scrsl"
+                    value=model.id_scrsl
                     name=id_scrsl
                     model=scrsl
                     tagid="Scrsl"
@@ -27,99 +46,140 @@
                     cmporlcn="id_undd_ngco"
                     data=(concat '{"id_undd_ngco":"' model.id_undds_ngcio '"}')
                   }}
-                  <div class="error_text">{{validationErrors.id}}</div>
+                  <div class="error_text"><strong>{{validationErrors.id_scrsl}}</strong></div>
               </div>
 
               <div class="form-group">
-                  <label>Perfil:</label>
-                  {{cntrl-select
-                    name=id_prfl_une
-                    model=Prfl
-                    tagid="Prfl"
-                    tagparent="Scrsl"
-                    text="Seleccione Perfil ..." valor_selecionado=model.id_prfl_une
-                    parent=model.id_undds_ngcio
-                    cmporlcn="id_undd_ngco"
-                    url="/api/AdministracionTablasMaestras/Perfiles"
-                    data=(concat '{"id_undd_ngco":"' model.id_undds_ngcio '"}')
-                  }}
-                  <div class="error_text">{{validationErrors.id}}</div>
-              </div>
+                  <label>Perfil :</label>
+                    {{cntrl-select
+                      externalModel=model
+                      externalSelect="id_prfl_une"
+                      value=model.id_prfl_une
+                      name=id_prfl_une
+                      model=Prfl
+                      tagid="Prfl"
+                      tagparent="Scrsl"
+                      text="Seleccione Perfil ..." valor_selecionado=model.id_prfl_une
+                      parent=model.id_undds_ngcio
+                      cmporlcn="id_undd_ngco"
+                      url="/api/AdministracionTablasMaestras/Perfiles"
+                      data=(concat '{"id_undd_ngco":"' model.id_undds_ngcio '"}')
+                    }}
+                  <div class="error_text"><strong>{{validationErrors.id_prfl_une}}</strong></div>
+             </div>
 
-              <div class="form-group">
-                  <label>Formas De Pago:</label>
-                  {{cntrl-select
-                    model=frmsPgo
-                    main=true
-                    tagid="frmsPgo"
-                    text="Seleccione Formas De Pago ..." valor_selecionado=model.id_frma_pgo_dfcto_une
-                    url="/api/AdministracionTablasMaestras/FormasPago"
-                    parent=model.id_undds_ngcio
-                    data=(concat '{"id_undd_ngco":"' model.id_undds_ngcio '"}')
-                  }}
-              </div>
+             <div class="form-group">
+                   <label>Formas De Pago :</label>
+                   {{cntrl-select
+                     externalModel=model
+                     externalSelect="id_frma_pgo"
+                     name=model.id_frma_pgo
+                     model=frmsPgo
+                     tagid="frmsPgo"
+ 					          main=null
+                     tagparent="UnddsNgcio"
+                     text="Seleccione Formas De Pago ..." valor_selecionado=model.id_frma_pgo_dfcto_une
+                     parent=model.id_undds_ngcio
+                     url="/api/AdministracionTablasMaestras/FormasPago"
+                     cmporlcn="id_undd_ngco"
+                     data=(concat '{"id_undd_ngco":"' model.id_undds_ngcio '"}')
+                   }}
+               </div>
 
-              <div class="form-group">
-                  <label>Canal De Recaudo:</label>
+               <div class="form-group">
+                  <label>Canal De Recaudo :</label>
                   {{cntrl-select
+                    externalModel=model
+                    externalSelect="id_cnl_rcdo"
+                    name=id_cnl_rcdo
                     model=Cnlrcdo
-                    main=true
                     tagid="Cnlrcdo"
-                    text="Seleccione Canal De Recaudo ..." valor_selecionado=model.id_cnl_rcdo_dfcto_une
-                    url="/api/AdministracionTablasMaestras/CanalRecaudo"
+                    main=null
+                    tagparent="UnddsNgcio"
+                    text="Seleccione Canal De Recaudo ..."  valor_selecionado=model.id_cnl_rcdo_dfcto_une
                     parent=model.id_undds_ngcio
+                    url="/api/AdministracionTablasMaestras/CanalRecaudo"
+                    cmporlcn="id_undd_ngco"
                     data=(concat '{"id_undd_ngco":"' model.id_undds_ngcio '"}')
                   }}
               </div>
-
-              <div class="form-group">
-                <label>Sucursal Defecto:</label>
-                <select id="chg_estdo" class="form-control" {{action 'cambioEstado' on='change'}}>
-                    <option  value='ACTIVO'  selected={{ifcond model.mrca_scrsl_dfcto "ACTIVO"}} >ACTIVO</option>
-                    <option  value='INACTIVO' selected={{ifcond model.mrca_scrsl_dfcto "INACTIVO"}} >INACTIVO</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-               <label>Control De Comprobantes:</label>
-               <select id="chg_estdo" class="form-control" {{action 'cambioEstado' on='change'}}>
-                   <option  value='ACTIVO'  selected={{ifcond model.cntrl_cmprbnte "ACTIVO"}} >ACTIVO</option>
-                   <option  value='INACTIVO' selected={{ifcond model.cntrl_cmprbnte "INACTIVO"}} >INACTIVO</option>
+                
+             <div class="form-group">
+               <label>Sucursal Defecto :</label>
+               <select id="mrca_scrsl_dfcto" class="form-control" {{action 'cambioEstado' "mrca_scrsl_dfcto"  on='change'}}>
+                 <option  value='ACTIVO'   selected={{ifcond model.mrca_scrsl_dfcto "ACTIVO"}} >ACTIVO</option>
+                 <option  value='INACTIVO' selected={{ifcond model.mrca_scrsl_dfcto "INACTIVO"}} >INACTIVO</option>
                </select>
-              </div>
-
-             <div class="form-group">
-              <label>Control De Autorizaciones:</label>
-              <select id="chg_estdo" class="form-control" {{action 'cambioEstado' on='change'}}>
-                  <option  value='ACTIVO'  selected={{ifcond model.cntrl_atrzcn "ACTIVO"}} >ACTIVO</option>
-                  <option  value='INACTIVO' selected={{ifcond model.cntrl_atrzcn "INACTIVO"}} >INACTIVO</option>
-              </select>
              </div>
 
              <div class="form-group">
-               <label>Monto Autorizado Reembolso:</label>
-               {{input class="form-control"  name="mnto_rmblso_pac" value = model.mnto_rmblso_pac}}
-            </div>
-
-             <div class="form-group">
-              <label>Control De Comprobantes Caja Menor:</label>
-              <select id="chg_estdo" class="form-control" {{action 'cambioEstado' on='change'}}>
-                  <option  value='ACTIVO'  selected={{ifcond model.cntrl_cja_mnr "ACTIVO"}} >ACTIVO</option>
-                  <option  value='INACTIVO' selected={{ifcond model.cntrl_cja_mnr "INACTIVO"}} >INACTIVO</option>
-              </select>
+               <label>Control De Comprobantes :</label>
+               <input
+                 id="cntrl_cmprbnte"
+                 type="checkbox"
+                 name="cntrl_cmprbnte"
+                 checked={{model.cntrl_cmprbnte}}
+                 {{action 'checkClick' "cntrl_cmprbnte" model.cntrl_cmprbnte on="change"}}
+               />
              </div>
 
              <div class="form-group">
-              <label>Estado:</label>
-              <select id="chg_estdo" class="form-control" {{action 'cambioEstado' on='change'}}>
-                  <option  value='ACTIVO'  selected={{ifcond model.estdo "ACTIVO"}} >ACTIVO</option>
+               <label>Control De Caja Menor :</label>
+               <input
+                 id="cntrl_cja_mnr"
+                 type="checkbox"
+                 name="cntrl_cja_mnr"
+                 checked={{model.cntrl_cja_mnr}}
+                 {{action 'checkClick' "cntrl_cja_mnr" model.cntrl_cja_mnr on="change"}}
+               />
+             </div>
+
+             <div class="form-group">
+               <label>Control De Autorizaciones :</label>
+               <input
+                 id="cntrl_atrzcn"
+                 type="checkbox"
+                 name="cntrl_atrzcn"
+                 checked={{model.cntrl_atrzcn}}
+                 {{action 'checkClick' "cntrl_atrzcn" model.cntrl_atrzcn on="change"}}
+               />
+             </div>
+
+             <div class="form-group">
+               <label>Mostrar Seguimientos a Traslados :</label>
+               <input
+                 id="gdgt_sgmnto_trsldo"
+                 type="checkbox"
+                 name="gdgt_sgmnto_trsldo"
+                 checked={{model.gdgt_sgmnto_trsldo}}
+                 {{action 'checkClick' "gdgt_sgmnto_trsldo" model.gdgt_sgmnto_trsldo on="change"}}
+               />
+             </div>
+
+             <div class="form-group">
+               <label>Monto Autorizado Reembolso :</label>
+               {{input class="form-control"  name="mnto_rmblso_pac" value=model.mnto_rmblso_pac}}
+             </div>
+
+             <div class="form-group">
+               <label>Estado:</label>
+                <select id="estdo" class="form-control" {{action 'cambioEstado' "estdo"  on='change'}}>
+                  <option  value='ACTIVO'   selected={{ifcond model.estdo "ACTIVO"}} >ACTIVO</option>
                   <option  value='INACTIVO' selected={{ifcond model.estdo "INACTIVO"}} >INACTIVO</option>
-              </select>
-            </div>
-
-             <div style="text-align:center">
-                   <button class="button-default" onclick={{action "update"}} >Guardar</button>
+                </select>
              </div>
+            {{model.id_lgn_prfl_scrsl}}
+            <div class="btn-group">
+              <div class="alert alert-success" role="alert"  id="success" hidden></div>
+              <div class="alert alert-danger" role="alert" id="danger" hidden></div>
+              {{#if model.id_lgn_prfl_scrsl}}
+                    {{input type="hidden" name="id" value=model.id_lgn_prfl_scrsl}}
+  						      <button type="submit" class="btn btn-info" {{action 'update' on='click' npro="update" }}>Actualizar</button>
+              {{else}}
+                    <button type="submit" class="btn btn-info" {{action 'save' on='click' }}>Crear</button>
+              {{/if}}
+  					</div>
+
            </form>
         </div>
       </div>

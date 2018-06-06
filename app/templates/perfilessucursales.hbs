@@ -1,17 +1,34 @@
 <div class="fgContainer">
+
   <div class="col-sm-1 pad-adjust" align="right">
-    <button class="btn btn-primary" onclick={{action "openmodal" "frm-perfilessucursales" }}>Nuevo</button>
+    <button class="btn btn-primary"  onclick={{action "openmodal" "actualizar" }}>Nuevo</button>
+    {{#bs-modal open=mdlComponentCrear onHidden=(action (mut mdlComponentCrear) false) as |modal|}}
+      {{#modal.header}}
+        <h2 class="modal-title">
+          Nueva Sucursal
+        </h2>
+      {{/modal.header}}
+      {{#modal.body}}
+        {{component "frm-perfilessucursales" model=model.perfiles_sucursales.modelCreator}}
+      {{/modal.body}}
+    {{/bs-modal}}
   </div>
+
   <div class="col-md-1 pad-adjust" align="left">
-    <button class="btn btn-primary" onclick={{action "openmodal" "frm-perfilessucursales" }}>Salir</button>
+    <button class="btn btn-primary" onclick={{action "goBack" }}>Salir</button>
   </div>
+
+  <div class="form-group">
+    <label>Usuario :</label>
+    {{input class="form-control"  name="nmbre_usro" value = model.perfiles_sucursales.datos.nmbre_usro}}
+ </div>
 
   {{cntrl-grid
     model=model.perfiles_sucursales
     permisos=model.permisos
     frmComponentCrear="frm-perfilessucursales"
-    frmTitleCrear="Nuevo Sucursal"
-    modelCreator=model.perfilessucursales.modelCreator
+    frmTitleCrear="Nueva Sucursal"
+    modelCreator=model.perfiles_sucursales.modelCreator
     frmComponentExportar=true
     modelExportar=model.exportar
     frmComponentImprimir=true
@@ -20,6 +37,4 @@
       editRow=(component "boton-actualizar" frmComponentActualizar="frm-perfilessucursales" frmTitleActualizar="Actualizar  Sucursal")
     )
   }}
-
-
 </div>

@@ -111,6 +111,6 @@ export default Ember.Component.extend(formValidation,{
     cambioEstado(){
       var lb_estdo = $( "#chg_estdo option:selected" ).val();
       this.set('model.estdo',lb_estdo);
-    }
+    },
   }
 })

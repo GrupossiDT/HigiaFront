@@ -29,7 +29,7 @@ export default Route.extend({
 			var myModel = {"nmbre_scrsl":"",
                      "dscrpcn_prfl":"",
                      "estdo":"",
-                     "lgn_prfl_scrsl":"",
+                     "id_lgn_prfl_scrsl":"",
                      "undds_ngcio":"",
                      "mrca_scrsl_dfcto":"",
                      "id_scrsl":"",
@@ -41,13 +41,16 @@ export default Route.extend({
                      "cntrl_atrzcn":"",
                      "cntrl_cja_mnr":"",
                      "cntrl_cmprbnte":"",
-                     "id_lgn_ge":""};
+                     "id_lgn_ge":"",
+                     "nmbre_usro":"",
+                     "id_undds_ngcio":""};
 			if(result.error){
         console.log('error');
 				 obj["perfiles_sucursales"]["datos"]=myModel;
 			}else {
 					obj["perfiles_sucursales"]["datos"]=result;
 			}
+      console.log(myModel);
 			var columns = [{"title": "","component": "editRow","editable": false},
 				{"propertyName":"nmbre_scrsl","title" :"Sucursal"},
 				{"propertyName":"dscrpcn_prfl","title" :"Perfil"},

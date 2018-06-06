@@ -820,7 +820,9 @@ border-radius : 0px;
   	color : rgb(0, 0, 0);
 }
 
-
+.error_text{
+	color:#FF3333;
+}
 
 #logo_user_info {
 	text-align: center;
