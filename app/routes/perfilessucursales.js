@@ -10,7 +10,6 @@ export default Route.extend({
   queryParams: {
     id_lgn_ge: ''
   },
-
 	model:function(params){
 		let{access_token,cookie_higia} = this.get('session.data.authenticated');
     let ln_id_lgn_ge = params.id_lgn_ge;

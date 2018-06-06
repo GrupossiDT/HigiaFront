@@ -7,7 +7,6 @@ import { inject } from '@ember/service';
 import ENV from '../config/environment';
 export default Ember.Component.extend(formValidation,{
   session: inject('session'),
-
   init:function(){
     this._super(...arguments);
         let{access_token,cookie_higia} = this.get('session.data.authenticated');
