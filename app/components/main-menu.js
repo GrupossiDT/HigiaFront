@@ -91,6 +91,9 @@ export default Component.extend({
 		cambiarcontrasena(){
 				window.location.href='/cambiarcontrasenainterno';
 			},
+		preguntasseguridad(){
+			window.location.href='/preguntasseguridad';
+		},
 		borrarFavorito(id_mnu_ge,id,enlace){
 			var _this = this;
 			let{access_token,cookie_higia} = this.get('session.data.authenticated');

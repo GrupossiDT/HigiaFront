@@ -1,0 +1,13 @@
+<div class="fgContainer">
+  {{cntrl-grid
+    model=model.preguntasseguridad
+    frmComponentCrear="frm-preguntasseguridad"
+    frmTitleCrear="Nueva pregunta de seguridad"
+    modelCreator=model.preguntasseguridad.modelCreator
+    frmComponentImprimir=true
+    modelImprimir=model.preguntasseguridad
+    hashColumns=(hash
+      editRow=(component "boton-actualizar" frmComponentActualizar="frm-preguntasseguridad" frmTitleActualizar="Actualizar pregunta de seguridad")
+    )
+  }}
+</div>

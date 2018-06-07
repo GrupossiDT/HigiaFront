@@ -1,3 +1,4 @@
+
 <header class="login_header">
   <img class="logo_header" src="{{rootURL}}/assets/img/logo_ssi_header.png" alt="logo ssi">
 </header>
@@ -6,13 +7,21 @@
   <h2>Preguntas de Seguridad</h2>
   <p>Responde las siguientes preguntas para validar tu identidad</p>
 
-  <p>¿CUAL ES EL NOMBRE DE TU PRIMER PROFESOR?</p>
-    {{input type='password' name='pregunta1' maxlength="8" value=pregunta1 placeholder="Ingresa la respuesta" class='form-control' autofocus="autofocus" focus-out="enable_btn"}}
+  <p id="pr0"></p>
+    {{input type='password' id='txt_pregunta0' maxlength="20" value=pregunta0 placeholder="Ingresa la respuesta" class='form-control' autofocus="autofocus" focus-out="enable_btn"}}
 
   <br>
-  <p>¿CUAL ES TU COMIDA FAVORITA?</p>
-    {{input type='password' name='pregunta2' maxlength="8" value=pregunta2 placeholder="Ingresa la respuesta" class='form-control' autofocus="autofocus" focus-out="enable_btn"}}
+  <p id="pr1"></p>
+    {{input type='password' id='txt_pregunta1' maxlength="20" value=pregunta1 placeholder="Ingresa la respuesta" class='form-control' autofocus="autofocus" focus-out="enable_btn"}}
+    <br>
 
+    <p id="pr2"></p>
+    {{input type='password' id='txt_pregunta2' maxlength="20" value=pregunta2 placeholder="Ingresa la respuesta" class='form-control' autofocus="autofocus" focus-out="enable_btn"}}
+
+     {{input type="hidden" id="txt_idpr0"}}
+     {{input type="hidden" id="txt_idpr1"}}
+     {{input type="hidden" id="txt_idpr2"}}
+     {{input type="hidden" id="token"}}
     <div class="btn-group" style="width:100%;">
       <div class="alert alert-success" role="alert"  id="success" hidden></div>
       <div class="alert alert-danger" role="alert" id="danger" hidden></div>
