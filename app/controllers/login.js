@@ -16,7 +16,13 @@ export default EmberController.extend({
 			let {username,password} = this.getProperties('username','password');
 			let identification =username;
 			let  u = this.get('session').authenticate('authenticator:oauth2',identification,password).then(() =>{
-				window.location.href='/protected';
+				let{access_token,cookie_higia} = this.get('session.data.authenticated');
+				console.log('FOO ',cookie_higia);
+				if (cookie_higia.cmbo_cntrsna){
+					window.location.href='/cambiarcontrasenainterno';
+				}else{
+					window.location.href='/protected';
+				}
 			}).catch((reason)=>{
 				console.log(reason);
 				if(typeof reason.error == "object"){

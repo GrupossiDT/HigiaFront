@@ -5,7 +5,7 @@ import ENV from '../config/environment';
 import { inject } from '@ember/service';
 import $ from 'jquery';
 
-export default Route.extend({
+export default Route.extend(AuthenticatedRouteMixin,{
   session: inject('session'),
   queryParams: {
     id_lgn_ge: ''

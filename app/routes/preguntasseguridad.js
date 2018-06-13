@@ -5,7 +5,7 @@ import ENV from '../config/environment';
 import { inject } from '@ember/service';
 import $ from 'jquery';
 
-export default Route.extend({
+export default Route.extend(AuthenticatedRouteMixin,{
   session: inject('session'),
   model:function(){
     let{access_token,cookie_higia} = this.get('session.data.authenticated');
