@@ -5,7 +5,7 @@ import ENV from '../config/environment';
 import { inject } from '@ember/service';
 import $ from 'jquery';
 
-export default Route.extend({
+export default Route.extend(AuthenticatedRouteMixin,{
   session: inject('session'),
   queryParams: {
     id_lgn_ge: ''
@@ -15,7 +15,7 @@ export default Route.extend({
     let ln_id_lgn_ge = params.id_lgn_ge;
     var formdata = new FormData();
   	formdata.append('id_lgn_ge',ln_id_lgn_ge);
-		return Ember.$.ajax({
+    return Ember.$.ajax({
 			headers:{"Authorization": access_token},
 			cache: false,
 			contentType: false,
@@ -27,10 +27,10 @@ export default Route.extend({
 			let obj={"perfiles_sucursales":[]};
 			var myModel = {"nmbre_scrsl":"",
                      "dscrpcn_prfl":"",
-                     "estdo":"",
+                     "estdo":"ACTIVO",
                      "id_lgn_prfl_scrsl":"",
                      "undds_ngcio":"",
-                     "mrca_scrsl_dfcto":"",
+                     "mrca_scrsl_dfcto":"ACTIVO",
                      "id_scrsl":"",
                      "id_prfl_une":"",
                      "id_frma_pgo_dfcto_une":"",
@@ -40,7 +40,7 @@ export default Route.extend({
                      "cntrl_atrzcn":"",
                      "cntrl_cja_mnr":"",
                      "cntrl_cmprbnte":"",
-                     "id_lgn_ge":"",
+                     "id_lgn_ge":ln_id_lgn_ge,
                      "nmbre_usro":"",
                      "id_undds_ngcio":""};
 			if(result.error){
@@ -49,8 +49,8 @@ export default Route.extend({
 			}else {
 					obj["perfiles_sucursales"]["datos"]=result;
 			}
-      console.log(myModel);
-			var columns = [{"title": "","component": "editRow","editable": false},
+      console.log(result);
+      var columns = [{"title": "","component": "editRow","editable": false},
 				{"propertyName":"nmbre_scrsl","title" :"Sucursal"},
 				{"propertyName":"dscrpcn_prfl","title" :"Perfil"},
 				{"propertyName":"undds_ngcio","title" :"Unidade Negocio"},
@@ -59,6 +59,7 @@ export default Route.extend({
 			];
 			obj["perfiles_sucursales"]["columns"] = columns;
 			obj["perfiles_sucursales"]["modelCreator"]= myModel;
+      obj["nmbre"]=obj["perfiles_sucursales"]["datos"][0].nmbre_usro;
 			return obj;
 		})
 	}

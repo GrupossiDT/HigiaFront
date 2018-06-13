@@ -1,4 +1,8 @@
 <div class="fgContainer">
+  <div class="form-group">
+      <label> Usuario :</label>
+      {{model.nmbre}}
+  </div>
 
   <div class="col-sm-1 pad-adjust" align="right">
     <button class="btn btn-primary"  onclick={{action "openmodal" "actualizar" }}>Nuevo</button>
@@ -9,7 +13,7 @@
         </h2>
       {{/modal.header}}
       {{#modal.body}}
-        {{component "frm-perfilessucursales" model=model.perfiles_sucursales.modelCreator}}
+        {{component "frm-perfilessucursales" model=model.perfiles_sucursales.modelCreator parent=model.perfiles_sucursales}}
       {{/modal.body}}
     {{/bs-modal}}
   </div>
@@ -18,10 +22,6 @@
     <button class="btn btn-primary" onclick={{action "goBack" }}>Salir</button>
   </div>
 
-  <div class="form-group">
-    <label>Usuario :</label>
-    {{input class="form-control"  name="nmbre_usro" value = model.perfiles_sucursales.datos.nmbre_usro}}
- </div>
   {{cntrl-grid
     model=model.perfiles_sucursales
     permisos=model.permisos

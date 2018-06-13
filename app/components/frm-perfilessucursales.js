@@ -7,6 +7,7 @@ import { inject } from '@ember/service';
 import ENV from '../config/environment';
 export default Ember.Component.extend(formValidation,{
   session: inject('session'),
+
   init:function(){
     this._super(...arguments);
         let{access_token,cookie_higia} = this.get('session.data.authenticated');
@@ -19,6 +20,7 @@ export default Ember.Component.extend(formValidation,{
             _this.set('UnddsNgcio',result);
       });
   },
+
   validate:{
     form:{
         id_undds_ngcio:{
@@ -125,8 +127,8 @@ export default Ember.Component.extend(formValidation,{
       if(Object.keys(this.validationErrors).length > 0){
         return;
       }
-
       //asignacion de datos a variables
+      var ln_id_lgn_ge =frmData.id_lgn_ge;
       formData.append('id_lgn_ge',frmData.id_lgn_ge);
       formData.append('id_undds_ngcio',frmData.id_undds_ngcio);
       formData.append('id_scrsl',frmData.id_scrsl);
@@ -152,10 +154,27 @@ export default Ember.Component.extend(formValidation,{
       }).then((response)=> {
           if(typeof response == "object"){
             if(!response.error){
-              var perfil={"cdgo":frmData.cdgo,"dscrpcn":frmData.dscrpcn,"id":response.id,"estdo":"ACTIVO"};
-              this.parent.unshiftObject(perfil);
+              var perfiles_sucursales={"nmbre_scrsl":$("#Scrsl option:selected").text(),
+              "dscrpcn_prfl":$("#Prfl option:selected").text(),
+              "undds_ngcio":$("#UnddsNgcio option:selected").text(),
+              "mrca_scrsl_dfcto":$("#mrca_scrsl_dfcto option:selected").text(),
+              "id_lgn_prfl_scrsl":response.id,
+              "estdo":$("#estdo option:selected").text()};
+              //limpiar datos delmodelo de creacion y actualizar el modelo de datos para que se muestren los creados
+              var emptyModel ={"nmbre_scrsl":"","dscrpcn_prfl":"","estdo":"ACTIVO","id_lgn_prfl_scrsl":"","undds_ngcio":"","mrca_scrsl_dfcto":"ACTIVO",
+                             "id_scrsl":"","id_prfl_une":"","id_frma_pgo_dfcto_une":"","id_cnl_rcdo_dfcto_une":"","mnto_rmblso_pac":"",
+                             "gdgt_sgmnto_trsldo":"","cntrl_atrzcn":"","cntrl_cja_mnr":"","cntrl_cmprbnte":"","id_lgn_ge":ln_id_lgn_ge,
+                             "nmbre_usro":"","id_undds_ngcio":""};
+              if(! _this.parent.datos.length){//inserto datos creados
+                var arrayPerfiles=[];
+                arrayPerfiles.push(perfiles_sucursales);
+                _this.set('parent.datos',arrayPerfiles);
+              } else{
+                _this.parent.datos.unshiftObject(perfiles_sucursales);
+              }
+
               $("#success").html(response.success).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
-                  _this.set('model',{});
+                  _this.set('model',emptyModel);//limpio modelo de creacion
                   $("#success").slideUp(ENV.TIME_IN_ALERT);
               });
             }else {

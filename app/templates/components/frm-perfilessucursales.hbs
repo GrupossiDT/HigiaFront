@@ -5,7 +5,6 @@
 				  <form class="form" role="form" id = "form_perfiles_sucursales">
               <div class="form-group">
                   <label for="UnddsNgcio">Unidad De Negocio:</label>
-                  {{#if model.id_lgn_prfl_scrsl}}
                       {{cntrl-select
                         externalModel=model
                         externalSelect="id_undds_ngcio"
@@ -15,18 +14,6 @@
                         model=UnddsNgcio
                         text="Seleccione Unidad De Negocio ..."   valor_selecionado=model.id_undds_ngcio
                       }}
-                  {{else}}
-
-                      {{cntrl-select
-                        externalModel=model.perfiles_sucursales.modelCreator
-                        externalSelect="id_undds_ngcio"
-                        name=id_undds_ngcio
-                        id=UnddsNgcio.id
-                        tagid="UnddsNgcio"
-                        model=UnddsNgcio
-                        text="Seleccione Unidad De Negocio ..."
-                      }}
-                  {{/if}}
                   <div class="error_text"><strong>{{validationErrors.id_undds_ngcio}}</strong></div>
               </div>
 
@@ -35,7 +22,6 @@
                   {{cntrl-select
                     externalModel=model
                     externalSelect="id_scrsl"
-                    value=model.id_scrsl
                     name=id_scrsl
                     model=scrsl
                     tagid="Scrsl"
@@ -54,11 +40,10 @@
                     {{cntrl-select
                       externalModel=model
                       externalSelect="id_prfl_une"
-                      value=model.id_prfl_une
                       name=id_prfl_une
                       model=Prfl
                       tagid="Prfl"
-                      tagparent="Scrsl"
+                      tagparent="UnddsNgcio"
                       text="Seleccione Perfil ..." valor_selecionado=model.id_prfl_une
                       parent=model.id_undds_ngcio
                       cmporlcn="id_undd_ngco"
@@ -72,37 +57,36 @@
                    <label>Formas De Pago :</label>
                    {{cntrl-select
                      externalModel=model
-                     externalSelect="id_frma_pgo"
-                     name=model.id_frma_pgo
+                     externalSelect="id_frma_pgo_dfcto_une"
+                     name=id_frma_pgo
                      model=frmsPgo
                      tagid="frmsPgo"
- 					          main=null
                      tagparent="UnddsNgcio"
                      text="Seleccione Formas De Pago ..." valor_selecionado=model.id_frma_pgo_dfcto_une
                      parent=model.id_undds_ngcio
-                     url="/api/AdministracionTablasMaestras/FormasPago"
                      cmporlcn="id_undd_ngco"
+                     url="/api/AdministracionTablasMaestras/FormasPago"
                      data=(concat '{"id_undd_ngco":"' model.id_undds_ngcio '"}')
                    }}
                </div>
+
                <div class="form-group">
                   <label>Canal De Recaudo :</label>
                   {{cntrl-select
                     externalModel=model
-                    externalSelect="id_cnl_rcdo"
+                    externalSelect="id_cnl_rcdo_dfcto_une"
                     name=id_cnl_rcdo
                     model=Cnlrcdo
                     tagid="Cnlrcdo"
-                    main=null
                     tagparent="UnddsNgcio"
                     text="Seleccione Canal De Recaudo ..."  valor_selecionado=model.id_cnl_rcdo_dfcto_une
                     parent=model.id_undds_ngcio
-                    url="/api/AdministracionTablasMaestras/CanalRecaudo"
                     cmporlcn="id_undd_ngco"
+                    url="/api/AdministracionTablasMaestras/CanalRecaudo"
                     data=(concat '{"id_undd_ngco":"' model.id_undds_ngcio '"}')
                   }}
               </div>
-
+              {{model.mrca_scrsl_dfcto}}
              <div class="form-group">
                <label>Sucursal Defecto :</label>
                <select id="mrca_scrsl_dfcto" class="form-control" {{action 'cambioEstado' "mrca_scrsl_dfcto"  on='change'}}>
@@ -159,15 +143,15 @@
                <label>Monto Autorizado Reembolso :</label>
                {{input class="form-control"  name="mnto_rmblso_pac" value=model.mnto_rmblso_pac}}
              </div>
-
-             <div class="form-group">
+                {{model.estdo}}
+             <div  class="form-group">
                <label>Estado:</label>
                 <select id="estdo" class="form-control" {{action 'cambioEstado' "estdo"  on='change'}}>
                   <option  value='ACTIVO'   selected={{ifcond model.estdo "ACTIVO"}} >ACTIVO</option>
                   <option  value='INACTIVO' selected={{ifcond model.estdo "INACTIVO"}} >INACTIVO</option>
                 </select>
              </div>
-            {{model.id_lgn_prfl_scrsl}}
+             {{model.id_lgn_prfl_scrsl}}
             <div class="btn-group">
               <div class="alert alert-success" role="alert"  id="success" hidden></div>
               <div class="alert alert-danger" role="alert" id="danger" hidden></div>
