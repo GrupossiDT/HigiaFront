@@ -11,11 +11,12 @@ export default EmberController.extend({
 			var  crro_crprtvo = this.getProperties('txt_crro_crprtvo');
 			if(crro_crprtvo.txt_crro_crprtvo != ''){
 				$.post( ENV.SERVER_API+"/api/users/claveTemporal", { "crro_crprtvo": crro_crprtvo.txt_crro_crprtvo}).done(function( data ) {
-					console.log(data);
+
 					$("#success").html(data.success).fadeTo(ENV.TIME_OUT_ALERT, ENV.TIME_IN_ALERT).slideUp(ENV.TIME_IN_ALERT, function(){
 							$("#success").slideUp(ENV.TIME_IN_ALERT);
+							console.log(data.tkn);
 							setTimeout(function () {
-										window.location.href='/clavetemporal';
+										window.location.href='/responderpregunta?token='+data.tkn; //ahora direcciona a responderpregunta
 							}, 2000);
 					});
 				}).fail(function(data){
